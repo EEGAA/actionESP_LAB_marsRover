@@ -12,7 +12,7 @@ bool RosNode::createEntities(){
     if(!initSubscribers()) return false;
     //executor
     if(!initExecutor()) return false;
-
+    // y demas cosas que necesite inicializar
     counter_msg.data = 0;
 
     return true;
