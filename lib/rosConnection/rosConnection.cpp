@@ -1,6 +1,6 @@
 #include <rosConnection.hpp>
 #include <myTimer.hpp>
-Tempo mainTimer(500, true);//timer de 500 ms periodico
+Tempo mainTimer(1000, true);//timer de 1000 ms periodico, solo para que counter muestre los segundos transcurridos
 void RosConnection::init(){
     ros_node.initSerial();
 }
@@ -27,9 +27,9 @@ void RosConnection::update()
             if (rmw_uros_ping_agent(100, 1) != RMW_RET_OK) {
                 state = AGENT_DISCONNECTED;
             } else {
+                ros_node.spinROS();
                 if(mainTimer.checkTimer()){
                     ros_node.publishCounter();
-                    ros_node.spinROS();
                 }
             }
             break;
