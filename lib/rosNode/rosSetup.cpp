@@ -2,6 +2,11 @@
 //pero aqui es parte del control modular y estos metodos se aplican en createEntities() de rosNode.cpp
 #include <rosNode.hpp>
 
+void RosNode::initSerial(){
+    Serial.begin(921600);
+    set_microros_serial_transports(Serial);
+}
+
 bool RosNode::initSupport(){
     if (rclc_support_init(&support, 0, NULL, &allocator) != RCL_RET_OK)
         return false;
@@ -20,7 +25,7 @@ bool RosNode::initExecutor(){
 
     if (rclc_executor_add_subscription(
         &executor,
-        &subscriber,
+        &subLED,
         &led_msg,
         &RosNode::subscription_callback,
         ON_NEW_DATA) != RCL_RET_OK)

@@ -18,8 +18,8 @@ private:
     rclc_support_t support;
     rcl_node_t node;
 
-    rcl_publisher_t publisher;
-    rcl_subscription_t subscriber;
+    rcl_publisher_t pubCounter;
+    rcl_subscription_t subLED;
     rclc_executor_t executor;
 
     std_msgs__msg__Int32 counter_msg;

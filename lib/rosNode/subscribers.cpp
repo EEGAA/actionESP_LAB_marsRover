@@ -1,7 +1,7 @@
 #include <rosNode.hpp>
 bool RosNode::initSubscribers(){
     if (rclc_subscription_init_default(
-        &subscriber,
+        &subLED,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
                                        "led_command") != RCL_RET_OK)
@@ -9,5 +9,5 @@ bool RosNode::initSubscribers(){
     return true;
 }
 void RosNode::finiSubscribers(){
-    rcl_subscription_fini(&subscriber, &node);
+    rcl_subscription_fini(&subLED, &node);
 }

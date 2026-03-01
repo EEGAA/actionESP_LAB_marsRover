@@ -1,10 +1,5 @@
 #include <rosNode.hpp>
 
-void RosNode::initSerial(){
-    Serial.begin(921600);
-    set_microros_serial_transports(Serial);
-}
-
 bool RosNode::createEntities(){
     allocator = rcl_get_default_allocator();
     //support
@@ -42,7 +37,7 @@ void RosNode::spinROS(){
 
 void RosNode::publishCounter(){
     counter_msg.data++;
-    rcl_publish(&publisher, &counter_msg, NULL);
+    rcl_publish(&pubCounter, &counter_msg, NULL);
 }
 
 void RosNode::subscription_callback(const void * msgin){
