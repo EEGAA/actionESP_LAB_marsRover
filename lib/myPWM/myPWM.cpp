@@ -9,13 +9,13 @@ PWMgen::PWMgen(int freq_, int chanel_, int resolution_, int pin_){
     ledcSetup(chanel, freq, resolution);
     ledcAttachPin(pin, chanel);
     stopPWM();
+    ADCmax = (1 << resolution) - 1;
 }
 int PWMgen::getPWM(){
     return pwm;
 }
 void PWMgen::setPWM(int x){
-    int max = (1 << resolution) - 1;
-    if (x >= 0 && x <= max){
+    if (x >= 0 && x <= ADCmax){
         this->pwm = x;
         startPWM();
     }else return;
@@ -25,4 +25,7 @@ void PWMgen::stopPWM(){
 }
 void PWMgen::startPWM(){
     ledcWrite(chanel, pwm);
+}
+void PWMgen::getADCmax(){
+    return ADCmax;
 }
