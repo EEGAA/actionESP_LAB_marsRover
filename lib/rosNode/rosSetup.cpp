@@ -20,14 +20,21 @@ bool RosNode::initNode(){
 }
 
 bool RosNode::initExecutor(){
-    if (rclc_executor_init(&executor, &support.context, 1, &allocator) != RCL_RET_OK)
+    if (rclc_executor_init(&executor, &support.context, 2, &allocator) != RCL_RET_OK)
         return false;
 
     if (rclc_executor_add_subscription(
         &executor,
         &subLED,
         &led_msg,
-        &RosNode::subscription_callback,
+        &RosNode::subLED_callback,
+        ON_NEW_DATA) != RCL_RET_OK)
+        return false;
+    if (rclc_executor_add_subscription(
+        &executor,
+        &subServo,
+        &servoAng_msg,
+        &RosNode::subServoAng_callback,
         ON_NEW_DATA) != RCL_RET_OK)
         return false;
     return true;

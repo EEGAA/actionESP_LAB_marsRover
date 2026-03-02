@@ -26,6 +26,6 @@ void PWMgen::stopPWM(){
 void PWMgen::startPWM(){
     ledcWrite(chanel, pwm);
 }
-void PWMgen::getADCmax(){
+int PWMgen::getADCmax(){
     return ADCmax;
 }

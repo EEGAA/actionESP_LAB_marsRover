@@ -10,5 +10,5 @@ public:
     void setPWM(int x);
     void stopPWM();
     void startPWM();
-    void getADCmax();
+    int getADCmax();
 };

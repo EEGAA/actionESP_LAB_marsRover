@@ -25,3 +25,7 @@ void Servo::sendPWM(float pulso_){
 int Servo::getADCmax(){
     return ADCmax;
 }
+
+void Servo::stopPWM(){
+    thisPWM.stopPWM();
+}

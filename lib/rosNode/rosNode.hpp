@@ -1,5 +1,6 @@
 #pragma once
-#include <Arduino.h>
+
+#include <espLayer.hpp>
 
 #include <micro_ros_platformio.h>
 
@@ -8,6 +9,7 @@
 #include <rclc/executor.h>
 #include <std_msgs/msg/int32.h>
 #include <std_msgs/msg/int16.h>
+#include <std_msgs/msg/u_int8.h>
 #include <std_msgs/msg/bool.h>
 
 class RosNode{
@@ -19,14 +21,16 @@ private:
     rcl_node_t node;
 
     rcl_publisher_t pubCounter;
-    rcl_subscription_t subLED;
+    rcl_subscription_t subLED, subServo;
     rclc_executor_t executor;
 
     std_msgs__msg__Int32 counter_msg;
     std_msgs__msg__Bool led_msg;
+    std_msgs__msg__UInt8 servoAng_msg;
 
     //este callback manipula el LED
-    static void subscription_callback(const void * msgin);
+    static void subLED_callback(const void * msgin);
+    static void subServoAng_callback(const void * msgin);
 
 public:
     //metodos relacionados con ROS
