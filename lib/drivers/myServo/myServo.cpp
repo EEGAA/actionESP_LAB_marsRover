@@ -1,4 +1,4 @@
-#include <myServo.hpp>
+#include "myServo.hpp"
 
 Servo::Servo(int freq_, int chanel_, int resolution_, int minPulso_, int maxPulso_, int pin_):
     thisPWM(freq_, chanel_, resolution_, pin_){

@@ -1,4 +1,4 @@
-#include <myPWM.hpp>
+#include "myPWM.hpp"
 PWMgen::PWMgen(int freq_, int chanel_, int resolution_, int pin_){
     this->freq = freq_;
     this->chanel = chanel_;

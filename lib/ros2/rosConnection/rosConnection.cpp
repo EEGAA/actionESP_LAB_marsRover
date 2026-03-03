@@ -1,6 +1,5 @@
-#include <rosConnection.hpp>
-#include <myTimer.hpp>
-Tempo mainTimer(1000, true);//timer de 1000 ms periodico, solo para que counter muestre los segundos transcurridos
+#include "rosConnection.hpp"
+Tempo seconsTempo(1000, true);//timer de 1000 ms periodico, solo para que counter muestre los segundos transcurridos
 void RosConnection::init(){
     ros_node.initSerial();
 }
@@ -28,7 +27,7 @@ void RosConnection::update()
                 state = AGENT_DISCONNECTED;
             } else {
                 ros_node.spinROS();
-                if(mainTimer.checkTimer()){
+                if(seconsTempo.checkTempo()){
                     ros_node.publishCounter();
                 }
             }

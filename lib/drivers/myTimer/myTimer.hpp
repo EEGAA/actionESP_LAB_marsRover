@@ -18,7 +18,7 @@ public:
     void initTempo();
     void resetTempo();//alias de initTempo()
 
-    bool checkTimer();//devuelve true si el intervalo ha transcurrido
+    bool checkTempo();//devuelve true si el intervalo ha transcurrido
 
     void setInter(unsigned long nuevoIntervalo);//util para cambiar el tiempo de espera del objeto Tempo
 
@@ -26,6 +26,6 @@ public:
 
     void useMicro(bool usar);//para decidir si usamos millis o micros
 
-    unsigned long getCurrentTime();
+    unsigned long getCurrentTempo();
 
 };

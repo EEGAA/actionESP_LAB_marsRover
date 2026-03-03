@@ -1,5 +1,5 @@
 #pragma once
-#include <myPWM.hpp>
+#include "../myPWM/myPWM.hpp"
 
 class Servo {
 private:
@@ -15,4 +15,4 @@ public:
 };
 //Este es un ejemplo en como se puede usar el objeto Servo
 // (freq, canal, resolucion, minPulso_us, maxPulso_us, pin)
-//Servo myServo(50, 0, 14, 500, 2400, 18);  // resolución de 10 o 14, no funciona con otras
+//Servo myServo(50, 0, 14, 500, 2400, 18);  // resolución de 10 o 14, recomendadas, con otras el servo tiene problemas

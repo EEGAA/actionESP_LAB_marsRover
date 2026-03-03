@@ -1,6 +1,6 @@
 //Todo lo que se use aqui normalmente estaria en el setup del main.cpp
 //pero aqui es parte del control modular y estos metodos se aplican en createEntities() de rosNode.cpp
-#include <rosNode.hpp>
+#include "rosNode.hpp"
 
 void RosNode::initSerial(){
     Serial.begin(921600);

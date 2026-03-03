@@ -1,6 +1,6 @@
 #pragma once
 //#include <micro_ros_platformio.h>
-#include <rosNode.hpp>
+#include "../rosNode/rosNode.hpp"
 
 class RosConnection{
 private:
