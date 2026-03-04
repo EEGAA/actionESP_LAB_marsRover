@@ -17,9 +17,15 @@ void EXCAVA::setVel2(uint8_t vel_){
 uint8_t EXCAVA::getVel1(){return velG;}
 uint8_t EXCAVA::getVel2(){return velB;}
 
-void EXCAVA::stop(){
+void EXCAVA::stopMTR1(){
     roboclaw.ForwardM1(MTR1_ADDRESS, 0);
+}
+void EXCAVA::stopMTR2(){
     roboclaw.ForwardM2(MTR2_ADDRESS, 0);
+}
+void EXCAVA::stop(){
+    stopMTR1();
+    stopMTR2();
 }
 void EXCAVA::moveMTR1(bool aux){
     if(aux)

@@ -24,6 +24,8 @@ public:
     uint8_t getVel1();
     uint8_t getVel2();
     void stop();
+    void stopMTR1();
+    void stopMTR2();
     void moveMTR1(bool aux);
     void moveMTR2(bool aux);
 };
