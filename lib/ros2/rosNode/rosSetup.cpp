@@ -8,7 +8,6 @@ void RosNode::initSerial(){
     while(!Serial && !timeConnected.checkTempo()){}
     if(!Serial)
         ESP.restart();
-
     set_microros_serial_transports(Serial);
 }
 

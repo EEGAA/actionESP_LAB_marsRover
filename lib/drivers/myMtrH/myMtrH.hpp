@@ -1,12 +1,12 @@
 #pragma once
 //Esta clase es para hacer funcionar un puente h l298
 #include "../myPWM/myPWM.hpp"
-class L298N{
+class L298Ngen{
 private:
     uint8_t pinA, pinB;
     PWMgen myPWM;
 public:
-    L298N(uint8_t, uint8_t, int);
+    L298Ngen(uint8_t, uint8_t, int);
     void stop();
     void moveR();
     void moveL();

@@ -11,14 +11,14 @@
 #define MTR1_ADDRESS 0x80  //Gusano
 #define MTR2_ADDRESS 0x80 //Broca
 
-class EXCAVA{
+class EXCAgen{
 private:
     RoboClaw roboclaw;
     ////////MTR1///MTR2
     uint8_t velG, velB;
     int colchon;
 public:
-    EXCAVA(uint8_t pinTx, uint8_t pinRx);
+    EXCAgen(uint8_t pinTx, uint8_t pinRx);
     void setVel1(uint8_t vel_);
     void setVel2(uint8_t vel_);
     uint8_t getVel1();

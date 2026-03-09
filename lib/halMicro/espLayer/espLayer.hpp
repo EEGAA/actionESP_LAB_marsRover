@@ -5,8 +5,8 @@
 #include "../../drivers/myLED/myLED.hpp"
 #include "../../drivers/myNema/myNema.hpp"
 #include "../../drivers/myRoboClaw/myRoboClaw.hpp"
-extern Servo servoDisp;
+extern SERVOgen servoDisp;
 extern LEDgen myLed;
-extern EXCAVA exca;
+extern EXCAgen exca;
 
 void myESPinfo();
