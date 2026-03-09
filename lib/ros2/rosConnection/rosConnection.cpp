@@ -4,28 +4,26 @@ void RosConnection::init(){
     ros_node.initSerial();
 }
 
-void RosConnection::update()
-{
-    switch (state) {
-
+void RosConnection::update(){
+    switch(state){
         case WAITING_AGENT:
-            if (rmw_uros_ping_agent(100, 1) == RMW_RET_OK) {
+            if(rmw_uros_ping_agent(100, 1) == RMW_RET_OK){
                 state = AGENT_AVAILABLE;
             }
             break;
 
         case AGENT_AVAILABLE:
-            if (ros_node.createEntities()) {
+            if(ros_node.createEntities()){
                 state = AGENT_CONNECTED;
-            } else {
+            }else{
                 state = WAITING_AGENT;
             }
             break;
 
         case AGENT_CONNECTED:
-            if (rmw_uros_ping_agent(100, 1) != RMW_RET_OK) {
+            if(rmw_uros_ping_agent(100, 1) != RMW_RET_OK){
                 state = AGENT_DISCONNECTED;
-            } else {
+            }else{
                 ros_node.spinROS();
                 if(seconsTempo.checkTempo()){
                     ros_node.publishCounter();

@@ -1,9 +1,14 @@
 //Todo lo que se use aqui normalmente estaria en el setup del main.cpp
 //pero aqui es parte del control modular y estos metodos se aplican en createEntities() de rosNode.cpp
 #include "rosNode.hpp"
-
+Tempo timeConnected(500);//es para darle 500ms en caso de no poder inicializar Serial antes
 void RosNode::initSerial(){
     Serial.begin(921600);
+    timeConnected.initTempo();
+    while(!Serial && !timeConnected.checkTempo()){}
+    if(!Serial)
+        ESP.restart();
+
     set_microros_serial_transports(Serial);
 }
 

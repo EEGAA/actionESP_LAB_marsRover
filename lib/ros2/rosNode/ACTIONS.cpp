@@ -7,8 +7,6 @@ void RosNode::publishCounter(){
 
 void RosNode::subLED_callback(const void * msgin){
     const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
-    //aqui el led debe tomar el estado de msg
-    //pero no se si implementarlo aqui o con /hal
     myLed.setState(msg->data);
 }
 

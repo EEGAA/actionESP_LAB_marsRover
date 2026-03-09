@@ -6,7 +6,8 @@ void myESPinfo(){
     Serial.println("\nChip: " + String(ESP.getChipModel()));
     Serial.println("Cores: " + String(ESP.getChipCores()));
     Serial.println("CPU MHz: " + String(ESP.getCpuFreqMHz()));
-    Serial.println("\nMemoria SRAM bytes\nHeap libre: " + String(ESP.getFreeHeap()));
+    Serial.println("\nMemoria SRAM bytes");
+    Serial.println("Heap libre: " + String(ESP.getFreeHeap()));
     Serial.println("Heap minimo: " + String(ESP.getMinFreeHeap()));
     Serial.println("Heap max asignable: " + String(ESP.getMaxAllocHeap()));
     Serial.println("Heap size: " + String(ESP.getHeapSize()));
