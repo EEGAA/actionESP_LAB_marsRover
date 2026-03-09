@@ -4,7 +4,7 @@
 class L298Ngen{
 private:
     uint8_t pinA, pinB;
-    PWMgen myPWM;
+    PWMgen thisPWM;
 public:
     L298Ngen(uint8_t, uint8_t, int);
     void stop();
