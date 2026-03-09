@@ -8,3 +8,5 @@
 extern Servo servoDisp;
 extern LEDgen myLed;
 extern EXCAVA exca;
+
+void myESPinfo();
