@@ -8,14 +8,14 @@
 #include <rclc/rclc.h>
 #include <rclc/executor.h>
 #include <std_msgs/msg/int32.h>
-// #include <std_msgs/msg/int16.h>
+#include <std_msgs/msg/int16.h>
 #include <std_msgs/msg/u_int8.h>
 #include <std_msgs/msg/bool.h>
 
 class RosNode{
 private:
     //Variables locales de ROS2 (micro ros agent)
-
+    //estas 3 variables son para el funcionamiento del nodo
     rcl_allocator_t allocator;
     rclc_support_t support;
     rcl_node_t node;
