@@ -1,38 +1,37 @@
 #include "driversTask.hpp"
 
-// Referencias a tus objetos de driver globales
-// (los mismos que ya usas en ACTIONS.cpp)
-extern LEDgen   myLed;
-extern SERVOgen servoDisp;
+// aqui se usa todo lo de espLayer.hpp (ya esta declarado en driversTask.hpp)
+// extern LEDgen   myLed;
+// extern SERVOgen servoDisp;
 // extern MyMtrH  motorExc;  etc.
 
 // Timer local para reportar el contador de segundos
 static uint32_t lastSecTick = 0;
 
 void DriversTask::init() {
-    // Inicializa hardware aquí si tus constructores no lo hacen
+    // Inicializa hardware aquí (la mayoria de los constructores drivers ya lo hacen {igual hay metodos para cambiarlos aqui mismo si se necesita})
     // myLed.init();
     // servoDisp.init();
 }
 
-void DriversTask::update() {
+void DriversTask::update(){
     // ── 1. Consumir comandos de ROS ──
     RosCommand cmd;
-    while (xQueueReceive(commandQueue, &cmd, 0) == pdTRUE) {
-        switch (cmd.type) {
+    while(xQueueReceive(commandQueue, &cmd, 0) == pdTRUE){
+        switch(cmd.type){
             case CmdType::LED_SET:
                 myLed.setState(cmd.boolVal);
                 break;
             case CmdType::SERVO_MOVE:
                 servoDisp.moveAng(cmd.uint8Val);
                 break;
-            // Añade: MOTOR_SET, STEPPER_MOVE, etc.
+            // Añade: todos los demas motores
         }
     }
 
     // ── 2. Lógica periódica de drivers (ejemplo: tick del counter) ──
     uint32_t now = xTaskGetTickCount() * portTICK_PERIOD_MS;
-    if (now - lastSecTick >= 1000) {
+    if(now - lastSecTick >= 1000){
         lastSecTick = now;
         DriverStatus status;
         status.type  = StatusType::COUNTER_TICK;
@@ -40,7 +39,7 @@ void DriversTask::update() {
         xQueueSend(statusQueue, &status, 0);
     }
 
-    // ── 3. Aquí va tu lógica de excavación/dispensación ──
+    // ── 3. Aquí va lógica de excavación/dispensación ──
     // excavationFSM.update();
     // dispenserFSM.update();
 }

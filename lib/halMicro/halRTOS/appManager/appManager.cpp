@@ -13,37 +13,37 @@ QueueHandle_t statusQueue  = nullptr;
 static RosConnection rosManager;
 static DriversTask   driversManager;
 
-void AppManager::start() {
+void AppManager::start(){
     createQueues();
     launchTasks();
 }
 
-void AppManager::createQueues() {
+void AppManager::createQueues(){
     commandQueue = xQueueCreate(16, sizeof(RosCommand));
     statusQueue  = xQueueCreate(16, sizeof(DriverStatus));
 }
 
-void AppManager::launchTasks() {
+void AppManager::launchTasks(){
     xTaskCreatePinnedToCore(rosTask,     "rosTask",     8192, nullptr, 5, nullptr, 0);
     xTaskCreatePinnedToCore(driversTask, "driversTask", 4096, nullptr, 4, nullptr, 1);
 }
 
-void AppManager::rosTask(void* pvParameters) {
+void AppManager::rosTask(void* pvParameters){
     rosManager.init();
-    for (;;) {
+    while(true){
         rosManager.update();
         vTaskDelay(pdMS_TO_TICKS(1));
     }
 }
 
-void AppManager::driversTask(void* pvParameters) {
+void AppManager::driversTask(void* pvParameters){
     driversManager.init();
-    for (;;) {
+    while(true){
         driversManager.update();
         vTaskDelay(pdMS_TO_TICKS(1));
     }
 }
 
-void AppManager::idle() {
+void AppManager::idle(){
     vTaskDelay(portMAX_DELAY);
 }

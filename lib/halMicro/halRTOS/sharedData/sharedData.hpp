@@ -7,7 +7,7 @@
 enum class CmdType : uint8_t {
     LED_SET,        // bool
     SERVO_MOVE,     // uint8 ángulo
-    // añade aquí: MOTOR_SET, STEPPER_MOVE, etc.
+    // aqui va el resto de lo que desarrolle despues
 };
 
 struct RosCommand {
@@ -23,7 +23,7 @@ struct RosCommand {
 // ── Tipos de estado que Drivers pueden reportar a ROS ──
 enum class StatusType : uint8_t {
     COUNTER_TICK,   // señal para publicar counter
-    // añade: EXCAVATION_DONE, DISPENSE_DONE, ERROR, etc.
+    // aqui tambien se tienen que modificar/agregar cosas
 };
 
 struct DriverStatus {
