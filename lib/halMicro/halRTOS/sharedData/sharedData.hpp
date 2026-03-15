@@ -7,7 +7,8 @@
 // ── Tipos de comando que ROS puede enviar a los drivers ──
 enum class CmdType : uint8_t {
     LED_SET,        // bool
-    SERVO_MOVE,     // uint8 ángulo
+    SERVOdisp_MOVE,     // uint8 ángulo
+    SERVOcube_MOVE,
     // aqui va el resto de lo que desarrolle despues
 };
 

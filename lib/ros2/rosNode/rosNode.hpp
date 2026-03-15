@@ -23,15 +23,18 @@ private:
 
     //hay que hacer una variable publisher o subscription por cada topico
     rcl_publisher_t pubCounter;
-    rcl_subscription_t subLED, subServo;
+    rcl_subscription_t subLED, subServoDisp, subServoCube;
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
     std_msgs__msg__Bool led_msg;
-    std_msgs__msg__UInt8 servoAng_msg;
+    std_msgs__msg__UInt8 svDispAng_msg, svCubeAng_msg;
 
-    //este callback manipula el LED recibe
+    //**** todos los callbacks se manejan en ACTIONS.cpp ****
+    //este callback manipula el LED recibe bool = estado led
     static void subLED_callback(const void * msgin);
-    static void subServoAng_callback(const void * msgin);
+    //este es para el servo y recive el angulo 0 a 180 = u_int8
+    static void subServoDispAng_callback(const void * msgin);
+    static void subServoCubeAng_callback(const void * msgin);
 
 public:
     //metodos relacionados con ROS
@@ -52,7 +55,7 @@ public:
         // son usados en createEntities y destroyEntities en rosNode.cpp
     bool initPublishers();
     void finiPublishers();
-
+    //**** todos los publish tambien se manejan en ACTIONS.cpp ****
     void publishCounter();
 };
 //es buena idea poner callback en private  y publish en public

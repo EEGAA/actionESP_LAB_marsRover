@@ -16,11 +16,20 @@ void RosNode::subLED_callback(const void * msgin){
     // xQueueSend(commandQueue, &cmd, 0);
 }
 
-void RosNode::subServoAng_callback(const void * msgin){
+void RosNode::subServoDispAng_callback(const void * msgin){
     const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
     //servoDisp.moveAng(msg->data);
     RosCommand cmd;
-    cmd.type      = CmdType::SERVO_MOVE;
+    cmd.type      = CmdType::SERVOdisp_MOVE;
+    cmd.uint8Val  = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+void RosNode::subServoCubeAng_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    //servoDisp.moveAng(msg->data);
+    RosCommand cmd;
+    cmd.type      = CmdType::SERVOcube_MOVE;
     cmd.uint8Val  = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }

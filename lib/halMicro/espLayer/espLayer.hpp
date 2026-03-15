@@ -6,6 +6,7 @@
 #include "../../drivers/myNema/myNema.hpp"
 #include "../../drivers/myRoboClaw/myRoboClaw.hpp"
 extern SERVOgen servoDisp;
+extern SERVOgen servoCube;
 extern LEDgen myLed;
 extern EXCAgen exca;
 

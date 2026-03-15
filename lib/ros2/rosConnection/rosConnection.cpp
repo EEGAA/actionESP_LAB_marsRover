@@ -25,16 +25,12 @@ void RosConnection::update(){
                 state = AGENT_DISCONNECTED;
             }else{
                 ros_node.spinROS();
-                // if(seconsTempo.checkTempo()){
-                //     ros_node.publishCounter();
-                // }
                 // Consumir statusQueue — drivers nos piden publicar algo
                 DriverStatus status;
-                while (xQueueReceive(statusQueue, &status, 0) == pdTRUE) {
-                    if (status.type == StatusType::COUNTER_TICK) {
+                while(xQueueReceive(statusQueue, &status, 0) == pdTRUE){
+                    if(status.type == StatusType::COUNTER_TICK){
                         ros_node.publishCounter();
                     }
-                    // añade más casos según amplíes StatusType
                 }
             }
             break;

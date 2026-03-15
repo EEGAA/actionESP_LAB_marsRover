@@ -22,8 +22,11 @@ void DriversTask::update(){
             case CmdType::LED_SET:
                 myLed.setState(cmd.boolVal);
                 break;
-            case CmdType::SERVO_MOVE:
+            case CmdType::SERVOdisp_MOVE:
                 servoDisp.moveAng(cmd.uint8Val);
+                break;
+            case CmdType::SERVOcube_MOVE:
+                servoCube.moveAng(cmd.uint8Val);
                 break;
             // Añade: todos los demas motores
         }
