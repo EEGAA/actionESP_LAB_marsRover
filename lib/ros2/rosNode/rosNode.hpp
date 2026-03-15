@@ -15,20 +15,21 @@
 class RosNode{
 private:
     //Variables locales de ROS2 (micro ros agent)
-    //estas 3 variables son para el funcionamiento del nodo
+    //estas 4 variables son para el funcionamiento del nodo
     rcl_allocator_t allocator;
     rclc_support_t support;
     rcl_node_t node;
-
-    rcl_publisher_t pubCounter;
-    rcl_subscription_t subLED, subServo;
     rclc_executor_t executor;
 
+    //hay que hacer una variable publisher o subscription por cada topico
+    rcl_publisher_t pubCounter;
+    rcl_subscription_t subLED, subServo;
+    //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
     std_msgs__msg__Bool led_msg;
     std_msgs__msg__UInt8 servoAng_msg;
 
-    //este callback manipula el LED
+    //este callback manipula el LED recibe
     static void subLED_callback(const void * msgin);
     static void subServoAng_callback(const void * msgin);
 

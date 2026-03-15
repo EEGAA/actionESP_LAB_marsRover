@@ -1,9 +1,4 @@
 #include "appManager.hpp"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "../sharedData/sharedData.hpp"
-#include "../driversTask/driversTask.hpp"
-#include "../../../ros2/rosConnection/rosConnection.hpp"
 
 // ── Definición real de las colas (aquí vive la memoria) ──
 QueueHandle_t commandQueue = nullptr;

@@ -11,6 +11,13 @@ void myESPinfo(){
     Serial.println("Heap minimo: " + String(ESP.getMinFreeHeap()));
     Serial.println("Heap max asignable: " + String(ESP.getMaxAllocHeap()));
     Serial.println("Heap size: " + String(ESP.getHeapSize()));
+    if(psramFound()){
+        Serial.println("\nMemoria PSRAM bytes");
+        Serial.println("PSRAM size: " + String(ESP.getPsramSize()));
+        Serial.println("PSRAM libre: " + String(ESP.getFreePsram()));
+        Serial.println("PSRAM max asignable: " + String(ESP.getMaxAllocPsram()));
+    }else
+        Serial.println("PSRAM: NO DISPONIBLE");
     Serial.println("\nMemoria Flash bytes");
     Serial.println("Flash freq Hz: " + String(ESP.getFlashChipSpeed()));
     Serial.println("Flash mode: " + String(ESP.getFlashChipMode()));

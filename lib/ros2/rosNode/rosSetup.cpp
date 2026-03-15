@@ -8,7 +8,7 @@ void RosNode::initSerial(){
     while(!Serial && !timeConnected.checkTempo()){}
     if(!Serial)//es improbable entrar a este if, y si pasa, se reinicia la esp
         ESP.restart();
-
+    myESPinfo();//este mensaje solo se muestra en el puerto serial
     set_microros_serial_transports(Serial);
 }
 
