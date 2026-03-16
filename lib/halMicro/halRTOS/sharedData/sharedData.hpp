@@ -10,6 +10,8 @@ enum class CmdType : uint8_t {
     SERVOdisp_MOVE,     // uint8 ángulo
     SERVOcube_MOVE,
     // aqui va el resto de lo que desarrolle despues
+    //RoboClaw
+    RC_STOP, //bool = true = stop ambos motores; cuando es false no hace nada
 };
 
 struct RosCommand {
@@ -17,8 +19,8 @@ struct RosCommand {
     union {
         bool    boolVal;
         uint8_t uint8Val;
-        int32_t int32Val;
-        float   floatVal;
+        //int32_t int32Val;
+        //float   floatVal;
     };
 };
 

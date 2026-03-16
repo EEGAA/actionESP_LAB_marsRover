@@ -17,7 +17,7 @@ void myESPinfo(){
         Serial.println("PSRAM libre: " + String(ESP.getFreePsram()));
         Serial.println("PSRAM max asignable: " + String(ESP.getMaxAllocPsram()));
     }else
-        Serial.println("PSRAM: NO DISPONIBLE");
+        Serial.println("\nPSRAM: NO DISPONIBLE");
     Serial.println("\nMemoria Flash bytes");
     Serial.println("Flash freq Hz: " + String(ESP.getFlashChipSpeed()));
     Serial.println("Flash mode: " + String(ESP.getFlashChipMode()));

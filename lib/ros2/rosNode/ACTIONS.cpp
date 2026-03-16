@@ -11,9 +11,9 @@ void RosNode::subLED_callback(const void * msgin){
     RosCommand cmd;
     cmd.type     = CmdType::LED_SET;
     cmd.boolVal  = msg->data;
-    xQueueSendFromISR(commandQueue, &cmd, nullptr);
+    //xQueueSendFromISR(commandQueue, &cmd, nullptr);
     // Usa xQueueSend si callbacks NO son ISR reales:
-    // xQueueSend(commandQueue, &cmd, 0);
+    xQueueSend(commandQueue, &cmd, 0);
 }
 
 void RosNode::subServoDispAng_callback(const void * msgin){
@@ -31,5 +31,13 @@ void RosNode::subServoCubeAng_callback(const void * msgin){
     RosCommand cmd;
     cmd.type      = CmdType::SERVOcube_MOVE;
     cmd.uint8Val  = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+//RoboClaw
+void RosNode::subRCstop_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::RC_STOP;
+    cmd.boolVal   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }

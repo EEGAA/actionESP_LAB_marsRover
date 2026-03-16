@@ -1,17 +1,10 @@
 #include "driversTask.hpp"
 
-// aqui se usa todo lo de espLayer.hpp (ya esta declarado en driversTask.hpp)
-// extern LEDgen   myLed;
-// extern SERVOgen servoDisp;
-// extern MyMtrH  motorExc;  etc.
-
 // Timer local para reportar el contador de segundos
 static uint32_t lastSecTick = 0;
 
 void DriversTask::init() {
     // Inicializa hardware aquí (la mayoria de los constructores drivers ya lo hacen {igual hay metodos para cambiarlos aqui mismo si se necesita})
-    // myLed.init();
-    // servoDisp.init();
 }
 
 void DriversTask::update(){
@@ -29,6 +22,12 @@ void DriversTask::update(){
                 servoCube.moveAng(cmd.uint8Val);
                 break;
             // Añade: todos los demas motores
+            case CmdType::RC_STOP:
+                if(cmd.boolVal)
+                    exca.stop();
+                else
+                    exca.stop();
+                break;
         }
     }
 

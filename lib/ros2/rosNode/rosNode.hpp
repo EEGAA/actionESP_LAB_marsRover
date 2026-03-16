@@ -24,10 +24,31 @@ private:
     //hay que hacer una variable publisher o subscription por cada topico
     rcl_publisher_t pubCounter;
     rcl_subscription_t subLED, subServoDisp, subServoCube;
+    //los siguientes subscribers son para la roboclaw
+    rcl_subscription_t subRCStop;
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
     std_msgs__msg__Bool led_msg;
     std_msgs__msg__UInt8 svDispAng_msg, svCubeAng_msg;
+    //______los siguientes tipos de dato correponden a la parte relacionada a la
+    //roboclaw
+    std_msgs__msg__Bool rcStop_msg;//rc = roboclaw ; stop = detiene ambos motores
+    /*
+     * que falta?,
+     * - poder modificar vel mtr1
+     * - poder modificar vel mtr2
+     *
+     * - mtr1 derecha
+     * - mtr1 izquierda
+     *
+     * - mtr2 derecha
+     * - mtr2 izquierda
+     *
+     * - mtr1 stop
+     * - mtr2 stop
+     * - ambos stop //esto sive para dar stop a la tarea relacionada
+     */
+
 
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
     //este callback manipula el LED recibe bool = estado led
@@ -35,6 +56,9 @@ private:
     //este es para el servo y recive el angulo 0 a 180 = u_int8
     static void subServoDispAng_callback(const void * msgin);
     static void subServoCubeAng_callback(const void * msgin);
+
+    //los siguientes callbacks se relacionan con roboclaw
+    static void subRCstop_callback(const void * msgin);
 
 public:
     //metodos relacionados con ROS
