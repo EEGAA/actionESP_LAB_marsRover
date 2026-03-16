@@ -25,7 +25,7 @@ bool RosNode::initNode(){
 }
 
 bool RosNode::initExecutor(){
-    if (rclc_executor_init(&executor, &support.context, 6, &allocator) != RCL_RET_OK)
+    if (rclc_executor_init(&executor, &support.context, 8, &allocator) != RCL_RET_OK)
         return false;
 
     if (rclc_executor_add_subscription(
@@ -69,6 +69,20 @@ bool RosNode::initExecutor(){
         &subRCvelMTR2,
         &velMTR2_msg,
         &RosNode::subSetVelRCmtr2_callback,
+        ON_NEW_DATA) != RCL_RET_OK)
+        return false;
+    if (rclc_executor_add_subscription(
+        &executor,
+        &subRCmoveMTR1,
+        &moveRCmtr1_msg,
+        &RosNode::subRCmoveMTR1_callback,
+        ON_NEW_DATA) != RCL_RET_OK)
+        return false;
+    if (rclc_executor_add_subscription(
+        &executor,
+        &subRCmoveMTR2,
+        &moveRCmtr2_msg,
+        &RosNode::subRCmoveMTR2_callback,
         ON_NEW_DATA) != RCL_RET_OK)
         return false;
     return true;

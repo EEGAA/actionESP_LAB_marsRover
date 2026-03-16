@@ -26,6 +26,7 @@ private:
     rcl_subscription_t subLED, subServoDisp, subServoCube;
     //los siguientes subscribers son para la roboclaw
     rcl_subscription_t subRCStop, subRCvelMTR1, subRCvelMTR2;
+    rcl_subscription_t subRCmoveMTR1, subRCmoveMTR2;
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
     std_msgs__msg__Bool led_msg;
@@ -38,17 +39,7 @@ private:
     //1 = detiene motor uno
     //2 = detiene motos dos
     std_msgs__msg__UInt8 velMTR1_msg, velMTR2_msg;
-    /*
-     * que falta?,
-     * - poder modificar vel mtr1
-     * - poder modificar vel mtr2
-     *
-     * - mtr1 derecha
-     * - mtr1 izquierda
-     *
-     * - mtr2 derecha
-     * - mtr2 izquierda
-     */
+    std_msgs__msg__Bool moveRCmtr1_msg, moveRCmtr2_msg;
 
 
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
@@ -62,6 +53,8 @@ private:
     static void subRCstop_callback(const void * msgin);
     static void subSetVelRCmtr1_callback(const void * msgin);
     static void subSetVelRCmtr2_callback(const void * msgin);
+    static void subRCmoveMTR1_callback(const void * msgin);
+    static void subRCmoveMTR2_callback(const void * msgin);
 
 public:
     //metodos relacionados con ROS

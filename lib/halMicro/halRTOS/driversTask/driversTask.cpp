@@ -43,6 +43,12 @@ void DriversTask::update(){
             case CmdType::RC_VELMTR2:
                 exca.setVel2(cmd.uint8Val);
                 break;
+            case CmdType::RC_MoveMTR1:
+                exca.moveMTR1(cmd.boolVal);
+                break;
+            case CmdType::RC_MoveMTR2:
+                exca.moveMTR2(cmd.boolVal);
+                break;
         }
     }
 

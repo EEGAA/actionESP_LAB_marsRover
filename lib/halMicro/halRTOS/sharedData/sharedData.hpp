@@ -14,6 +14,8 @@ enum class CmdType : uint8_t {
     RC_STOP, //bool = true = stop ambos motores; cuando es false no hace nada
     RC_VELMTR1,//dan velociadad 0 a 127 a los motores gusano y broca
     RC_VELMTR2,
+    RC_MoveMTR1,
+    RC_MoveMTR2,
 };
 
 struct RosCommand {
