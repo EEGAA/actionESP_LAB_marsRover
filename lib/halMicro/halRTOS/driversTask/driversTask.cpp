@@ -23,10 +23,19 @@ void DriversTask::update(){
                 break;
             // Añade: todos los demas motores
             case CmdType::RC_STOP:
-                if(cmd.boolVal)
-                    exca.stop();
-                else
-                    exca.stop();
+                switch(cmd.uint8Val){
+                    case 0:
+                        exca.stop();
+                        break;
+                    case 1:
+                        exca.stopMTR1();
+                        break;
+                    case 2:
+                        exca.stopMTR2();
+                        break;
+                    default:
+                        exca.stop();
+                }
                 break;
         }
     }

@@ -22,7 +22,7 @@ bool RosNode::initSubscribers(){
     if (rclc_subscription_init_default(
         &subRCStop,
         &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
                                         "stopRC") != RCL_RET_OK)
         return false;
     return true;

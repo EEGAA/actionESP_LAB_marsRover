@@ -35,9 +35,9 @@ void RosNode::subServoCubeAng_callback(const void * msgin){
 }
 //RoboClaw
 void RosNode::subRCstop_callback(const void * msgin){
-    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
     RosCommand cmd;
     cmd.type      = CmdType::RC_STOP;
-    cmd.boolVal   = msg->data;
+    cmd.uint8Val   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }

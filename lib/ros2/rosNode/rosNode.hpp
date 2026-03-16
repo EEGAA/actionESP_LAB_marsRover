@@ -32,7 +32,11 @@ private:
     std_msgs__msg__UInt8 svDispAng_msg, svCubeAng_msg;
     //______los siguientes tipos de dato correponden a la parte relacionada a la
     //roboclaw
-    std_msgs__msg__Bool rcStop_msg;//rc = roboclaw ; stop = detiene ambos motores
+    std_msgs__msg__UInt8 rcStop_msg;//este msg puede tener 3 valores
+    //0, 1, y 2
+    //0 = detiene ambos motores
+    //1 = detiene motor uno
+    //2 = detiene motos dos
     /*
      * que falta?,
      * - poder modificar vel mtr1
@@ -43,10 +47,6 @@ private:
      *
      * - mtr2 derecha
      * - mtr2 izquierda
-     *
-     * - mtr1 stop
-     * - mtr2 stop
-     * - ambos stop //esto sive para dar stop a la tarea relacionada
      */
 
 
