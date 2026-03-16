@@ -41,3 +41,18 @@ void RosNode::subRCstop_callback(const void * msgin){
     cmd.uint8Val   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }
+
+void RosNode::subSetVelRCmtr1_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::RC_VELMTR1;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+void RosNode::subSetVelRCmtr2_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::RC_VELMTR2;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}

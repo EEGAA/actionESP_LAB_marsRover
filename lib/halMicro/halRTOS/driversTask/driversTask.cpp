@@ -37,6 +37,12 @@ void DriversTask::update(){
                         exca.stop();
                 }
                 break;
+            case CmdType::RC_VELMTR1:
+                exca.setVel1(cmd.uint8Val);
+                break;
+            case CmdType::RC_VELMTR2:
+                exca.setVel2(cmd.uint8Val);
+                break;
         }
     }
 

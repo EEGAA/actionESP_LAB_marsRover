@@ -25,6 +25,18 @@ bool RosNode::initSubscribers(){
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
                                         "stopRC") != RCL_RET_OK)
         return false;
+    if (rclc_subscription_init_default(
+        &subRCvelMTR1,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
+                                        "velRCmtr1") != RCL_RET_OK)
+        return false;
+    if (rclc_subscription_init_default(
+        &subRCvelMTR2,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
+                                        "velRCmtr2") != RCL_RET_OK)
+        return false;
     return true;
 }
 void RosNode::finiSubscribers(){
@@ -32,4 +44,6 @@ void RosNode::finiSubscribers(){
     rcl_subscription_fini(&subServoDisp, &node);
     rcl_subscription_fini(&subServoCube, &node);
     rcl_subscription_fini(&subRCStop, &node);
+    rcl_subscription_fini(&subRCvelMTR1, &node);
+    rcl_subscription_fini(&subRCvelMTR2, &node);
 }
