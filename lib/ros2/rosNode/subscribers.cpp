@@ -1,5 +1,5 @@
 #include "rosNode.hpp"
-bool RosNode::initSubscribers(){
+/*bool RosNode::initSubscribers(){
     if (rclc_subscription_init_default(
         &subLED,
         &node,
@@ -23,32 +23,76 @@ bool RosNode::initSubscribers(){
         &subRCStop,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
-                                        "stopRC") != RCL_RET_OK)
+                                        "RCstop") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subRCvelMTR1,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
-                                        "velRCmtr1") != RCL_RET_OK)
+                                        "RCvelMtr1") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subRCvelMTR2,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
-                                        "velRCmtr2") != RCL_RET_OK)
+                                        "RCvelMtr2") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subRCmoveMTR1,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
-                                        "moveRCmtr2") != RCL_RET_OK)
+                                        "RCmoveMtr1") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subRCmoveMTR2,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
-                                        "moveRCmtr2") != RCL_RET_OK)
+                                        "RCmoveMtr2") != RCL_RET_OK)
         return false;
+    return true;
+}*/
+bool RosNode::initSubscribers(){
+    Serial.println("[SUB] 1 subLED...");
+    if (rclc_subscription_init_default(&subLED, &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool), "led_command") != RCL_RET_OK)
+        { Serial.println("[SUB] FALLO en 1"); return false; }
+
+    Serial.println("[SUB] 2 subServoDisp...");
+    if (rclc_subscription_init_default(&subServoDisp, &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8), "svDispAng") != RCL_RET_OK)
+        { Serial.println("[SUB] FALLO en 2"); return false; }
+
+    Serial.println("[SUB] 3 subServoCube...");
+    if (rclc_subscription_init_default(&subServoCube, &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8), "svCubeAng") != RCL_RET_OK)
+        { Serial.println("[SUB] FALLO en 3"); return false; }
+
+    Serial.println("[SUB] 4 subRCStop...");
+    if (rclc_subscription_init_default(&subRCStop, &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8), "RCstop") != RCL_RET_OK)
+        { Serial.println("[SUB] FALLO en 4"); return false; }
+
+    Serial.println("[SUB] 5 subRCvelMTR1...");
+    if (rclc_subscription_init_default(&subRCvelMTR1, &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8), "RCvelMtr1") != RCL_RET_OK)
+        { Serial.println("[SUB] FALLO en 5"); return false; }
+
+    Serial.println("[SUB] 6 subRCvelMTR2...");
+    if (rclc_subscription_init_default(&subRCvelMTR2, &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8), "RCvelMtr2") != RCL_RET_OK)
+        { Serial.println("[SUB] FALLO en 6"); return false; }
+
+    Serial.println("[SUB] 7 subRCmoveMTR1...");
+    if (rclc_subscription_init_default(&subRCmoveMTR1, &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool), "RCmoveMtr1") != RCL_RET_OK)
+        { Serial.println("[SUB] FALLO en 7"); return false; }
+
+    Serial.println("[SUB] 8 subRCmoveMTR2...");
+    if (rclc_subscription_init_default(&subRCmoveMTR2, &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool), "RCmoveMtr2") != RCL_RET_OK)
+        { Serial.println("[SUB] FALLO en 8"); return false; }
+
+    Serial.println("[SUB] Todos OK");
     return true;
 }
 void RosNode::finiSubscribers(){

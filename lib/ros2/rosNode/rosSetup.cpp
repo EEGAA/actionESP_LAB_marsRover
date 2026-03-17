@@ -3,7 +3,7 @@
 #include "rosNode.hpp"
 Tempo timeConnected(500);//es para darle 500ms en caso de no poder inicializar Serial antes
 void RosNode::initSerial(){
-    Serial.begin(921600);
+    Serial.begin(115200);
     timeConnected.initTempo();
     while(!Serial && !timeConnected.checkTempo()){}
     if(!Serial)//es improbable entrar a este if, y si pasa, se reinicia la esp

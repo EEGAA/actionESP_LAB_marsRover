@@ -12,7 +12,9 @@ private:
     };
     State state = WAITING_AGENT;
     RosNode ros_node;
+    Tempo timeInter, timePing;
 public:
+    RosConnection() : timeInter(500, true), timePing(2000, true){}
     void init();
     void update();
 };
