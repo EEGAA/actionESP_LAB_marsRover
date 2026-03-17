@@ -1,8 +1,8 @@
-//esta modificacion no tiene chiste nadamas quiero hacer un comit en mi rama dev
-#include <rosConnection.hpp>
+#include "../lib/ros2/rosConnection/rosConnection.hpp"
 RosConnection manager;
 void setup(){
     manager.init();
+    myESPinfo();
 }
 void loop(){
     manager.update();

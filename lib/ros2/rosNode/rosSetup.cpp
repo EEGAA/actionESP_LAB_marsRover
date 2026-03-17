@@ -1,9 +1,13 @@
 //Todo lo que se use aqui normalmente estaria en el setup del main.cpp
 //pero aqui es parte del control modular y estos metodos se aplican en createEntities() de rosNode.cpp
-#include <rosNode.hpp>
-
+#include "rosNode.hpp"
+Tempo timeConnected(500);//es para darle 500ms en caso de no poder inicializar Serial antes
 void RosNode::initSerial(){
     Serial.begin(921600);
+    timeConnected.initTempo();
+    while(!Serial && !timeConnected.checkTempo()){}
+    if(!Serial)
+        ESP.restart();
     set_microros_serial_transports(Serial);
 }
 
@@ -20,14 +24,21 @@ bool RosNode::initNode(){
 }
 
 bool RosNode::initExecutor(){
-    if (rclc_executor_init(&executor, &support.context, 1, &allocator) != RCL_RET_OK)
+    if (rclc_executor_init(&executor, &support.context, 2, &allocator) != RCL_RET_OK)
         return false;
 
     if (rclc_executor_add_subscription(
         &executor,
         &subLED,
         &led_msg,
-        &RosNode::subscription_callback,
+        &RosNode::subLED_callback,
+        ON_NEW_DATA) != RCL_RET_OK)
+        return false;
+    if (rclc_executor_add_subscription(
+        &executor,
+        &subServo,
+        &servoAng_msg,
+        &RosNode::subServoAng_callback,
         ON_NEW_DATA) != RCL_RET_OK)
         return false;
     return true;
