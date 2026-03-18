@@ -1,20 +1,36 @@
 //Todo lo que se use aqui normalmente estaria en el setup del main.cpp
 //pero aqui es parte del control modular y estos metodos se aplican en createEntities() de rosNode.cpp
 #include "rosNode.hpp"
-Tempo timeConnected(500);//es para darle 500ms en caso de no poder inicializar Serial antes
+RosNode::RosNode(): timeConnected(2000), sleepReinit(1000){}
 void RosNode::initSerial(){
+    if(Serial.available() > 0){
+        sleepReinit.initTempo();
+        while(!sleepReinit.checkTempo()){}
+        ESP.restart();
+    }
     Serial.begin(115200);
     timeConnected.initTempo();
     while(!Serial && !timeConnected.checkTempo()){}
     if(!Serial)//es improbable entrar a este if, y si pasa, se reinicia la esp
         ESP.restart();
-    myESPinfo();//este mensaje solo se muestra en el puerto serial
-    set_microros_serial_transports(Serial);
+
+    sleepReinit.initTempo();
+    while(!sleepReinit.checkTempo()){}//bloqueante solo por 1000 ms, espera a estabilizar Serial
+
+    initTransport();
+}
+
+void RosNode::initTransport(){
+    while(Serial.available())//recorre basura de la conexion anterior,
+        Serial.read(); //lo lee para sacarlo del buffer
+    set_microros_serial_transports(Serial);//con esto micro ros sabe que debe usar Serial
 }
 
 bool RosNode::initSupport(){
     if (rclc_support_init(&support, 0, NULL, &allocator) != RCL_RET_OK)
         return false;
+    // if (rclc_support_init_with_options(&support, 0, NULL, &init_options, &allocator) != RCL_RET_OK)
+    //     return false;
     return true;
 }
 

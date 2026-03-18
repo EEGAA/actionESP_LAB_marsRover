@@ -1,5 +1,5 @@
 #include "appManager.hpp"
-#include "esp_task_wdt.h"
+//#include "esp_task_wdt.h"
 // ── Definición real de las colas (aquí vive la memoria) ──
 QueueHandle_t commandQueue = nullptr;
 QueueHandle_t statusQueue  = nullptr;
@@ -24,7 +24,7 @@ void AppManager::launchTasks(){
 }
 
 void AppManager::rosTask(void* pvParameters){
-     esp_task_wdt_delete(NULL);
+    //esp_task_wdt_delete(NULL);
     rosManager.init();
     while(true){
         rosManager.update();

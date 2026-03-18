@@ -1,7 +1,19 @@
 #include "rosNode.hpp"
-
-/*bool RosNode::createEntities(){
+// uint32_t RosNode::generate_client_key(){
+//     uint64_t mac = ESP.getEfuseMac();
+//     return (uint32_t)(mac ^ millis());//llave unica
+// }
+bool RosNode::createEntities(){
     allocator = rcl_get_default_allocator();
+
+
+    // rcl_init_options_init(&init_options, allocator);
+    // rmw_init_options_t * rmw_options = rcl_init_options_get_rmw_init_options(&init_options);
+    // rmw_uros_options_set_client_key(
+    //     generate_client_key(),
+    //     rmw_options
+    // );
+
     //support
     if(!initSupport()) return false;
     //node
@@ -17,28 +29,6 @@
 
     return true;
 
-}*/
-bool RosNode::createEntities(){
-    allocator = rcl_get_default_allocator();
-
-    Serial.println("[ROS] initSupport...");
-    if(!initSupport()){ Serial.println("[ROS] FALLO: initSupport"); return false; }
-
-    Serial.println("[ROS] initNode...");
-    if(!initNode()){ Serial.println("[ROS] FALLO: initNode"); return false; }
-
-    Serial.println("[ROS] initPublishers...");
-    if(!initPublishers()){ Serial.println("[ROS] FALLO: initPublishers"); return false; }
-
-    Serial.println("[ROS] initSubscribers...");
-    if(!initSubscribers()){ Serial.println("[ROS] FALLO: initSubscribers"); return false; }
-
-    Serial.println("[ROS] initExecutor...");
-    if(!initExecutor()){ Serial.println("[ROS] FALLO: initExecutor"); return false; }
-
-    Serial.println("[ROS] createEntities OK");
-    counter_msg.data = 0;
-    return true;
 }
 
 void RosNode::destroyEntities(){

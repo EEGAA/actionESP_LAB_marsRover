@@ -21,6 +21,8 @@ private:
     rcl_node_t node;
     rclc_executor_t executor;
 
+    // rcl_init_options_t init_options = rcl_get_zero_initialized_init_options();
+
     //hay que hacer una variable publisher o subscription por cada topico
     rcl_publisher_t pubCounter;
     rcl_subscription_t subLED, subServoDisp, subServoCube;
@@ -56,9 +58,16 @@ private:
     static void subRCmoveMTR1_callback(const void * msgin);
     static void subRCmoveMTR2_callback(const void * msgin);
 
+    Tempo timeConnected, sleepReinit;
 public:
+    //el constructor solo inci Serial begin
+    RosNode();
     //metodos relacionados con ROS
     void initSerial();//debe usarse en main.cpp setup
+    void initTransport();//es el indicador serial de micro ros
+    //ahora se usara tambien antes de createEntities para asegurar reconectar
+    //cuando se detiene el nodo, y no solo cuando falla la esp, ahora
+    //podemos detener con crl+c micro ros agent y volver a conectar sin reiniciar la esp
     bool createEntities();
     void destroyEntities();
     void spinROS();
@@ -77,5 +86,9 @@ public:
     void finiPublishers();
     //**** todos los publish tambien se manejan en ACTIONS.cpp ****
     void publishCounter();
+
+    //sirve para iniciar nuevas sesiones cada que una se pierde
+    //Es un identificador único de tu cliente micro-ROS. creado con la mac de la esp
+    // uint32_t generate_client_key();
 };
 //es buena idea poner callback en private  y publish en public

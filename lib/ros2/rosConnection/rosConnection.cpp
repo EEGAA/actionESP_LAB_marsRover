@@ -1,6 +1,7 @@
 #include "rosConnection.hpp"
 void RosConnection::init(){
     ros_node.initSerial();
+    myESPinfo();//este mensaje solo se muestra en el puerto serial
 }
 
 void RosConnection::update(){
@@ -16,7 +17,14 @@ void RosConnection::update(){
             if(ros_node.createEntities()){
                 state = AGENT_CONNECTED;
             }else{
-                ros_node.destroyEntities();
+                // ros_node.destroyEntities();//esta linea
+                // //asegura iniciar AGENT_AVAILABLE sin entidades creadas
+                // delay(500); // es bloqueante pero aqui vale la pena
+                // //da tiempo a que todo se destruya correctamente
+                //
+                // //una vez sin entidades se busca intentar recuperar Serial
+                // ros_node.initSerial();//para poder detener el nodo con ctrl+c,
+                // //y al reclamarlo recuperar Serial sin tener que reiniciar la esp
                 state = WAITING_AGENT;
             }
             break;
@@ -40,6 +48,12 @@ void RosConnection::update(){
 
         case AGENT_DISCONNECTED:
             ros_node.destroyEntities();
+            delay(500); // es bloqueante pero aqui vale la pena
+            //da tiempo a que todo se destruya correctamente
+
+            //una vez sin entidades se busca intentar recuperar Serial
+            ros_node.initSerial();//para poder detener el nodo con ctrl+c,
+            //y al reclamarlo recuperar Serial sin tener que reiniciar la esp
             state = WAITING_AGENT;
             break;
     }
