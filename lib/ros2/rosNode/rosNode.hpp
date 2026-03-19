@@ -29,6 +29,8 @@ private:
     //los siguientes subscribers son para la roboclaw
     rcl_subscription_t subRCStop, subRCvelMTR1, subRCvelMTR2;
     rcl_subscription_t subRCmoveMTR1, subRCmoveMTR2;
+    //los siguientes subscribers corresponden al puente H controla la Bomba peristaltica
+    rcl_subscription_t subH_moveMTR;
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
     std_msgs__msg__Bool led_msg;
@@ -42,6 +44,12 @@ private:
     //2 = detiene motos dos
     std_msgs__msg__UInt8 velMTR1_msg, velMTR2_msg;
     std_msgs__msg__Bool moveRCmtr1_msg, moveRCmtr2_msg;
+    //tipo de dato para detener motor H
+    std_msgs__msg__UInt8 subH_moveMTR_msg;//este msg puede tener 3 valores
+    //0, 1, y 2
+    //0 = detiene motor Bomba
+    //1 = Mueve motor horario
+    // 2 = Mueve motor antihorario
 
 
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
@@ -57,6 +65,9 @@ private:
     static void subSetVelRCmtr2_callback(const void * msgin);
     static void subRCmoveMTR1_callback(const void * msgin);
     static void subRCmoveMTR2_callback(const void * msgin);
+
+    //callback para el motor del puente h
+    static void subH_moveMTR_callback(const void * msgin);
 
     Tempo timeConnected, sleepReinit;
 public:

@@ -13,4 +13,5 @@ public:
     void PWMmas(int);
     void PWMmenos(int);
     int getPWM();
+    void setPWM(int);
 };

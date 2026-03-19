@@ -5,6 +5,7 @@ L298Ngen::L298Ngen(uint8_t a, uint8_t b, int c):
     this->pinB = b;
     pinMode(pinA, OUTPUT);
     pinMode(pinB, OUTPUT);
+    thisPWM.setPWM(thisPWM.getADCmax()/2);//inicializa pwm a la mitad
 }
 void L298Ngen::stop(){
     thisPWM.stopPWM();
@@ -31,4 +32,8 @@ void L298Ngen::PWMmenos(int x){
 }
 int L298Ngen::getPWM(){
     return thisPWM.getPWM();
+}
+
+void L298Ngen::setPWM(int x){
+    thisPWM.setPWM(x);
 }

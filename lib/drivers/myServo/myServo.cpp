@@ -6,6 +6,7 @@ SERVOgen::SERVOgen(int freq_, int chanel_, int resolution_, int minPulso_, int m
     this->maxPulso = maxPulso_;
     this->periodo  = (int)(1e6 / freq_);  // periodo en microsegundos
     ADCmax = thisPWM.getADCmax();
+    stopPWM();
 }
 
 // Mueve el servo a un angulo entre 0 y 180

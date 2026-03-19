@@ -16,6 +16,7 @@ enum class CmdType : uint8_t {
     RC_VELMTR2,
     RC_MoveMTR1,
     RC_MoveMTR2,
+    H_mtrMOVE,
 };
 
 struct RosCommand {

@@ -49,6 +49,23 @@ void DriversTask::update(){
             case CmdType::RC_MoveMTR2:
                 exca.moveMTR2(cmd.boolVal);
                 break;
+
+            //puenteH
+            case CmdType::H_mtrMOVE:
+                switch(cmd.uint8Val){
+                    case 0:
+                        bomba.stop();
+                        break;
+                    case 1:
+                        bomba.moveR();
+                        break;
+                    case 2:
+                        bomba.moveL();
+                        break;
+                    default:
+                        bomba.stop();
+                }
+                break;
         }
     }
 

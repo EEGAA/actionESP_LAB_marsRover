@@ -71,3 +71,11 @@ void RosNode::subRCmoveMTR2_callback(const void * msgin){
     cmd.boolVal   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }
+
+void RosNode::subH_moveMTR_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::H_mtrMOVE;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
