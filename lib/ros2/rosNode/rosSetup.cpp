@@ -41,7 +41,7 @@ bool RosNode::initNode(){
 }
 
 bool RosNode::initExecutor(){
-    if (rclc_executor_init(&executor, &support.context, 9, &allocator) != RCL_RET_OK)
+    if (rclc_executor_init(&executor, &support.context, 10, &allocator) != RCL_RET_OK)
         return false;
 
     if (rclc_executor_add_subscription(
@@ -106,6 +106,13 @@ bool RosNode::initExecutor(){
         &subH_moveMTR,
         &subH_moveMTR_msg,
         &RosNode::subH_moveMTR_callback,
+        ON_NEW_DATA) != RCL_RET_OK)
+        return false;
+    if (rclc_executor_add_subscription(
+        &executor,
+        &subH_setPWM,
+        &subH_setPWM_msg,
+        &RosNode::subH_setPWM_callback,
         ON_NEW_DATA) != RCL_RET_OK)
         return false;
     return true;

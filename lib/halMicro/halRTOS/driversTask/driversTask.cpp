@@ -66,6 +66,9 @@ void DriversTask::update(){
                         bomba.stop();
                 }
                 break;
+            case CmdType::H_mtrSetPWM:
+                      bomba.setPWM(cmd.int16Val);
+                break;
         }
     }
 

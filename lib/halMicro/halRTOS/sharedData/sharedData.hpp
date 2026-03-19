@@ -17,6 +17,7 @@ enum class CmdType : uint8_t {
     RC_MoveMTR1,
     RC_MoveMTR2,
     H_mtrMOVE,
+    H_mtrSetPWM,
 };
 
 struct RosCommand {
@@ -24,6 +25,7 @@ struct RosCommand {
     union {
         bool    boolVal;
         uint8_t uint8Val;
+        int16_t int16Val;
         //int32_t int32Val;
         //float   floatVal;
     };

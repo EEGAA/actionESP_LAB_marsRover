@@ -30,7 +30,7 @@ private:
     rcl_subscription_t subRCStop, subRCvelMTR1, subRCvelMTR2;
     rcl_subscription_t subRCmoveMTR1, subRCmoveMTR2;
     //los siguientes subscribers corresponden al puente H controla la Bomba peristaltica
-    rcl_subscription_t subH_moveMTR;
+    rcl_subscription_t subH_moveMTR, subH_setPWM;
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
     std_msgs__msg__Bool led_msg;
@@ -50,7 +50,7 @@ private:
     //0 = detiene motor Bomba
     //1 = Mueve motor horario
     // 2 = Mueve motor antihorario
-
+    std_msgs__msg__Int16 subH_setPWM_msg;
 
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
     //este callback manipula el LED recibe bool = estado led
@@ -68,7 +68,7 @@ private:
 
     //callback para el motor del puente h
     static void subH_moveMTR_callback(const void * msgin);
-
+    static void subH_setPWM_callback(const void * msgin);
     Tempo timeConnected, sleepReinit;
 public:
     //el constructor solo inci Serial begin

@@ -57,6 +57,12 @@ bool RosNode::initSubscribers(){
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
                                         "HmtrMove") != RCL_RET_OK)
         return false;
+    if (rclc_subscription_init_default(
+        &subH_setPWM,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int16),
+                                        "HmtrSpwm10B") != RCL_RET_OK)
+        return false;
 
     return true;
 }
@@ -71,4 +77,5 @@ void RosNode::finiSubscribers(){
     rcl_subscription_fini(&subRCmoveMTR1, &node);
     rcl_subscription_fini(&subRCmoveMTR2, &node);
     rcl_subscription_fini(&subH_moveMTR, &node);
+    rcl_subscription_fini(&subH_setPWM, &node);
 }
