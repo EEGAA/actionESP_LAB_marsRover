@@ -69,6 +69,30 @@ void DriversTask::update(){
             case CmdType::H_mtrSetPWM:
                       bomba.setPWM(cmd.int16Val);
                 break;
+            //neo led
+            case CmdType::NEO_LED_basic:
+                switch(cmd.uint8Val){
+                    case 0:
+                        neoLED.LEDoff();
+                        break;
+
+                    case 1:
+                        neoLED.rojo();
+                        break;
+                    case 2:
+                        neoLED.verde();
+                        break;
+                    case 3:
+                        neoLED.azul();
+                        break;
+                    case 4:
+                        neoLED.blanco();
+                        break;
+                    default:
+                        neoLED.LEDoff();
+                        break;
+                }
+                break;
         }
     }
 

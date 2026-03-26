@@ -18,6 +18,7 @@ enum class CmdType : uint8_t {
     RC_MoveMTR2,
     H_mtrMOVE,
     H_mtrSetPWM,
+    NEO_LED_basic,
 };
 
 struct RosCommand {

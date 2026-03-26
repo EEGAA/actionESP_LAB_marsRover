@@ -87,3 +87,12 @@ void RosNode::subH_setPWM_callback(const void * msgin){
     cmd.int16Val   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }
+
+//NEO Led
+void RosNode::subNeo_basic_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEO_LED_basic;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}

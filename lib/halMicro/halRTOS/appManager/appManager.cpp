@@ -9,6 +9,7 @@ static RosConnection rosManager;
 static DriversTask   driversManager;
 
 void AppManager::start(){
+    neoLED.begin();
     createQueues();
     launchTasks();
 }
