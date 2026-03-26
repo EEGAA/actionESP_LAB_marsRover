@@ -72,27 +72,41 @@ void DriversTask::update(){
             //neo led
             case CmdType::NEO_LED_basic:
                 switch(cmd.uint8Val){
-                    case 0:
-                        neoLED.LEDoff();
-                        break;
+                    case 0: neoLED.LEDoff(); break;
+                    //primarios
+                    case 1: neoLED.rojo(); break;
+                    case 2: neoLED.verde(); break;
+                    case 3: neoLED.azul(); break;
+                    //secundarios
+                    case 4: neoLED.amarillo(); break;
+                    case 5: neoLED.magenta(); break;
+                    case 6: neoLED.cian(); break;
+                    //terciarios
+                    case 7: neoLED.naranja(); break;
+                    case 8: neoLED.rosa(); break;
+                    case 9: neoLED.verdeLima(); break;
+                    case 10: neoLED.verdeMenta(); break;
+                    case 11: neoLED.violeta(); break;
+                    case 12: neoLED.azulCielo(); break;
+                    //complementos
+                    case 13: neoLED.grisOscuro(); break;
+                    case 14: neoLED.grisMedio(); break;
+                    case 15: neoLED.grisClaro(); break;
+                    case 16: neoLED.rojoClaro(); break;
+                    case 17: neoLED.rojoIntenso(); break;
+                    case 18: neoLED.verdeClaro(); break;
+                    case 19: neoLED.verdeIntenso(); break;
+                    case 20: neoLED.azulClaro(); break;
+                    case 21: neoLED.azulIntenso(); break;
 
-                    case 1:
-                        neoLED.rojo();
-                        break;
-                    case 2:
-                        neoLED.verde();
-                        break;
-                    case 3:
-                        neoLED.azul();
-                        break;
-                    case 4:
-                        neoLED.blanco();
-                        break;
-                    default:
-                        neoLED.LEDoff();
-                        break;
+                    case 100: neoLED.blanco(); break;
+                    default:  neoLED.LEDoff(); break;
                 }
                 break;
+            case CmdType::NEO_LED_brillo:
+                neoLED.setBrillo(cmd.uint8Val);
+                break;
+
         }
     }
 

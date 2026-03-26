@@ -32,7 +32,7 @@ private:
     //los siguientes subscribers corresponden al puente H controla la Bomba peristaltica
     rcl_subscription_t subH_moveMTR, subH_setPWM;
     //los siguientes subs son para Neo LED
-    rcl_subscription_t subNeo_basic;
+    rcl_subscription_t subNeo_basic, subNeo_brillo;
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
     std_msgs__msg__Bool led_msg;
@@ -55,7 +55,7 @@ private:
     std_msgs__msg__Int16 subH_setPWM_msg;
 
     //NEO led
-    std_msgs__msg__UInt8 subNeo_basic_msg;
+    std_msgs__msg__UInt8 subNeo_basic_msg, subNeo_brillo_msg;
 
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
     //este callback manipula el LED recibe bool = estado led
@@ -77,8 +77,9 @@ private:
 
     //Neo Led
     static void subNeo_basic_callback(const void * msgin);
+    static void subNeo_brillo_callback(const void * msgin);
 
-    Tempo timeConnected, sleepReinit;
+    Tempo timeConnected, sleepTime;
 public:
     //el constructor solo inci Serial begin
     RosNode();

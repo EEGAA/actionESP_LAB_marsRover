@@ -28,7 +28,6 @@ bool RosNode::createEntities(){
     counter_msg.data = 0;
 
     return true;
-
 }
 
 void RosNode::destroyEntities(){

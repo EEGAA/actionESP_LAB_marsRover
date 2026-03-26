@@ -96,3 +96,11 @@ void RosNode::subNeo_basic_callback(const void * msgin){
     cmd.uint8Val   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }
+
+void RosNode::subNeo_brillo_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEO_LED_brillo;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}

@@ -69,7 +69,13 @@ bool RosNode::initSubscribers(){
         &subNeo_basic,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
-                                        "neoLED") != RCL_RET_OK)
+                                        "neoLED_21c") != RCL_RET_OK)
+        return false;
+    if (rclc_subscription_init_default(
+        &subNeo_brillo,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
+                                        "neoLED_brillo") != RCL_RET_OK)
         return false;
 
     return true;
@@ -87,4 +93,5 @@ void RosNode::finiSubscribers(){
     rcl_subscription_fini(&subH_moveMTR, &node);
     rcl_subscription_fini(&subH_setPWM, &node);
     rcl_subscription_fini(&subNeo_basic, &node);
+    rcl_subscription_fini(&subNeo_brillo, &node);
 }

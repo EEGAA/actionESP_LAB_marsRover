@@ -37,7 +37,7 @@ void AppManager::driversTask(void* pvParameters){
     driversManager.init();
     while(true){
         driversManager.update();
-        vTaskDelay(pdMS_TO_TICKS(1));
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
 

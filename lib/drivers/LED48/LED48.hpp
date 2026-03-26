@@ -14,8 +14,31 @@ public:
     void LEDoff();
     void setBrillo(uint8_t);
     uint8_t getBrillo();
+    //todos los colores
+    void blanco();
+    //colores primarios
     void rojo();
     void verde();
     void azul();
-    void blanco();
+    //colores secundarios
+    void amarillo();
+    void magenta();
+    void cian();
+    //colores terciarios
+    void naranja();
+    void rosa();
+    void verdeLima();
+    void verdeMenta();
+    void violeta();
+    void azulCielo();
+    //complementos
+    void grisOscuro();
+    void grisMedio();
+    void grisClaro();
+    void rojoClaro();
+    void rojoIntenso();
+    void verdeClaro();
+    void verdeIntenso();
+    void azulClaro();
+    void azulIntenso();
 };
