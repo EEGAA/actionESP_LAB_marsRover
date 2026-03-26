@@ -6,7 +6,7 @@ private:
     uint8_t pinA, pinB;
     PWMgen thisPWM;
 public:
-    L298Ngen(uint8_t, uint8_t, int);
+    L298Ngen(uint8_t, uint8_t, int, int);
     void stop();
     void moveR();
     void moveL();

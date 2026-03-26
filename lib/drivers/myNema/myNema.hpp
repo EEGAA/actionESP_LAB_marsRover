@@ -8,8 +8,8 @@ private:
 public:
     NEMAgen(uint8_t dir_, uint8_t step_, uint8_t enable_);
     void setEnable(bool bnd);
-    void setDir(bool bnd);
-    void setStep(bool bnd);
+    void writeDir(bool bnd);
+    void writeStep(bool bnd);
     uint32_t getContStep();
     void resetContStep();
     bool sumContStep();

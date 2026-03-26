@@ -1,11 +1,19 @@
 #include "espLayer.hpp"
-
+NEOled neoLED;
+//- - - -  pinTx, pinRx
 EXCAgen exca(39, 40);
+//- - - Hz|canalPWM|resolucion|pulsoMin|pulsoMax|pinServo
 SERVOgen servoDisp(50, 0, 14, 550, 2450, 14);
 SERVOgen servoCube(50, 1, 14, 550, 2450, 13);
+//- - - - pinLED
 LEDgen myLed(47);
-L298Ngen bomba(15, 16, 17);
-
+//- - - - - INa, INb, pinPWM, canalPWM
+L298Ngen bomba(18, 21, 38, 2);
+//- - - - - dir, step, enable
+NEMAgen nemaEX(4, 5, 6);
+NEMAgen nemaES(7, 8, 9);
+NEMAgen nemaBA(10, 11, 12);
+NEMAgen nemaAX(15, 16, 17);
 /*
 NO usar estos pines
 

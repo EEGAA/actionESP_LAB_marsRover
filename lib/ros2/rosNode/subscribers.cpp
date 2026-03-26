@@ -4,7 +4,7 @@ bool RosNode::initSubscribers(){
         &subLED,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
-                                       "led_command") != RCL_RET_OK)
+                                       "ledCommand") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subServoDisp,
@@ -23,31 +23,31 @@ bool RosNode::initSubscribers(){
         &subRCStop,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
-                                        "RCstop") != RCL_RET_OK)
+                                        "rcStop") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subRCvelMTR1,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
-                                        "RCvelMtr1") != RCL_RET_OK)
+                                        "rcVelMtr1") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subRCvelMTR2,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
-                                        "RCvelMtr2") != RCL_RET_OK)
+                                        "rcVelMtr2") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subRCmoveMTR1,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
-                                        "RCmoveMtr1") != RCL_RET_OK)
+                                        "rcMoveMtr1") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subRCmoveMTR2,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
-                                        "RCmoveMtr2") != RCL_RET_OK)
+                                        "rcMoveMtr2") != RCL_RET_OK)
         return false;
 
     //puente H
@@ -55,13 +55,13 @@ bool RosNode::initSubscribers(){
         &subH_moveMTR,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, UInt8),
-                                        "HmtrMove") != RCL_RET_OK)
+                                        "hmMove") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subH_setPWM,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int16),
-                                        "HmtrSpwm10B") != RCL_RET_OK)
+                                        "hmSpwm10B") != RCL_RET_OK)
         return false;
 
     return true;

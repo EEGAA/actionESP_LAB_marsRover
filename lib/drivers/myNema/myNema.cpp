@@ -22,11 +22,11 @@ void NEMAgen::setEnable(bool bnd){
     }
 }
 
-void NEMAgen::setDir(bool bnd){
+void NEMAgen::writeDir(bool bnd){
     digitalWrite(dir, bnd);
 }
 
-void NEMAgen::setStep(bool bnd){
+void NEMAgen::writeStep(bool bnd){
     digitalWrite(step, bnd);
 }
 uint32_t NEMAgen::getContStep(){

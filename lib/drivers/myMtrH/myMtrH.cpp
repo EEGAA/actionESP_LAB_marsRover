@@ -1,6 +1,6 @@
 #include "myMtrH.hpp"
-L298Ngen::L298Ngen(uint8_t a, uint8_t b, int c):
-    thisPWM(20000, 0, 10, c){
+L298Ngen::L298Ngen(uint8_t a, uint8_t b, int c, int d):
+    thisPWM(20000, d, 10, c){
     this->pinA = a;
     this->pinB = b;
     pinMode(pinA, OUTPUT);
