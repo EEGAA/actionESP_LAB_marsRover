@@ -1,5 +1,6 @@
 #include "rosConnection.hpp"
 void RosConnection::init(){
+    neoLED.azul();
     ros_node.initSerial();
     myESPinfo();//este mensaje solo se muestra en el puerto serial
 }
@@ -31,7 +32,7 @@ void RosConnection::update(){
                     bnd = false;
                 }
 
-            if(timeCheckCon.checkTempo()){//verifica cada 2 segundos si sigue conectado
+            if(timeCheckCon.checkTempo()){//verifica cada 1.5 segundos si sigue conectado
                 if(rmw_uros_ping_agent(100, 1) != RMW_RET_OK){
                     state = AGENT_DISCONNECTED;
                     break;
