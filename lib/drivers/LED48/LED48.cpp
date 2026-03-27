@@ -7,8 +7,8 @@ NEOled::NEOled():
 void NEOled::begin(){
     pixels.begin();           // Inicializar el LED
     delay(20);
-    setBrillo(50); // ajustar brillo (0-255)
-    delay(10);
+    setBrillo(5); // ajustar brillo (0-255)
+    // delay(10);
     LEDoff();
 }
 
@@ -20,6 +20,7 @@ void NEOled::LEDoff(){
 void NEOled::setBrillo(uint8_t x){
     this->brillo = constrain(x, 0, 255);
     pixels.setBrightness(brillo);
+    pixels.show();
 }
 
 uint8_t NEOled::getBrillo(){
@@ -87,7 +88,7 @@ void NEOled::azulCielo(){
 }
 //complementos
 void NEOled::grisOscuro(){
-    pixels.setPixelColor(0, pixels.Color(64, 64, 64));
+    pixels.setPixelColor(0, pixels.Color(32, 32, 32));
     pixels.show();
 }
 void NEOled::grisMedio(){
@@ -99,26 +100,26 @@ void NEOled::grisClaro(){
     pixels.show();
 }
 void NEOled::rojoClaro(){
-    pixels.setPixelColor(0, pixels.Color(255, 128, 128));
-    pixels.show();
-}
-void NEOled::rojoIntenso(){
     pixels.setPixelColor(0, pixels.Color(255, 64, 64));
     pixels.show();
 }
-void NEOled::verdeClaro(){
-    pixels.setPixelColor(0, pixels.Color(128, 255, 128));
+void NEOled::rojoIntenso(){
+    pixels.setPixelColor(0, pixels.Color(255, 32, 32));
     pixels.show();
 }
-void NEOled::verdeIntenso(){
+void NEOled::verdeClaro(){
     pixels.setPixelColor(0, pixels.Color(64, 255, 64));
     pixels.show();
 }
+void NEOled::verdeIntenso(){
+    pixels.setPixelColor(0, pixels.Color(32, 255, 32));
+    pixels.show();
+}
 void NEOled::azulClaro(){
-    pixels.setPixelColor(0, pixels.Color(128, 128, 255));
+    pixels.setPixelColor(0, pixels.Color(64, 64, 255));
     pixels.show();
 }
 void NEOled::azulIntenso(){
-    pixels.setPixelColor(0, pixels.Color(64, 64, 255));
+    pixels.setPixelColor(0, pixels.Color(32, 32, 255));
     pixels.show();
 }

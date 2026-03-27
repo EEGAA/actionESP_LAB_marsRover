@@ -5,23 +5,26 @@
 class RosConnection{
 private:
     enum State{
-        WAITING_AGENT,
-        AGENT_AVAILABLE,
-        AGENT_CONNECTED,
-        AGENT_DISCONNECTED
+        WAITING_AGENT,//naranja
+        AGENT_AVAILABLE,//rosa
+        AGENT_CONNECTED,//verde
+        AGENT_DISCONNECTED//rojo
     };
     State state = WAITING_AGENT;
     RosNode ros_node;
-    Tempo timeInter, timePing;
+    Tempo timePING, timeCheckCon, lifeLED;
+    bool bnd; // true == conectado 1er vez, false == conexion establecida
 public:
-    RosConnection() : timeInter(500, true), timePing(2000, true){}
-    //timeInter son los 500 ms de espera para reconectar, usados aqui WAITING_AGENT
+    RosConnection() : timePING(500, true), timeCheckCon(2000, true), lifeLED(3000), bnd(true){}
+    //timePING son los 500 ms de espera para reconectar, usados aqui WAITING_AGENT
     //intervalo entre intentos de reconeccion
     //da tiempo a destruir y construir las entidades de micro ros
 
-    //timePing se usa en AGENT_CONNECTED y es el intervalo entre consultas de
+    //timeCheckCon se usa en AGENT_CONNECTED y es el intervalo entre consultas de
     //desconeccion
     //para no saturar con tantas consultas improbables,
+
+    // reintenta ping cada 500ms, verifica conexión activa cada 2s.
 
     void init();
     void update();
