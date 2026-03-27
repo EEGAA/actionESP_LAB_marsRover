@@ -12,7 +12,7 @@ public:
     LEDgen(uint8_t pin_);
     void setState(bool bnd);
     void LEDon();
-    void LEDof();
+    void LEDoff();
     void switchState();
     void writeLED();
     bool getState();

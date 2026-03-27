@@ -2,7 +2,7 @@
 
 LEDgen::LEDgen(uint8_t pin_): pin(pin_) {
     pinMode(pin, OUTPUT);
-    LEDof();
+    LEDoff();
 }
 void LEDgen::setState(bool bnd){
     this->state = bnd;
@@ -12,7 +12,7 @@ void LEDgen::LEDon(){
     setState(true);
     writeLED();
 }
-void LEDgen::LEDof(){
+void LEDgen::LEDoff(){
     setState(false);
     writeLED();
 }

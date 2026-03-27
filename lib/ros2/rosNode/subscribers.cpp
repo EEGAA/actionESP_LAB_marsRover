@@ -78,6 +78,14 @@ bool RosNode::initSubscribers(){
                                         "neoLED_brillo") != RCL_RET_OK)
         return false;
 
+    if (rclc_subscription_init_default(
+        &subSTOP,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
+                                        "STOP") != RCL_RET_OK)
+        return false;
+
+
     return true;
 }
 
@@ -94,4 +102,5 @@ void RosNode::finiSubscribers(){
     rcl_subscription_fini(&subH_setPWM, &node);
     rcl_subscription_fini(&subNeo_basic, &node);
     rcl_subscription_fini(&subNeo_brillo, &node);
+    rcl_subscription_fini(&subSTOP, &node);
 }

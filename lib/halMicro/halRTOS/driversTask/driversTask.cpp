@@ -106,6 +106,12 @@ void DriversTask::update(){
             case CmdType::NEO_LED_brillo:
                 neoLED.setBrillo(cmd.uint8Val);
                 break;
+            case CmdType::STOPall:
+                exca.stop();
+                bomba.stop();
+                neoLED.LEDoff();
+                myLed.LEDoff();
+                break;
 
         }
     }

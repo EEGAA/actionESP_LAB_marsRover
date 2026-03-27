@@ -104,3 +104,13 @@ void RosNode::subNeo_brillo_callback(const void * msgin){
     cmd.uint8Val   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }
+
+//generales
+
+void RosNode::subSTOP_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::STOPall;
+    cmd.boolVal   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}

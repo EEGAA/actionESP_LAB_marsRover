@@ -20,6 +20,7 @@ enum class CmdType : uint8_t {
     H_mtrSetPWM,
     NEO_LED_basic,
     NEO_LED_brillo,
+    STOPall,
 };
 
 struct RosCommand {

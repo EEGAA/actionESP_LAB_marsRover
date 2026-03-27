@@ -40,7 +40,7 @@ bool RosNode::initNode(){
 }
 
 bool RosNode::initExecutor(){
-    if (rclc_executor_init(&executor, &support.context, 12, &allocator) != RCL_RET_OK)
+    if (rclc_executor_init(&executor, &support.context, 13, &allocator) != RCL_RET_OK)
         return false;
 
     if (rclc_executor_add_subscription(
@@ -126,6 +126,13 @@ bool RosNode::initExecutor(){
         &subNeo_brillo,
         &subNeo_brillo_msg,
         &RosNode::subNeo_brillo_callback,
+        ON_NEW_DATA) != RCL_RET_OK)
+        return false;
+    if (rclc_executor_add_subscription(
+        &executor,
+        &subSTOP,
+        &subSTOP_msg,
+        &RosNode::subSTOP_callback,
         ON_NEW_DATA) != RCL_RET_OK)
         return false;
     return true;

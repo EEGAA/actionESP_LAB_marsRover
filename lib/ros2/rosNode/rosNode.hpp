@@ -33,6 +33,8 @@ private:
     rcl_subscription_t subH_moveMTR, subH_setPWM;
     //los siguientes subs son para Neo LED
     rcl_subscription_t subNeo_basic, subNeo_brillo;
+    //la idea del siguiente subscriber es ser un paro general
+    rcl_subscription_t subSTOP;
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
     std_msgs__msg__Bool led_msg;
@@ -57,6 +59,9 @@ private:
     //NEO led
     std_msgs__msg__UInt8 subNeo_basic_msg, subNeo_brillo_msg;
 
+    //Mensajes generales
+    std_msgs__msg__Bool subSTOP_msg;
+
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
     //este callback manipula el LED recibe bool = estado led
     static void subLED_callback(const void * msgin);
@@ -78,6 +83,9 @@ private:
     //Neo Led
     static void subNeo_basic_callback(const void * msgin);
     static void subNeo_brillo_callback(const void * msgin);
+
+    //callbacks generales
+    static void subSTOP_callback(const void * msgin);
 
     Tempo timeConnected, sleepTime;
 public:

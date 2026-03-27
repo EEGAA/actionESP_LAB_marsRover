@@ -5,8 +5,8 @@ EXCAgen::EXCAgen(uint8_t pinTx, uint8_t pinRx):
     roboclaw.begin(RBW_BAUD);
     //roboclaw.SetConfig();
     colchon = 2;
-    this->velG = constrain(124, 0, 70 - colchon);;
-    this->velB = constrain(124, 0, 127 - colchon);;
+    setVel1(70);
+    setVel2(127);
 }
 void EXCAgen::setVel1(uint8_t vel_){
     this->velG = constrain(vel_, 0, 127 - colchon);
