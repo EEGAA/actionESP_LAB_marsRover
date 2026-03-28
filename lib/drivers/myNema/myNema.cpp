@@ -29,12 +29,15 @@ void NEMAgen::writeDir(bool bnd){
 void NEMAgen::writeStep(bool bnd){
     digitalWrite(step, bnd);
 }
+
 uint32_t NEMAgen::getContStep(){
     return contStep;
 }
+
 void NEMAgen::resetContStep(){
     this->contStep = 0;
 }
+
 bool NEMAgen::sumContStep(){
     if(contStep == totalStep)
         return false;
@@ -42,9 +45,32 @@ bool NEMAgen::sumContStep(){
         contStep++;
     return true;
 }
+
 void NEMAgen::setTotalStep(uint32_t x){
     this->totalStep = x;
 }
+
 uint32_t NEMAgen::getTotalStep(){
     return totalStep;
+}
+
+//..........pasos, direccion, delay, micros o millis
+void NEMAgen::moveMTR(uint32_t pasos_, bool dir_, uint32_t time_, bool timeType_){
+    setEnable(true);
+    writeDir(dir_);
+
+    for(int i = 0; i < pasos_; i++){
+        writeStep(1);
+        if(timeType_)
+            delayMicroseconds(time_);
+        else
+            delay(time_);
+        writeStep(0);
+        if(timeType_)
+            delayMicroseconds(time_);
+        else
+            delay(time_);
+    }
+
+    setEnable(false);
 }

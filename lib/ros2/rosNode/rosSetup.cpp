@@ -40,7 +40,7 @@ bool RosNode::initNode(){
 }
 
 bool RosNode::initExecutor(){
-    if (rclc_executor_init(&executor, &support.context, 13, &allocator) != RCL_RET_OK)
+    if (rclc_executor_init(&executor, &support.context, 14, &allocator) != RCL_RET_OK)
         return false;
 
     if (rclc_executor_add_subscription(

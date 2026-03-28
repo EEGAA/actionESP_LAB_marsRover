@@ -4,10 +4,10 @@
             "cmake-args": [
                 "-DRMW_UXRCE_MAX_NODES=1",
                 "-DRMW_UXRCE_MAX_PUBLISHERS=1",
-                "-DRMW_UXRCE_MAX_SUBSCRIPTIONS=13",
+                "-DRMW_UXRCE_MAX_SUBSCRIPTIONS=14",
                 "-DRMW_UXRCE_MAX_SERVICES=0",
                 "-DRMW_UXRCE_MAX_CLIENTS=0",
-                "-DRMW_UXRCE_MAX_HISTORY=15"
+                "-DRMW_UXRCE_MAX_HISTORY=16"
             ]
         }
     }

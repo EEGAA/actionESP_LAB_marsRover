@@ -12,6 +12,8 @@
 #include <std_msgs/msg/u_int8.h>
 #include <std_msgs/msg/bool.h>
 
+#include <my_msgs/msg/nema_cmd.h>
+
 class RosNode{
 private:
     //Variables locales de ROS2 (micro ros agent)
@@ -35,6 +37,9 @@ private:
     rcl_subscription_t subNeo_basic, subNeo_brillo;
     //la idea del siguiente subscriber es ser un paro general
     rcl_subscription_t subSTOP;
+    //NEMA, subscribers para los nema
+    rcl_subscription_t subNemaEX_move;
+
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
     std_msgs__msg__Bool led_msg;
@@ -62,6 +67,9 @@ private:
     //Mensajes generales
     std_msgs__msg__Bool subSTOP_msg;
 
+    //Mema
+    my_msgs__msg__NemaCMD subNemaEX_move_msg;
+
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
     //este callback manipula el LED recibe bool = estado led
     static void subLED_callback(const void * msgin);
@@ -86,6 +94,9 @@ private:
 
     //callbacks generales
     static void subSTOP_callback(const void * msgin);
+
+    //Nema
+    static void subNemaEX_move_callback(const void * msgin);
 
     Tempo timeConnected, sleepTime;
 public:

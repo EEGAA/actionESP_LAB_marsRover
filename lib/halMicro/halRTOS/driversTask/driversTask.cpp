@@ -112,6 +112,9 @@ void DriversTask::update(){
                 neoLED.LEDoff();
                 myLed.LEDoff();
                 break;
+            case CmdType::NEMA_EX_MOVE:
+                nemaEX.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
+                break;
 
         }
     }

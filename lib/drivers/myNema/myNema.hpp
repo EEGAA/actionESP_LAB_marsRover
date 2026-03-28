@@ -15,4 +15,6 @@ public:
     bool sumContStep();
     void setTotalStep(uint32_t x);
     uint32_t getTotalStep();
+    //..........pasos, direccion, delay, micros o millis
+    void moveMTR(uint32_t, bool, uint32_t, bool);
 };

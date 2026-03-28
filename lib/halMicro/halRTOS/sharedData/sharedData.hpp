@@ -21,6 +21,7 @@ enum class CmdType : uint8_t {
     NEO_LED_basic,
     NEO_LED_brillo,
     STOPall,
+    NEMA_EX_MOVE,
 };
 
 struct RosCommand {
@@ -29,7 +30,7 @@ struct RosCommand {
         bool    boolVal;
         uint8_t uint8Val;
         int16_t int16Val;
-        //int32_t int32Val;
+        uint32_t uint32Val;
         //float   floatVal;
     };
 };

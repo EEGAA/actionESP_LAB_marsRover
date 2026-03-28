@@ -85,6 +85,14 @@ bool RosNode::initSubscribers(){
                                         "STOP") != RCL_RET_OK)
         return false;
 
+    //Nemas
+    if (rclc_subscription_init_default(
+        &subNemaEX_move,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(my_msgs, msg, NemaCMD),
+                                        "nemaEX") != RCL_RET_OK)
+        return false;
+
 
     return true;
 }
@@ -103,4 +111,5 @@ void RosNode::finiSubscribers(){
     rcl_subscription_fini(&subNeo_basic, &node);
     rcl_subscription_fini(&subNeo_brillo, &node);
     rcl_subscription_fini(&subSTOP, &node);
+    rcl_subscription_fini(&subNemaEX_move, &node);
 }

@@ -114,3 +114,15 @@ void RosNode::subSTOP_callback(const void * msgin){
     cmd.boolVal   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }
+
+// Nema
+
+void RosNode::subNemaEX_move_callback(const void * msgin){
+    const my_msgs__msg__NemaCMD * msg = (const my_msgs__msg__NemaCMD *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEMA_EX_MOVE;
+    cmd.boolVal   = msg->direccion;
+    cmd.uint32Val = msg->pasos;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
