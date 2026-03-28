@@ -22,6 +22,9 @@ enum class CmdType : uint8_t {
     NEO_LED_brillo,
     STOPall,
     NEMA_EX_MOVE,
+    NEMA_ES_MOVE,
+    NEMA_BA_MOVE,
+    NEMA_AX_MOVE,
 };
 
 struct RosCommand {

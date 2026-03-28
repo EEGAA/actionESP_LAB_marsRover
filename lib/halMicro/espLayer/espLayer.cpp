@@ -8,12 +8,18 @@ SERVOgen servoCube(50, 1, 14, 550, 2450, 13);
 //- - - - pinLED
 LEDgen myLed(47);
 //- - - - - INa, INb, pinPWM, canalPWM
-L298Ngen bomba(18, 21, 38, 2);
+L298Ngen bomba(10, 11, 9, 2);
 //- - - - - dir, step, enable
-NEMAgen nemaEX(4, 5, 6);
-NEMAgen nemaES(7, 8, 9);
-NEMAgen nemaBA(10, 11, 12);
-NEMAgen nemaAX(15, 16, 17);
+// NEMAgen nemaEX(4, 5, 6);
+// NEMAgen nemaES(7, 8, 9);
+// NEMAgen nemaBA(10, 11, 12);
+// NEMAgen nemaAX(15, 16, 17);
+
+//pines PCB
+NEMAgen nemaEX(2, 42, 1);
+NEMAgen nemaES(37, 38, 36);
+NEMAgen nemaBA(5, 4, 6);
+NEMAgen nemaAX(18, 8, 17);
 /*
 NO usar estos pines
 

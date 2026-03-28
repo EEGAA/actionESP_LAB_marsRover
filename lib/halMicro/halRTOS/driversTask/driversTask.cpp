@@ -115,6 +115,15 @@ void DriversTask::update(){
             case CmdType::NEMA_EX_MOVE:
                 nemaEX.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
                 break;
+            case CmdType::NEMA_ES_MOVE:
+                nemaES.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
+                break;
+            case CmdType::NEMA_BA_MOVE:
+                nemaBA.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
+                break;
+            case CmdType::NEMA_AX_MOVE:
+                nemaAX.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
+                break;
 
         }
     }

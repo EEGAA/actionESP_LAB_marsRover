@@ -38,7 +38,8 @@ private:
     //la idea del siguiente subscriber es ser un paro general
     rcl_subscription_t subSTOP;
     //NEMA, subscribers para los nema
-    rcl_subscription_t subNemaEX_move;
+    rcl_subscription_t subNemaEX_move, subNemaES_move;
+    rcl_subscription_t subNemaBA_move, subNemaAX_move;
 
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
@@ -68,7 +69,8 @@ private:
     std_msgs__msg__Bool subSTOP_msg;
 
     //Mema
-    my_msgs__msg__NemaCMD subNemaEX_move_msg;
+    my_msgs__msg__NemaCMD subNemaEX_move_msg, subNemaES_move_msg;
+    my_msgs__msg__NemaCMD subNemaBA_move_msg, subNemaAX_move_msg;
 
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
     //este callback manipula el LED recibe bool = estado led
@@ -97,6 +99,9 @@ private:
 
     //Nema
     static void subNemaEX_move_callback(const void * msgin);
+    static void subNemaES_move_callback(const void * msgin);
+    static void subNemaBA_move_callback(const void * msgin);
+    static void subNemaAX_move_callback(const void * msgin);
 
     Tempo timeConnected, sleepTime;
 public:
