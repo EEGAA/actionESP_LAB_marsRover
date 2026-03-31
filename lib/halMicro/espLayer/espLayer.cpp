@@ -4,7 +4,7 @@ NEOled neoLED;
 EXCAgen exca(39, 40);
 //- - - Hz|canalPWM|resolucion|pulsoMin|pulsoMax|pinServo
 SERVOgen servoDisp(50, 0, 14, 550, 2450, 14);
-SERVOgen servoCube(50, 1, 14, 550, 2450, 13);
+SERVOgen servoCube(50, 1, 14, 550, 2450, 13);// el home es en 90 grados
 //- - - - pinLED
 LEDgen myLed(47);
 //- - - - - INa, INb, pinPWM, canalPWM
@@ -20,6 +20,11 @@ NEMAgen nemaEX(2, 42, 1);
 NEMAgen nemaES(37, 38, 36);
 NEMAgen nemaBA(5, 4, 6);
 NEMAgen nemaAX(18, 8, 17);
+
+//Pines limit switch
+LIMITgen limitEX(19);
+LIMITgen limitES(20);
+
 /*
 NO usar estos pines
 

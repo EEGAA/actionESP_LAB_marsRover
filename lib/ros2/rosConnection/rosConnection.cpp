@@ -47,6 +47,12 @@ void RosConnection::update(){
                 if(status.type == StatusType::COUNTER_TICK){
                     ros_node.publishCounter();
                 }
+                if(status.type == StatusType::SIGNAL_LIMIT_EX){
+                    ros_node.pubLimitEX_callback();
+                }
+                if(status.type == StatusType::SIGNAL_LIMIT_ES){
+                    ros_node.pubLimitES_callback();
+                }
             }
             break;
 

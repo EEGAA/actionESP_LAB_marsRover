@@ -1,7 +1,7 @@
 #include "driversTask.hpp"
 
-// Timer local para reportar el contador de segundos
-static uint32_t lastSecTick = 0;
+// Timers locales para reportar el contador de segundos
+static uint32_t lastSecTick = 0, lastTimeLimit = 0;
 
 void DriversTask::init() {
     // Inicializa hardware aquí (la mayoria de los constructores drivers ya lo hacen {igual hay metodos para cambiarlos aqui mismo si se necesita})
@@ -137,7 +137,15 @@ void DriversTask::update(){
         status.value = 0;
         xQueueSend(statusQueue, &status, 0);
     }
-
+    //cuando se consulta el pub de los limits regresa cada 1/4 [s] su satate
+    if(now - lastTimeLimit >= 250){
+        lastTimeLimit = now;
+        DriverStatus statusLex, statusLes;
+        statusLex.type = StatusType::SIGNAL_LIMIT_EX;
+        xQueueSend(statusQueue, &statusLex, 0);
+        statusLes.type = StatusType::SIGNAL_LIMIT_ES;
+        xQueueSend(statusQueue, &statusLes, 0);
+    }
     // ── 3. Aquí va lógica de excavación/dispensación ──
     // excavationFSM.update();
     // dispenserFSM.update();

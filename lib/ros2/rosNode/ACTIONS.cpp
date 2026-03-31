@@ -1,10 +1,21 @@
 #include "rosNode.hpp"
 #include "../../halMicro/halRTOS/sharedData/sharedData.hpp"
+// ===== PUBLISHERS =====
 void RosNode::publishCounter(){
     counter_msg.data++;
     rcl_publish(&pubCounter, &counter_msg, NULL);
 }
+void RosNode::pubLimitEX_callback(){
+    pubLimitEX_msg.data = limitEX.readState();
+    rcl_publish(&pubLimitEX, &pubLimitEX_msg, NULL);
+}
 
+void RosNode::pubLimitES_callback(){
+    pubLimitES_msg.data = limitES.readState();
+    rcl_publish(&pubLimitES, &pubLimitES_msg, NULL);
+}
+
+// ===== SUBSCRIBERS =====
 void RosNode::subLED_callback(const void * msgin){
     const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
     //myLed.setState(msg->data);

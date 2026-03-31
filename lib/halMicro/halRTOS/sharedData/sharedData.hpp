@@ -42,11 +42,14 @@ struct RosCommand {
 enum class StatusType : uint8_t {
     COUNTER_TICK,   // señal para publicar counter
     // aqui tambien se tienen que modificar/agregar cosas
+    SIGNAL_LIMIT_EX,
+    SIGNAL_LIMIT_ES,
 };
 
 struct DriverStatus {
     StatusType type;
     int32_t    value;
+    // bool       boolVal;
 };
 
 // ── Handles globales (definidos en main.cpp) ──

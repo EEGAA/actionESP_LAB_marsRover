@@ -27,6 +27,8 @@ private:
 
     //hay que hacer una variable publisher o subscription por cada topico
     rcl_publisher_t pubCounter;
+    //los siguientes dos publishers son para consultar el estado de los limit
+    rcl_publisher_t pubLimitEX, pubLimitES;
     rcl_subscription_t subLED, subServoDisp, subServoCube;
     //los siguientes subscribers son para la roboclaw
     rcl_subscription_t subRCStop, subRCvelMTR1, subRCvelMTR2;
@@ -71,6 +73,9 @@ private:
     //Mema
     my_msgs__msg__NemaCMD subNemaEX_move_msg, subNemaES_move_msg;
     my_msgs__msg__NemaCMD subNemaBA_move_msg, subNemaAX_move_msg;
+
+    //tipos de dato bool, tomaran el state de los limitSwitch
+    std_msgs__msg__Bool pubLimitEX_msg, pubLimitES_msg;
 
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
     //este callback manipula el LED recibe bool = estado led
@@ -131,6 +136,9 @@ public:
     void finiPublishers();
     //**** todos los publish tambien se manejan en ACTIONS.cpp ****
     void publishCounter();
+    //publicadores para consultar estado de los limit
+    void pubLimitEX_callback();
+    void pubLimitES_callback();
 
     //sirve para iniciar nuevas sesiones cada que una se pierde
     //Es un identificador único de tu cliente micro-ROS. creado con la mac de la esp
