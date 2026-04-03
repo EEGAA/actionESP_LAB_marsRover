@@ -113,7 +113,7 @@ void DriversTask::update(){
                 myLed.LEDoff();
                 break;
             case CmdType::NEMA_EX_MOVE:
-                nemaEX.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
+                nemaEX.moveMTR(cmd.uint32Val, cmd.boolVal, 2000, true);
                 break;
             case CmdType::NEMA_ES_MOVE:
                 nemaES.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
