@@ -55,3 +55,4 @@ struct DriverStatus {
 // ── Handles globales (definidos en main.cpp) ──
 extern QueueHandle_t commandQueue;   // ROS  → Drivers
 extern QueueHandle_t statusQueue;    // Drivers → ROS
+extern TaskHandle_t servoTaskHandle;

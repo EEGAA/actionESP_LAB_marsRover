@@ -10,15 +10,12 @@ void LEDgen::setState(bool bnd){
 }
 void LEDgen::LEDon(){
     setState(true);
-    writeLED();
 }
 void LEDgen::LEDoff(){
     setState(false);
-    writeLED();
 }
 void LEDgen::switchState(){
     setState(!state);
-    writeLED();
 }
 void LEDgen::writeLED(){
     digitalWrite(pin, state);

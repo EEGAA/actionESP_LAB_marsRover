@@ -18,6 +18,7 @@ SERVOgen::SERVOgen(int freq_, int chanel_, int resolution_, int minPulso_, int m
 // Mueve el servo a un angulo entre 0 y 180
 void SERVOgen::moveAng(float angulo_){
     if (angulo_ < 0 || angulo_ > 180) return;
+    this->currentAngle = angulo_;
     // Interpola el pulso en us segun el angulo
     float pulso = minPulso + (maxPulso - minPulso) * (angulo_ / 180.0f);
     // Convierte el pulso a duty cycle en counts ADC
@@ -49,6 +50,7 @@ void SERVOgen::setTargetAngle(float angulo_, float speed_){
 
     this->targetAngle = angulo_;
     this->speed = speed_;
+    this->lastUpdate = millis();
 }
 //update es quien se encarga de que esto no sea bloqueante, ya que se llama cada ciclo, lo ideal es que este
 //dentro de una tarea de freertos
@@ -73,4 +75,12 @@ void SERVOgen::update(){
     }
 
     moveAng(currentAngle);
+}
+
+float SERVOgen::getCurrentAngle(){
+    return this->currentAngle;
+}
+
+bool SERVOgen::isAtTarget(){
+    return (abs(targetAngle - currentAngle) < 0.1f);
 }

@@ -16,10 +16,16 @@ void DriversTask::update(){
                 myLed.setState(cmd.boolVal);
                 break;
             case CmdType::SERVOdisp_MOVE:
-                servoDisp.moveAng(cmd.uint8Val);
+                //servoDisp.moveAng(cmd.uint8Val);
+                servoDisp.setTargetAngle(cmd.uint8Val, 120.0f);
+                if (servoTaskHandle)
+                    xTaskNotify(servoTaskHandle, 0, eNoAction);
                 break;
             case CmdType::SERVOcube_MOVE:
-                servoCube.moveAng(cmd.uint8Val);
+                //servoCube.moveAng(cmd.uint8Val);
+                servoCube.setTargetAngle(cmd.uint8Val, 20.0f);
+                if (servoTaskHandle)
+                    xTaskNotify(servoTaskHandle, 0, eNoAction);
                 break;
             // Añade: todos los demas motores
             case CmdType::RC_STOP:

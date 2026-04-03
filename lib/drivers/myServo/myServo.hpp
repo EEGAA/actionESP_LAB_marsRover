@@ -27,9 +27,10 @@ public:
 
     void update();
 
-    // float getCurrentAngle();
+    float getCurrentAngle();
     // float getTargetAngle();
     // float getSpeed;
+    bool isAtTarget();
 
 };
 //Este es un ejemplo en como se puede usar el objeto Servo

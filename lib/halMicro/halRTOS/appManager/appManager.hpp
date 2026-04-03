@@ -16,4 +16,5 @@ private:
     // Funciones de tarea (se pasan a xTaskCreatePinnedToCore)
     static void rosTask(void* pvParameters);
     static void driversTask(void* pvParameters);
+    static void servoTask(void* pvParameters);
 };
