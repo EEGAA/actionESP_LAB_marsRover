@@ -52,8 +52,8 @@ void AppManager::servoTask(void* pvParameters) {
 
         // Corre el update hasta que ambos servos lleguen al objetivo
         while (!servoDisp.isAtTarget() || !servoCube.isAtTarget()) {
-            servoDisp.update();
-            servoCube.update();
+            servoDisp.update(false);//velocidad constante
+            servoCube.update(true);//empieza rapido termina lento
             vTaskDelay(pdMS_TO_TICKS(10));  // 10 ms = dt razonable para el cálculo
         }
     }

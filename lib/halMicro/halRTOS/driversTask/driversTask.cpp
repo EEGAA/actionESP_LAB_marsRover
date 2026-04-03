@@ -17,13 +17,13 @@ void DriversTask::update(){
                 break;
             case CmdType::SERVOdisp_MOVE:
                 //servoDisp.moveAng(cmd.uint8Val);
-                servoDisp.setTargetAngle(cmd.uint8Val, 120.0f);
+                servoDisp.setTargetAngle(cmd.uint8Val, 360.0f);
                 if (servoTaskHandle)
                     xTaskNotify(servoTaskHandle, 0, eNoAction);
                 break;
             case CmdType::SERVOcube_MOVE:
                 //servoCube.moveAng(cmd.uint8Val);
-                servoCube.setTargetAngle(cmd.uint8Val, 20.0f);
+                servoCube.setTargetAngle(cmd.uint8Val, 180.0f);
                 if (servoTaskHandle)
                     xTaskNotify(servoTaskHandle, 0, eNoAction);
                 break;

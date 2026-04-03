@@ -54,7 +54,7 @@ void SERVOgen::setTargetAngle(float angulo_, float speed_){
 }
 //update es quien se encarga de que esto no sea bloqueante, ya que se llama cada ciclo, lo ideal es que este
 //dentro de una tarea de freertos
-void SERVOgen::update(){
+void SERVOgen::update(bool bnd){
     unsigned long now = millis();
     float dt = (now - lastUpdate) / 1000.0f; //en segundos
     lastUpdate = now;
@@ -66,7 +66,11 @@ void SERVOgen::update(){
     if(abs(error_) < 0.1f)
         currentAngle = targetAngle;
     else{
-        float step_ = speed * dt;
+        float step_;
+        if(!bnd)
+            step_ = speed * dt;
+        else
+            step_ = speed * dt * (abs(error_) / 180.0f);
 
         if(abs(step_) > abs(error_))
             currentAngle = targetAngle;

@@ -25,7 +25,10 @@ public:
     void setTargetAngle(float angulo_, float speed_);
     // void setSpeed;
 
-    void update();
+    void update(bool);
+    //update(false) -> el servo se mueve siempre a la misma velocidad
+    //update(true) -> empieza rapido, termina suave, lo mas rapido que empezara
+    //equivale a la velocidad constante de update(false)
 
     float getCurrentAngle();
     // float getTargetAngle();
