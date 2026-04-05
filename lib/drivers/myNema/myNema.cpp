@@ -10,6 +10,7 @@ NEMAgen::NEMAgen(uint8_t dir_, uint8_t step_, uint8_t enable_){
     resetContStep();
     setTotalStep(1);
     setEnable(false);
+    setTimeSleep(20);
 }
 
 void NEMAgen::setEnable(bool bnd){
@@ -73,4 +74,13 @@ void NEMAgen::moveMTR(uint32_t pasos_, bool dir_, uint32_t time_, bool timeType_
     }
 
     setEnable(false);
+}
+
+void NEMAgen::setTimeSleep(uint32_t ms){
+    if(ms < 1) ms = 1;
+    this->timeSleep = ms;
+}
+
+uint32_t NEMAgen::getTimeSleep(){
+    return timeSleep;
 }

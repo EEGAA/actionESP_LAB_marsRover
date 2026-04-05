@@ -12,9 +12,12 @@ private:
     // Creación de colas y lanzamiento de tasks
     static void createQueues();
     static void launchTasks();
-
+    //Semaforos para control de los nema
+    static void createSemaphores();
     // Funciones de tarea (se pasan a xTaskCreatePinnedToCore)
     static void rosTask(void* pvParameters);
     static void driversTask(void* pvParameters);
     static void servoTask(void* pvParameters);
+    //NEMA
+    static void nemaEXTask(void* pvParameters);
 };

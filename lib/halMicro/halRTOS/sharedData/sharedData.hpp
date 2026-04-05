@@ -56,3 +56,6 @@ struct DriverStatus {
 extern QueueHandle_t commandQueue;   // ROS  → Drivers
 extern QueueHandle_t statusQueue;    // Drivers → ROS
 extern TaskHandle_t servoTaskHandle;
+//Semaforos motor nemaEX
+extern SemaphoreHandle_t semNemaEX;   // Semáforo binario: dispara el movimiento de
+extern SemaphoreHandle_t mutexNemaEX; // Mutex: protege acceso al objeto motor

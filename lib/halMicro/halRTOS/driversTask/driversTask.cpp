@@ -118,8 +118,15 @@ void DriversTask::update(){
                 neoLED.LEDoff();
                 myLed.LEDoff();
                 break;
+            //NEMA
             case CmdType::NEMA_EX_MOVE:
-                nemaEX.moveMTR(cmd.uint32Val, cmd.boolVal, 2000, true);
+                if(xSemaphoreTake(mutexNemaEX, pdMS_TO_TICKS(100)) == pdTRUE){
+                    nemaEX.setTotalStep(cmd.uint32Val);
+                    nemaEX.writeDir(cmd.boolVal);
+                    xSemaphoreGive(mutexNemaEX);
+                }
+                //libera la tarea nemaEXTask
+                xSemaphoreGive(semNemaEX);
                 break;
             case CmdType::NEMA_ES_MOVE:
                 nemaES.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);

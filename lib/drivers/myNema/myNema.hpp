@@ -4,7 +4,7 @@
 class NEMAgen{
 private:
     uint8_t dir, step, enable;
-    uint32_t contStep, totalStep;
+    uint32_t contStep, totalStep, timeSleep;
 public:
     NEMAgen(uint8_t dir_, uint8_t step_, uint8_t enable_);
     void setEnable(bool bnd);
@@ -17,4 +17,7 @@ public:
     uint32_t getTotalStep();
     //..........pasos, direccion, delay, micros o millis
     void moveMTR(uint32_t, bool, uint32_t, bool);
+    //timeSleep son milisegundos
+    void setTimeSleep(uint32_t);
+    uint32_t getTimeSleep();
 };
