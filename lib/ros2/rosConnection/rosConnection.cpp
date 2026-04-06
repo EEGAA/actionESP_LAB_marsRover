@@ -58,6 +58,7 @@ void RosConnection::update(){
 
         case AGENT_DISCONNECTED: neoLED.rojo();
             ros_node.destroyEntities();
+            vTaskDelay(pdMS_TO_TICKS(500));
             neoLED.azul();
             //una vez sin entidades se busca intentar recuperar Serial
             ros_node.initSerial();//para poder detener el nodo con ctrl+c,
