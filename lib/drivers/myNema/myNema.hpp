@@ -5,6 +5,7 @@ class NEMAgen{
 private:
     uint8_t dir, step, enable;
     uint32_t contStep, totalStep, timeSleep;
+    bool stopNema;
 public:
     NEMAgen(uint8_t dir_, uint8_t step_, uint8_t enable_);
     void setEnable(bool bnd);
@@ -20,4 +21,7 @@ public:
     //timeSleep son milisegundos
     void setTimeSleep(uint32_t);
     uint32_t getTimeSleep();
+
+    void setStopNema(bool);
+    bool getStopNema();
 };

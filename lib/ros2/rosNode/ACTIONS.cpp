@@ -163,3 +163,11 @@ void RosNode::subNemaAX_move_callback(const void * msgin){
     cmd.uint32Val = msg->pasos;
     xQueueSend(commandQueue, &cmd, 0);
 }
+
+void RosNode::subNemaStop_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEMA_STOP;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}

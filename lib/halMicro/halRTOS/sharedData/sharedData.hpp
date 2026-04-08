@@ -25,6 +25,7 @@ enum class CmdType : uint8_t {
     NEMA_ES_MOVE,
     NEMA_BA_MOVE,
     NEMA_AX_MOVE,
+    NEMA_STOP,
 };
 
 struct RosCommand {
@@ -59,3 +60,10 @@ extern TaskHandle_t servoTaskHandle;
 //Semaforos motor nemaEX
 extern SemaphoreHandle_t semNemaEX;   // Semáforo binario: dispara el movimiento de
 extern SemaphoreHandle_t mutexNemaEX; // Mutex: protege acceso al objeto motor
+//Semaforos nemaES
+extern SemaphoreHandle_t semNemaES, mutexNemaES;
+//nemaBA
+extern SemaphoreHandle_t semNemaBA, mutexNemaBA;
+//nemaAX
+extern SemaphoreHandle_t semNemaAX, mutexNemaAX;
+

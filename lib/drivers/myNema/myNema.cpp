@@ -21,6 +21,7 @@ void NEMAgen::setEnable(bool bnd){
         digitalWrite(dir, LOW);
         digitalWrite(step, LOW);
     }
+    setStopNema(!bnd);
 }
 
 void NEMAgen::writeDir(bool bnd){
@@ -83,4 +84,12 @@ void NEMAgen::setTimeSleep(uint32_t ms){
 
 uint32_t NEMAgen::getTimeSleep(){
     return timeSleep;
+}
+
+void NEMAgen::setStopNema(bool bnd){
+    this->stopNema = bnd;
+}
+
+bool NEMAgen::getStopNema(){
+    return stopNema;
 }

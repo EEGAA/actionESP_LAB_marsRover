@@ -117,27 +117,67 @@ void DriversTask::update(){
                 bomba.stop();
                 neoLED.LEDoff();
                 myLed.LEDoff();
+                nemaEX.setStopNema(true);
+                nemaES.setStopNema(true);
+                nemaBA.setStopNema(true);
+                nemaAX.setStopNema(true);
                 break;
             //NEMA
             case CmdType::NEMA_EX_MOVE:
                 if(xSemaphoreTake(mutexNemaEX, pdMS_TO_TICKS(100)) == pdTRUE){
-                    nemaEX.setTotalStep(cmd.uint32Val);
                     nemaEX.writeDir(cmd.boolVal);
+                    nemaEX.setTotalStep(cmd.uint32Val);
                     xSemaphoreGive(mutexNemaEX);
                 }
                 //libera la tarea nemaEXTask
                 xSemaphoreGive(semNemaEX);
                 break;
             case CmdType::NEMA_ES_MOVE:
-                nemaES.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
+                if(xSemaphoreTake(mutexNemaES, pdMS_TO_TICKS(100)) == pdTRUE){
+                    nemaES.writeDir(cmd.boolVal);
+                    nemaES.setTotalStep(cmd.uint32Val);
+                    xSemaphoreGive(mutexNemaES);
+                }
+                //libera la tarea nemaESTask
+                xSemaphoreGive(semNemaES);
                 break;
             case CmdType::NEMA_BA_MOVE:
-                nemaBA.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
+                if(xSemaphoreTake(mutexNemaBA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    nemaBA.writeDir(cmd.boolVal);
+                    nemaBA.setTotalStep(cmd.uint32Val);
+                    xSemaphoreGive(mutexNemaBA);
+                }
+                //libera la tarea nemaBATask
+                xSemaphoreGive(semNemaBA);
                 break;
             case CmdType::NEMA_AX_MOVE:
-                nemaAX.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
+                // nemaAX.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
+                if(xSemaphoreTake(mutexNemaAX, pdMS_TO_TICKS(100)) == pdTRUE){
+                    nemaAX.writeDir(cmd.boolVal);
+                    nemaAX.setTotalStep(cmd.uint32Val);
+                    xSemaphoreGive(mutexNemaAX);
+                }
+                //libera la tarea nemaAXTask
+                xSemaphoreGive(semNemaAX);
                 break;
-
+            case CmdType::NEMA_STOP:
+                switch(cmd.boolVal){
+                    case 0:
+                        nemaEX.setStopNema(true);
+                        break;
+                    case 1:
+                        nemaES.setStopNema(true);
+                        break;
+                    case 2:
+                        nemaBA.setStopNema(true);
+                        break;
+                    case 3:
+                        nemaAX.setStopNema(true);
+                        break;
+                    default:
+                        break;
+                }
+                break;
         }
     }
 

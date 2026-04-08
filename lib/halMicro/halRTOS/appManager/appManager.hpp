@@ -20,4 +20,7 @@ private:
     static void servoTask(void* pvParameters);
     //NEMA
     static void nemaEXTask(void* pvParameters);
+    static void nemaESTask(void* pvParameters);
+    static void nemaBATask(void* pvParameters);
+    static void nemaAXTask(void* pvParameters);
 };

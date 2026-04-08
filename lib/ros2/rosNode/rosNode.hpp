@@ -42,6 +42,7 @@ private:
     //NEMA, subscribers para los nema
     rcl_subscription_t subNemaEX_move, subNemaES_move;
     rcl_subscription_t subNemaBA_move, subNemaAX_move;
+    rcl_subscription_t subNemaStop;
 
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
@@ -73,6 +74,7 @@ private:
     //Mema
     my_msgs__msg__NemaCMD subNemaEX_move_msg, subNemaES_move_msg;
     my_msgs__msg__NemaCMD subNemaBA_move_msg, subNemaAX_move_msg;
+    std_msgs__msg__UInt8 subNemaStop_msg;
 
     //tipos de dato bool, tomaran el state de los limitSwitch
     std_msgs__msg__Bool pubLimitEX_msg, pubLimitES_msg;
@@ -107,6 +109,7 @@ private:
     static void subNemaES_move_callback(const void * msgin);
     static void subNemaBA_move_callback(const void * msgin);
     static void subNemaAX_move_callback(const void * msgin);
+    static void subNemaStop_callback(const void * msgin);
 
     Tempo timeConnected, sleepTime;
 public:
