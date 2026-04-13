@@ -97,6 +97,7 @@ void AppManager::nemaEXTask(void* pvParameters){
         if(xSemaphoreTake(mutexNemaEX, pdMS_TO_TICKS(100)) == pdTRUE){
             nemaEX.resetContStep();
             nemaEX.setEnable(true);
+            nemaEX.writeDir();
             xSemaphoreGive(mutexNemaEX);
         }
 
@@ -138,6 +139,7 @@ void AppManager::nemaESTask(void* pvParameters){
         if(xSemaphoreTake(mutexNemaES, pdMS_TO_TICKS(100)) == pdTRUE){
             nemaES.resetContStep();
             nemaES.setEnable(true);
+            nemaES.writeDir();
             xSemaphoreGive(mutexNemaES);
         }
 
@@ -179,6 +181,7 @@ void AppManager::nemaBATask(void* pvParameters){
         if(xSemaphoreTake(mutexNemaBA, pdMS_TO_TICKS(100)) == pdTRUE){
             nemaBA.resetContStep();
             nemaBA.setEnable(true);
+            nemaBA.writeDir();
             xSemaphoreGive(mutexNemaBA);
         }
 
@@ -220,6 +223,7 @@ void AppManager::nemaAXTask(void* pvParameters){
         if(xSemaphoreTake(mutexNemaAX, pdMS_TO_TICKS(100)) == pdTRUE){
             nemaAX.resetContStep();
             nemaAX.setEnable(true);
+            nemaAX.writeDir();
             xSemaphoreGive(mutexNemaAX);
         }
 

@@ -23,7 +23,7 @@ void DriversTask::update(){
                 break;
             case CmdType::SERVOcube_MOVE:
                 //servoCube.moveAng(cmd.uint8Val);
-                servoCube.setTargetAngle(cmd.uint8Val, 180.0f);
+                servoCube.setTargetAngle(cmd.uint8Val, 270.0f);
                 if (servoTaskHandle)
                     xTaskNotify(servoTaskHandle, 0, eNoAction);
                 break;
@@ -125,7 +125,8 @@ void DriversTask::update(){
             //NEMA
             case CmdType::NEMA_EX_MOVE:
                 if(xSemaphoreTake(mutexNemaEX, pdMS_TO_TICKS(100)) == pdTRUE){
-                    nemaEX.writeDir(cmd.boolVal);
+                    nemaEX.setCurrentDir(cmd.boolVal);
+                    // nemaEX.writeDir(cmd.boolVal);
                     nemaEX.setTotalStep(cmd.uint32Val);
                     xSemaphoreGive(mutexNemaEX);
                 }
@@ -134,7 +135,8 @@ void DriversTask::update(){
                 break;
             case CmdType::NEMA_ES_MOVE:
                 if(xSemaphoreTake(mutexNemaES, pdMS_TO_TICKS(100)) == pdTRUE){
-                    nemaES.writeDir(cmd.boolVal);
+                    nemaES.setCurrentDir(cmd.boolVal);
+                    // nemaES.writeDir(cmd.boolVal);
                     nemaES.setTotalStep(cmd.uint32Val);
                     xSemaphoreGive(mutexNemaES);
                 }
@@ -143,7 +145,8 @@ void DriversTask::update(){
                 break;
             case CmdType::NEMA_BA_MOVE:
                 if(xSemaphoreTake(mutexNemaBA, pdMS_TO_TICKS(100)) == pdTRUE){
-                    nemaBA.writeDir(cmd.boolVal);
+                    nemaBA.setCurrentDir(cmd.boolVal);
+                    // nemaBA.writeDir(cmd.boolVal);
                     nemaBA.setTotalStep(cmd.uint32Val);
                     xSemaphoreGive(mutexNemaBA);
                 }
@@ -153,7 +156,8 @@ void DriversTask::update(){
             case CmdType::NEMA_AX_MOVE:
                 // nemaAX.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
                 if(xSemaphoreTake(mutexNemaAX, pdMS_TO_TICKS(100)) == pdTRUE){
-                    nemaAX.writeDir(cmd.boolVal);
+                    nemaAX.setCurrentDir(cmd.boolVal);
+                    // nemaAX.writeDir(cmd.boolVal);
                     nemaAX.setTotalStep(cmd.uint32Val);
                     xSemaphoreGive(mutexNemaAX);
                 }

@@ -5,11 +5,11 @@ class NEMAgen{
 private:
     uint8_t dir, step, enable;
     uint32_t contStep, totalStep, timeSleep;
-    bool stopNema;
+    bool stopNema, currentDir;
 public:
     NEMAgen(uint8_t dir_, uint8_t step_, uint8_t enable_);
     void setEnable(bool bnd);
-    void writeDir(bool bnd);
+    void writeDir();
     void writeStep(bool bnd);
     uint32_t getContStep();
     void resetContStep();
@@ -24,4 +24,7 @@ public:
 
     void setStopNema(bool);
     bool getStopNema();
+
+    void setCurrentDir(bool);
+    bool getCurrentDir();
 };

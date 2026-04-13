@@ -4,6 +4,7 @@ NEMAgen::NEMAgen(uint8_t dir_, uint8_t step_, uint8_t enable_){
     this->dir = dir_;
     this->step = step_;
     this->enable = enable_;
+    setCurrentDir(false);
     pinMode(dir, OUTPUT);
     pinMode(step, OUTPUT);
     pinMode(enable, OUTPUT);
@@ -11,6 +12,7 @@ NEMAgen::NEMAgen(uint8_t dir_, uint8_t step_, uint8_t enable_){
     setTotalStep(1);
     setEnable(false);
     setTimeSleep(20);
+
 }
 
 void NEMAgen::setEnable(bool bnd){
@@ -24,8 +26,8 @@ void NEMAgen::setEnable(bool bnd){
     setStopNema(!bnd);
 }
 
-void NEMAgen::writeDir(bool bnd){
-    digitalWrite(dir, bnd);
+void NEMAgen::writeDir(){
+    digitalWrite(dir, currentDir);
 }
 
 void NEMAgen::writeStep(bool bnd){
@@ -59,7 +61,8 @@ uint32_t NEMAgen::getTotalStep(){
 //..........pasos, direccion, delay, micros o millis
 void NEMAgen::moveMTR(uint32_t pasos_, bool dir_, uint32_t time_, bool timeType_){
     setEnable(true);
-    writeDir(dir_);
+    setCurrentDir(dir_);
+    writeDir();
 
     for(int i = 0; i < pasos_; i++){
         writeStep(1);
@@ -92,4 +95,12 @@ void NEMAgen::setStopNema(bool bnd){
 
 bool NEMAgen::getStopNema(){
     return stopNema;
+}
+
+void NEMAgen::setCurrentDir(bool bnd){
+    this->currentDir = bnd;
+}
+
+bool NEMAgen::getCurrentDir(){
+    return currentDir;
 }
