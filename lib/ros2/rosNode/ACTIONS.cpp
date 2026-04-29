@@ -132,8 +132,8 @@ void RosNode::subNemaEX_move_callback(const void * msgin){
     const my_msgs__msg__NemaCMD * msg = (const my_msgs__msg__NemaCMD *)msgin;
     RosCommand cmd;
     cmd.type      = CmdType::NEMA_EX_MOVE;
-    cmd.boolVal   = msg->direccion;
-    cmd.uint32Val = msg->pasos;
+    cmd.nemaVal.pasos     = msg->pasos;
+    cmd.nemaVal.direccion = msg->direccion;
     xQueueSend(commandQueue, &cmd, 0);
 }
 
@@ -141,8 +141,8 @@ void RosNode::subNemaES_move_callback(const void * msgin){
     const my_msgs__msg__NemaCMD * msg = (const my_msgs__msg__NemaCMD *)msgin;
     RosCommand cmd;
     cmd.type      = CmdType::NEMA_ES_MOVE;
-    cmd.boolVal   = msg->direccion;
-    cmd.uint32Val = msg->pasos;
+    cmd.nemaVal.pasos     = msg->pasos;
+    cmd.nemaVal.direccion = msg->direccion;
     xQueueSend(commandQueue, &cmd, 0);
 }
 
@@ -150,8 +150,8 @@ void RosNode::subNemaBA_move_callback(const void * msgin){
     const my_msgs__msg__NemaCMD * msg = (const my_msgs__msg__NemaCMD *)msgin;
     RosCommand cmd;
     cmd.type      = CmdType::NEMA_BA_MOVE;
-    cmd.boolVal   = msg->direccion;
-    cmd.uint32Val = msg->pasos;
+    cmd.nemaVal.pasos     = msg->pasos;
+    cmd.nemaVal.direccion = msg->direccion;
     xQueueSend(commandQueue, &cmd, 0);
 }
 
@@ -159,8 +159,8 @@ void RosNode::subNemaAX_move_callback(const void * msgin){
     const my_msgs__msg__NemaCMD * msg = (const my_msgs__msg__NemaCMD *)msgin;
     RosCommand cmd;
     cmd.type      = CmdType::NEMA_AX_MOVE;
-    cmd.boolVal   = msg->direccion;
-    cmd.uint32Val = msg->pasos;
+    cmd.nemaVal.pasos     = msg->pasos;
+    cmd.nemaVal.direccion = msg->direccion;
     xQueueSend(commandQueue, &cmd, 0);
 }
 

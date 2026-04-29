@@ -27,6 +27,13 @@ enum class CmdType : uint8_t {
     NEMA_AX_MOVE,
     NEMA_STOP,
 };
+//La siguiente estructura es para que los nema, pueda recibir, bien bien
+// el mensaje custom
+struct NemaMSGS{
+    uint32_t pasos;
+    bool     direccion;
+};
+
 
 struct RosCommand {
     CmdType type;
@@ -35,6 +42,7 @@ struct RosCommand {
         uint8_t uint8Val;
         int16_t int16Val;
         uint32_t uint32Val;
+        NemaMSGS nemaVal;
         //float   floatVal;
     };
 };

@@ -125,9 +125,8 @@ void DriversTask::update(){
             //NEMA
             case CmdType::NEMA_EX_MOVE:
                 if(xSemaphoreTake(mutexNemaEX, pdMS_TO_TICKS(100)) == pdTRUE){
-                    nemaEX.setCurrentDir(cmd.boolVal);
-                    // nemaEX.writeDir(cmd.boolVal);
-                    nemaEX.setTotalStep(cmd.uint32Val);
+                    nemaEX.setCurrentDir(cmd.nemaVal.direccion);
+                    nemaEX.setTotalStep(cmd.nemaVal.pasos);
                     xSemaphoreGive(mutexNemaEX);
                 }
                 //libera la tarea nemaEXTask
@@ -135,9 +134,8 @@ void DriversTask::update(){
                 break;
             case CmdType::NEMA_ES_MOVE:
                 if(xSemaphoreTake(mutexNemaES, pdMS_TO_TICKS(100)) == pdTRUE){
-                    nemaES.setCurrentDir(cmd.boolVal);
-                    // nemaES.writeDir(cmd.boolVal);
-                    nemaES.setTotalStep(cmd.uint32Val);
+                    nemaES.setCurrentDir(cmd.nemaVal.direccion);
+                    nemaES.setTotalStep(cmd.nemaVal.pasos);
                     xSemaphoreGive(mutexNemaES);
                 }
                 //libera la tarea nemaESTask
@@ -145,9 +143,8 @@ void DriversTask::update(){
                 break;
             case CmdType::NEMA_BA_MOVE:
                 if(xSemaphoreTake(mutexNemaBA, pdMS_TO_TICKS(100)) == pdTRUE){
-                    nemaBA.setCurrentDir(cmd.boolVal);
-                    // nemaBA.writeDir(cmd.boolVal);
-                    nemaBA.setTotalStep(cmd.uint32Val);
+                    nemaBA.setCurrentDir(cmd.nemaVal.direccion);
+                    nemaBA.setTotalStep(cmd.nemaVal.pasos);
                     xSemaphoreGive(mutexNemaBA);
                 }
                 //libera la tarea nemaBATask
@@ -156,9 +153,8 @@ void DriversTask::update(){
             case CmdType::NEMA_AX_MOVE:
                 // nemaAX.moveMTR(cmd.uint32Val, cmd.boolVal, 1000, true);
                 if(xSemaphoreTake(mutexNemaAX, pdMS_TO_TICKS(100)) == pdTRUE){
-                    nemaAX.setCurrentDir(cmd.boolVal);
-                    // nemaAX.writeDir(cmd.boolVal);
-                    nemaAX.setTotalStep(cmd.uint32Val);
+                    nemaAX.setCurrentDir(cmd.nemaVal.direccion);
+                    nemaAX.setTotalStep(cmd.nemaVal.pasos);
                     xSemaphoreGive(mutexNemaAX);
                 }
                 //libera la tarea nemaAXTask

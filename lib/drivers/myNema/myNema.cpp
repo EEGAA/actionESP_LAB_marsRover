@@ -17,6 +17,7 @@ NEMAgen::NEMAgen(uint8_t dir_, uint8_t step_, uint8_t enable_){
 
 void NEMAgen::setEnable(bool bnd){
     if(bnd){
+        setStopNema(false);
         digitalWrite(enable, LOW);
         writeDir();
     }else{
@@ -24,7 +25,7 @@ void NEMAgen::setEnable(bool bnd){
         digitalWrite(dir, LOW);
         digitalWrite(step, LOW);
     }
-    setStopNema(!bnd);
+    //setStopNema(!bnd);
 }
 
 void NEMAgen::writeDir(){
@@ -44,9 +45,10 @@ void NEMAgen::resetContStep(){
 }
 
 bool NEMAgen::sumContStep(){
-    if(contStep == totalStep)
+    if(contStep == totalStep){
+        setStopNema(true);
         return false;
-    else
+    }else
         contStep++;
     return true;
 }
