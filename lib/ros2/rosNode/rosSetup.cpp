@@ -33,7 +33,7 @@ bool RosNode::initSupport(){
 }
 
 bool RosNode::initNode(){
-    if (rclc_node_init_default(&node, "esp32_node", "actionESP", &support) != RCL_RET_OK)
+    if (rclc_node_init_default(&node, "esp32_node", "labActESP", &support) != RCL_RET_OK)
         return false;
 
     return true;

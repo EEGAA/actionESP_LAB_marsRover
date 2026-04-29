@@ -16,9 +16,10 @@ NEMAgen::NEMAgen(uint8_t dir_, uint8_t step_, uint8_t enable_){
 }
 
 void NEMAgen::setEnable(bool bnd){
-    if(bnd)
+    if(bnd){
         digitalWrite(enable, LOW);
-    else{
+        writeDir();
+    }else{
         digitalWrite(enable, HIGH);
         digitalWrite(dir, LOW);
         digitalWrite(step, LOW);

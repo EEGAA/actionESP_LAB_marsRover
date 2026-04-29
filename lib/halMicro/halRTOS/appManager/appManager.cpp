@@ -97,7 +97,7 @@ void AppManager::nemaEXTask(void* pvParameters){
         if(xSemaphoreTake(mutexNemaEX, pdMS_TO_TICKS(100)) == pdTRUE){
             nemaEX.resetContStep();
             nemaEX.setEnable(true);
-            nemaEX.writeDir();
+            //nemaEX.writeDir();
             xSemaphoreGive(mutexNemaEX);
         }
 
