@@ -10,4 +10,6 @@ public:
     int getTeclaI();
 
     void update(); //aqui se hace todo alv
+
+    void showTeclas();
 };

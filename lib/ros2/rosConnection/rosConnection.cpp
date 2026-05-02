@@ -87,6 +87,7 @@ void RosConnection::update(){
                     neoLED.LEDoff();
                     bnd = false;
                 }
+
             //esto es cada respuesta al teclado
             if(Serial.available() > 0)
                 appUM.update();

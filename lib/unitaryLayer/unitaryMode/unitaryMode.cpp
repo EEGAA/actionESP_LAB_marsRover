@@ -6,7 +6,9 @@ void UNITYgen::update(){
 //     switch(teclaChar){
 //
 //     }
-    Serial.println(teclaChar);
+    showTeclas();
+    if(teclaChar == 'R')//este if es bien importante pq gracias a el regresamos a modo ros2
+         ESP.restart();
 }
 
 
@@ -19,4 +21,9 @@ char UNITYgen::getTeclaC(){
 }
 int UNITYgen::getTeclaI(){
     return teclaInt;
+}
+
+void UNITYgen::showTeclas(){
+    Serial.print(teclaChar);
+    Serial.println(" "+String(teclaInt));
 }
