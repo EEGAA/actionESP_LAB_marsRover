@@ -8,7 +8,8 @@ private:
         WAITING_AGENT,//naranja
         AGENT_AVAILABLE,//rosa
         AGENT_CONNECTED,//verdeLima
-        AGENT_DISCONNECTED//rojo
+        AGENT_DISCONNECTED,//rojo
+        UNITARY_MODE,//azul cielo
     };
     State state = WAITING_AGENT;
     RosNode ros_node;

@@ -54,11 +54,9 @@ void RosConnection::update(){
                     ros_node.pubLimitES_callback();
                 }
             }
-            if(!bnd)
-                if(bndSignal_UM.getSignalBND())
-                    neoLED.verdeIntenso();
-                else
-                    neoLED.azulCielo();
+            //cambia a modo unitary mode, Serial mode, solo cuando es true bndSignal_UM
+            if(bndSignal_UM.getSignalBND())
+                state = UNITARY_MODE;
             break;
 
         case AGENT_DISCONNECTED: neoLED.rojo();
@@ -69,6 +67,32 @@ void RosConnection::update(){
             ros_node.initSerial();//para poder detener el nodo con ctrl+c,
             //y al reclamarlo recuperar Serial sin tener que reiniciar la esp
             state = WAITING_AGENT;
+            break;
+        case UNITARY_MODE:
+            if(bndSignal_UM.getSignalBND()){
+                neoLED.rojoClaro();
+                ros_node.destroyEntities();
+                vTaskDelay(pdMS_TO_TICKS(500));
+                bndSignal_UM.setSignalBND(false);
+                neoLED.azulCielo();
+                lifeLED.initTempo();
+                bnd = true;
+            }
+            if(bnd)
+                if(lifeLED.checkTempo()){
+                    neoLED.LEDoff();
+                    bnd = false;
+                }
+
+
+            if(!Serial){
+                Serial.begin(921600);
+                vTaskDelay(pdMS_TO_TICKS(250));
+            }
+            if(Serial.available() > 0)
+                Serial.println(Serial.read());
+
+
             break;
     }
 }
