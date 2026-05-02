@@ -6,6 +6,8 @@ void UNITYgen::update(){
     showTeclas();
     if(teclaChar == 'R')//este if es bien importante pq gracias a el regresamos a modo ros2
          ESP.restart();
+    if(teclaInt == 9)//si pucha tab muestra un menu
+        while(myMenu.menuOption()){}
     genSwitch();
 }
 
@@ -27,8 +29,6 @@ void UNITYgen::showTeclas(){
 }
 
 void UNITYgen::genSwitch(){
-    if(teclaInt == 9)
-        myMenu.menuOption();
     switch(teclaChar){
         
         default:

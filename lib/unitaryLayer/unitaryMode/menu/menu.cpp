@@ -10,15 +10,17 @@ MENUgen::MENUgen(){
 
 bool MENUgen::menuOption(){
     char op = 'z', opM = 'x';
-    Serial.println("Que quieres saber?");
+    Serial.println("\n\tQue quieres saber?");
 
     Serial.println("a) Como mover la roboclaw?");
     Serial.println("b) Como mover la bomba?");
     Serial.println("c) Como mover los servos?");
     Serial.println("d) Como mover los nemas?");
+    Serial.println("e) Para mostrar datos GENERALES");
+    Serial.println("R) Para regresar a modo micro ROS");
     
     Serial.println("Opcion: ");
-    while(Serial.available() < 0){ delay(100); }
+    while(!Serial.available() > 0){ delay(100); }
     op = Serial.read();
     switch (op){
     case 'a':
@@ -33,16 +35,22 @@ bool MENUgen::menuOption(){
     case 'd':
         opM = 'n';
         break;
+    case 'R':
+        ESP.restart();
+        break;
+    case 'e':
+        generalDTA();
+        break;
     
     default:
         Serial.println("Opcion NO reconicida tonto,\nIntentalo de nuevo perdedor jaja L"); 
         // menuOption();
-        return false;
+        return true;
         break;
     }
         
     menuManager(opM);
-    return true;
+    return false;
 }
 
 void MENUgen::menuManager(char currentTecla){
@@ -75,4 +83,8 @@ void MENUgen::servos_M(){
 }
 void MENUgen::nemas_M(){
     Serial.println("\n\tNEMAS m e n u\t:)");
+}
+
+void MENUgen::generalDTA(){
+    Serial.println("\n\tGENERAL d a t a\t:)");
 }

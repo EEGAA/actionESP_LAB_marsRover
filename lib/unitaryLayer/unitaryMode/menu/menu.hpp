@@ -10,6 +10,7 @@ private:
     void bomba_M();
     void servos_M();
     void nemas_M();
+    void generalDTA();
 public:
     MENUgen();
     bool menuOption();
