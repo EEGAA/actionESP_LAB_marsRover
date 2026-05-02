@@ -3,12 +3,10 @@
 
 void UNITYgen::update(){
     setTecla();
-//     switch(teclaChar){
-//
-//     }
     showTeclas();
     if(teclaChar == 'R')//este if es bien importante pq gracias a el regresamos a modo ros2
          ESP.restart();
+    genSwitch();
 }
 
 
@@ -26,4 +24,17 @@ int UNITYgen::getTeclaI(){
 void UNITYgen::showTeclas(){
     Serial.print(teclaChar);
     Serial.println(" "+String(teclaInt));
+}
+
+void UNITYgen::genSwitch(){
+    if(teclaInt == 9)
+        myMenu.menuOption();
+    switch(teclaChar){
+        
+        default:
+            Serial.println("Tecla NO reconocida :( ...");
+            // Serial.println("Intenta con alguna de las siguientes opciones");
+            //aki se supone que debo de imprimir un menu relatando lo que hace cada tecla pero xd pa luego sera otro dia
+            break;
+    }
 }

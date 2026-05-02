@@ -12,14 +12,11 @@ L298Ngen bomba(10, 11, 9, 2);
 
 //pines PCB nueva
 //- - - - - dir, step, enable
-// NEMAgen nemaEX(2, 42, 1);
-// NEMAgen nemaES(37, 38, 36);
-// NEMAgen nemaBA(5, 4, 6);
-// NEMAgen nemaAX(18, 8, 17);
-NEMAgen nemaBA(2, 42, 1);
-NEMAgen nemaAX(37, 38, 36);
-NEMAgen nemaEX(5, 4, 6);
-NEMAgen nemaES(18, 8, 17);
+NEMAgen nemaEX(42, 2, 1);
+NEMAgen nemaES(38, 37, 36);
+NEMAgen nemaBA(8, 18, 17);
+NEMAgen nemaAX(4, 5, 6);
+
 //PCB viejita
 // nemaA = {36, 37, 38}, nemaB = {42, 2, 1}; //nemaC{4, 5 ,6}
 // NEMAgen nemaEX(36, 37, 38);
