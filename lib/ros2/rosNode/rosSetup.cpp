@@ -6,7 +6,7 @@ RosNode::RosNode(): timeConnected(2000), sleepTime(250){}
 void RosNode::initSerial(){
     if(!Serial){
         timeConnected.initTempo();
-        Serial.begin(921600);
+        Serial.begin(SerialSpeed);
         while(!Serial && !timeConnected.checkTempo()){}
     }
     if(!Serial)//es improbable entrar a este if, y si pasa, se reinicia la esp

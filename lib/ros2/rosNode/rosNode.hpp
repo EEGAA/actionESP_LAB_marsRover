@@ -14,6 +14,8 @@
 
 #include <my_msgs/msg/nema_cmd.h>
 
+#define SerialSpeed 921600
+
 class RosNode{
 private:
     //Variables locales de ROS2 (micro ros agent)

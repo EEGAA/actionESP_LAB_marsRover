@@ -70,11 +70,15 @@ void RosConnection::update(){
             break;
         case UNITARY_MODE:
             if(bndSignal_UM.getSignalBND()){
-                neoLED.rojoClaro();
+                neoLED.grisMedio();
                 ros_node.destroyEntities();
                 vTaskDelay(pdMS_TO_TICKS(500));
                 bndSignal_UM.setSignalBND(false);
                 neoLED.azulCielo();
+                if(!Serial){
+                    Serial.begin(SerialSpeed);
+                    vTaskDelay(pdMS_TO_TICKS(250));
+                }
                 lifeLED.initTempo();
                 bnd = true;
             }
@@ -83,14 +87,9 @@ void RosConnection::update(){
                     neoLED.LEDoff();
                     bnd = false;
                 }
-
-
-            if(!Serial){
-                Serial.begin(921600);
-                vTaskDelay(pdMS_TO_TICKS(250));
-            }
+            //esto es cada respuesta al teclado
             if(Serial.available() > 0)
-                Serial.println(Serial.read());
+                appUM.update();
 
 
             break;
