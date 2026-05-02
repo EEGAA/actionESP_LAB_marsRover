@@ -8,6 +8,7 @@
 #include "../../drivers/myMtrH/myMtrH.hpp"
 #include "../../drivers/LED48/LED48.hpp"
 #include "../../drivers/myLimit/myLimit.hpp"
+#include "../../unitaryLayer/signalMode/signalMode.hpp"
 extern SERVOgen servoDisp; // dispensación
 extern SERVOgen servoCube; // cubeta
 extern LEDgen myLed; // ilumia lab
@@ -22,5 +23,7 @@ extern LIMITgen limitEX; // excavación
 extern LIMITgen limitES; // espectrofotómetro
 
 extern NEOled neoLED; // es el led rgb integrado en la esp pin 48
+
+extern SIGNALgen bndSignal_UM;
 
 void myESPinfo();

@@ -117,6 +117,12 @@ bool RosNode::initSubscribers(){
                                         "nemaStop") != RCL_RET_OK)
         return false;
 
+    if (rclc_subscription_init_default(
+        &subUnitaryMode,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
+                                        "unitaryMode") != RCL_RET_OK)
+        return false;
     return true;
 }
 
@@ -139,4 +145,5 @@ void RosNode::finiSubscribers(){
     rcl_subscription_fini(&subNemaBA_move, &node);
     rcl_subscription_fini(&subNemaAX_move, &node);
     rcl_subscription_fini(&subNemaStop, &node);
+    rcl_subscription_fini(&subUnitaryMode, &node);
 }

@@ -32,6 +32,8 @@ NEMAgen nemaES(18, 8, 17);
 LIMITgen limitEX(19);
 LIMITgen limitES(20);
 
+//esto es una clase que solo gestiona el estado de una bnadera o sea variable booleana
+SIGNALgen bndSignal_UM;
 /*
 NO usar estos pines
 

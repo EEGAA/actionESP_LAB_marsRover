@@ -43,6 +43,8 @@ private:
     rcl_subscription_t subNemaEX_move, subNemaES_move;
     rcl_subscription_t subNemaBA_move, subNemaAX_move;
     rcl_subscription_t subNemaStop;
+    //Este subscriber ayuda a cambiar de modo micro ros a Serial
+    rcl_subscription_t subUnitaryMode;
 
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
@@ -79,6 +81,9 @@ private:
     //tipos de dato bool, tomaran el state de los limitSwitch
     std_msgs__msg__Bool pubLimitEX_msg, pubLimitES_msg;
 
+    //dato bool para cambiar estado de la bnd signal subUnitaryMode
+    std_msgs__msg__Bool subUnitaryMode_msg;
+
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
     //este callback manipula el LED recibe bool = estado led
     static void subLED_callback(const void * msgin);
@@ -110,6 +115,9 @@ private:
     static void subNemaBA_move_callback(const void * msgin);
     static void subNemaAX_move_callback(const void * msgin);
     static void subNemaStop_callback(const void * msgin);
+
+    //callback para manejar la bandera subUnitaryMode
+    static void subUnitaryMode_callback(const void * msgin);
 
     Tempo timeConnected, sleepTime;
 public:

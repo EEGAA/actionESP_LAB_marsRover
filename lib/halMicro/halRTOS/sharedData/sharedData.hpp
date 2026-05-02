@@ -26,6 +26,7 @@ enum class CmdType : uint8_t {
     NEMA_BA_MOVE,
     NEMA_AX_MOVE,
     NEMA_STOP,
+    UNITARY_MODE,
 };
 //La siguiente estructura es para que los nema, pueda recibir, bien bien
 // el mensaje custom

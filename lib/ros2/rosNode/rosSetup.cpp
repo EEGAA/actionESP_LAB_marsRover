@@ -40,7 +40,7 @@ bool RosNode::initNode(){
 }
 
 bool RosNode::initExecutor(){
-    if (rclc_executor_init(&executor, &support.context, 18, &allocator) != RCL_RET_OK)
+    if (rclc_executor_init(&executor, &support.context, 19, &allocator) != RCL_RET_OK)
         return false;
 
     if (rclc_executor_add_subscription(
@@ -169,6 +169,14 @@ bool RosNode::initExecutor(){
         &subNemaStop,
         &subNemaStop_msg,
         &RosNode::subNemaStop_callback,
+        ON_NEW_DATA) != RCL_RET_OK)
+        return false;
+   //subUnitaryMode
+   if (rclc_executor_add_subscription(
+        &executor,
+        &subUnitaryMode,
+        &subUnitaryMode_msg,
+        &RosNode::subUnitaryMode_callback,
         ON_NEW_DATA) != RCL_RET_OK)
         return false;
     return true;

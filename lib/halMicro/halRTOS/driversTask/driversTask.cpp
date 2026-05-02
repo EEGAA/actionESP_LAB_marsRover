@@ -178,6 +178,10 @@ void DriversTask::update(){
                         break;
                 }
                 break;
+            case CmdType::UNITARY_MODE:
+                // neoLED.blanco();
+                bndSignal_UM.setSignalBND(cmd.boolVal);
+                break;
         }
     }
 

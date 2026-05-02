@@ -54,6 +54,11 @@ void RosConnection::update(){
                     ros_node.pubLimitES_callback();
                 }
             }
+            if(!bnd)
+                if(bndSignal_UM.getSignalBND())
+                    neoLED.verdeIntenso();
+                else
+                    neoLED.azulCielo();
             break;
 
         case AGENT_DISCONNECTED: neoLED.rojo();

@@ -171,3 +171,11 @@ void RosNode::subNemaStop_callback(const void * msgin){
     cmd.uint8Val   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }
+// signal mode bnd
+void RosNode::subUnitaryMode_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::UNITARY_MODE;
+    cmd.boolVal   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
