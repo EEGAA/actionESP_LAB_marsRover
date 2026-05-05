@@ -73,18 +73,30 @@ void MENUgen::menuManager(char currentTecla){
 }
 
 void MENUgen::roboclaw_M(){
-    Serial.println("\n\tROBOCLAW m e n u\t:)");
+    Serial.println("\n\tROBOCLAW m e n u :)");
+    Serial.println(" F detiene ambos motores");
+    Serial.println("\t- Motor Gusano -");
+    Serial.println(" Q giro antihorario mtr1");
+    Serial.println(" E giro horario mtr1");
+    Serial.println("\t- Motor Broca -");
+    Serial.println(" A giro antihorario mtr2");
+    Serial.println(" D giro horario mtr2");
+    Serial.println("\t- Modificar Velocidad de ambos MTR -");
+    Serial.println(" R cambia entre mtr1 o mtr2 para ajustar sus velocidades");
+    Serial.println("\t donde 0 = stop   ;   127 = maxVel");
+    Serial.println(" W aumenta en uno la velocidad del mtrX");
+    Serial.println(" S disminuye en uno la velocidad del mtrX");
 }
 void MENUgen::bomba_M(){
-    Serial.println("\n\tBOMBA m e n u\t:)");
+    Serial.println("\n\tBOMBA m e n u :)");
 }
 void MENUgen::servos_M(){
-    Serial.println("\n\tSERVOS m e n u\t:)");
+    Serial.println("\n\tSERVOS m e n u :)");
 }
 void MENUgen::nemas_M(){
-    Serial.println("\n\tNEMAS m e n u\t:)");
+    Serial.println("\n\tNEMAS m e n u :)");
 }
 
 void MENUgen::generalDTA(){
-    Serial.println("\n\tGENERAL d a t a\t:)");
+    Serial.println("\n\tGENERAL d a t a :)");
 }

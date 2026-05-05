@@ -32,7 +32,7 @@ void RosConnection::update(){
                     bnd = false;
                 }
 
-            if(timeCheckCon.checkTempo()){//verifica cada 1.5 segundos si sigue conectado
+            if(timeCheckCon.checkTempo()){//verifica cada 50 milisegundos si sigue conectado
                 if(rmw_uros_ping_agent(100, 1) != RMW_RET_OK){
                     state = AGENT_DISCONNECTED;
                     break;

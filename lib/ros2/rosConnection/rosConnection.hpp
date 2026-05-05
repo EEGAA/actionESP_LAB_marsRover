@@ -21,7 +21,7 @@ private:
     UNITYgen appUM;
     //appUM tiene que ver con el manejo de los motores cuando se usa el modo Serial
 public:
-    RosConnection() : timePING(500, true), timeCheckCon(1000, true), lifeLED(1500), bnd(true){}
+    RosConnection() : timePING(500, true), timeCheckCon(50, true), lifeLED(1500), bnd(true){}
     //timePING son los 500 ms de espera para reconectar, usados aqui WAITING_AGENT
     //intervalo entre intentos de reconeccion
     //da tiempo a destruir y construir las entidades de micro ros
@@ -30,7 +30,7 @@ public:
     //desconeccion
     //para no saturar con tantas consultas improbables,
 
-    // reintenta ping cada 500ms, verifica conexión activa cada 1s.
+    // reintenta ping cada 500ms, verifica conexión activa cada 50ms.
 
     void init();
     void update();
