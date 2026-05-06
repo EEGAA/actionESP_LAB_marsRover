@@ -40,6 +40,19 @@ void UNITYgen::showTeclas(){
 void UNITYgen::genSwitch(){
     uint8_t aux;
     switch(teclaChar){
+        //casos GENERALES
+        case 'S'://detiene todo alv como vez asi nomas en caliente
+            Serial.println("PAREN TODO!!!");
+            exca.stop();
+            bomba.stop();
+            neoLED.LEDoff();
+            myLed.LEDoff();
+            nemaEX.setStopNema(true);
+            nemaES.setStopNema(true);
+            nemaBA.setStopNema(true);
+            nemaAX.setStopNema(true);
+            Serial.println("TODO DETENIDO awevo");
+            break;
         /// estos case son para mover los motores de la roboclaw
         case 'q'://antihorario
             exca.moveMTR1(true);

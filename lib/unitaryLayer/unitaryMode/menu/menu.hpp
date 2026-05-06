@@ -15,4 +15,5 @@ public:
     MENUgen();
     bool menuOption();
     void menuManager(char currentTecla);    
+    void separacion(bool bnd);
 };
