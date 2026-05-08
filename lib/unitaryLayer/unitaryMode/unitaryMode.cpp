@@ -41,6 +41,16 @@ void UNITYgen::genSwitch(){
     uint8_t aux;
     switch(teclaChar){
         //casos GENERALES
+        case 'Z'://selecciona el servo de la dispensacion
+            Serial.println("Entra a bule servo dispensacion");
+            while(loopServo(true)){}
+            Serial.println("Sale con exito del bucle dispensacion");
+            break;
+        case 'X'://seleciona al de la cubeta
+            Serial.println("Entra a bule servo cubeta optica");
+            while(loopServo(false)){}
+            Serial.println("Sale con exito del bucle cubeta optica");
+            break;
         case 'S'://detiene todo alv como vez asi nomas en caliente
             Serial.println("PAREN TODO!!!");
             exca.stop();
@@ -107,7 +117,7 @@ void UNITYgen::genSwitch(){
 
         //ESTO es para la bomba controlada con el puente H
         case '1':
-            bomba.PWMmenos(50);
+            bomba.PWMmenos(5);
             Serial.println("PWM actual: "+String(bomba.getPWM()));
             break;
         case '2':
@@ -119,7 +129,7 @@ void UNITYgen::genSwitch(){
             Serial.println("Moviendo bomba en sentido horario");
             break;
         case '4':
-            bomba.PWMmas(50);
+            bomba.PWMmas(5);
             Serial.println("PWM actual: "+String(bomba.getPWM()));
             break;
         case '5':
@@ -136,4 +146,86 @@ void UNITYgen::genSwitch(){
             //aki se supone que debo de imprimir un menu relatando lo que hace cada tecla pero xd pa luego sera otro dia
             break;
     }
+}
+
+bool UNITYgen::loopServo(bool bnd){
+    char op;
+    Serial.print("Opcion: ");
+    while(!Serial.available() > 0){ delay(100); }
+    op = Serial.read();
+
+    switch(op){
+        case '1':
+            if(bnd)
+                servoDisp.moveAng(20.0f);
+            else
+                servoCube.moveAng(20.0f);
+            Serial.println("angulo actual 20°");
+            break;
+        case '2':
+            if(bnd)
+                servoDisp.moveAng(40.0f);
+            else
+                servoCube.moveAng(40.0f);
+            Serial.println("angulo actual 40°");
+            break;
+        case '3':
+            if(bnd)
+                servoDisp.moveAng(60.0f);
+            else
+                servoCube.moveAng(60.0f);
+            Serial.println("angulo actual 60°");
+            break;
+        case '4':
+            if(bnd)
+                servoDisp.moveAng(80.0f);
+            else
+                servoCube.moveAng(80.0f);
+            Serial.println("angulo actual 80°");
+            break;
+        case '5':
+            if(bnd)
+                servoDisp.moveAng(100.0f);
+            else
+                servoCube.moveAng(100.0f);
+            Serial.println("angulo actual 100°");
+            break;
+        case '6':
+            if(bnd)
+                servoDisp.moveAng(120.0f);
+            else
+                servoCube.moveAng(120.0f);
+            Serial.println("angulo actual 120°");
+            break;
+        case '7':
+            if(bnd)
+                servoDisp.moveAng(140.0f);
+            else
+                servoCube.moveAng(140.0f);
+            Serial.println("angulo actual 140°");
+            break;
+        case '8':
+            if(bnd)
+                servoDisp.moveAng(160.0f);
+            else
+                servoCube.moveAng(160.0f);
+            Serial.println("angulo actual 160°");
+            break;
+        case '9':
+            if(bnd)
+                servoDisp.moveAng(180.0f);
+            else
+                servoCube.moveAng(180.0f);
+            Serial.println("angulo actual 180°");
+            break;
+        case 'S':
+            return false;
+            break;
+        default:
+            Serial.println("Tecla no reconocida");
+            Serial.println("'S' para salir de este bucle");
+            break;
+    }
+
+    return true;
 }

@@ -27,4 +27,6 @@ public:
     void showTeclas();
 
     void genSwitch();
+
+    bool loopServo(bool);
 };
