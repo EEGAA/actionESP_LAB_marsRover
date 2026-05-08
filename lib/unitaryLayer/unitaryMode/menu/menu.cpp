@@ -96,6 +96,11 @@ void MENUgen::roboclaw_M(){
 }
 void MENUgen::bomba_M(){
     Serial.println("\n\tBOMBA m e n u :)");
+    Serial.println(" 1 - disminuye PWM");
+    Serial.println(" 2 - Mueve bomba antihorario");
+    Serial.println(" 3 - Mueve bomba horario");
+    Serial.println(" 4 - aumenta PWM");
+    Serial.println(" 5 - DETIENE la bomba");
 }
 void MENUgen::servos_M(){
     Serial.println("\n\tSERVOS m e n u :)");

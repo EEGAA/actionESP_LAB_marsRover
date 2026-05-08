@@ -104,6 +104,29 @@ void UNITYgen::genSwitch(){
             }
             break;
 
+
+        //ESTO es para la bomba controlada con el puente H
+        case '1':
+            bomba.PWMmenos(50);
+            Serial.println("PWM actual: "+String(bomba.getPWM()));
+            break;
+        case '2':
+            bomba.moveL();
+            Serial.println("Movienodo bomba en sentido antihorario");
+            break;
+        case '3':
+            bomba.moveR();
+            Serial.println("Moviendo bomba en sentido horario");
+            break;
+        case '4':
+            bomba.PWMmas(50);
+            Serial.println("PWM actual: "+String(bomba.getPWM()));
+            break;
+        case '5':
+            bomba.stop();
+            Serial.println("BOMBAA stop con exito :)");
+            break;
+
         default:
             if(omiteDefault)
                 Serial.println("Tecla NO reconocida :( ...");

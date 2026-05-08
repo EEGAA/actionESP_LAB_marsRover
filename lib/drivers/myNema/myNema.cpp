@@ -11,7 +11,7 @@ NEMAgen::NEMAgen(uint8_t dir_, uint8_t step_, uint8_t enable_){
     resetContStep();
     setTotalStep(1);
     setEnable(false);
-    setTimeSleep(10);
+    setTimeSleep(1);
 
 }
 

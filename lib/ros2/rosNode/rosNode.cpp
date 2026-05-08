@@ -6,14 +6,6 @@
 bool RosNode::createEntities(){
     allocator = rcl_get_default_allocator();
 
-
-    // rcl_init_options_init(&init_options, allocator);
-    // rmw_init_options_t * rmw_options = rcl_init_options_get_rmw_init_options(&init_options);
-    // rmw_uros_options_set_client_key(
-    //     generate_client_key(),
-    //     rmw_options
-    // );
-
     //support
     if(!initSupport()) return false;
     //node
