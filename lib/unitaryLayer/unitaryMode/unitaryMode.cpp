@@ -33,6 +33,7 @@ int UNITYgen::getTeclaI(){
 }
 
 void UNITYgen::showTeclas(){
+    Serial.println(" ");
     Serial.print(teclaChar);
     Serial.println(" "+String(teclaInt));
 }
@@ -42,14 +43,20 @@ void UNITYgen::genSwitch(){
     switch(teclaChar){
         //casos GENERALES
         case 'Z'://selecciona el servo de la dispensacion
+            myMenu.separacion(false);
             Serial.println("Entra a bule servo dispensacion");
             while(loopServo(true)){}
             Serial.println("Sale con exito del bucle dispensacion");
+            myMenu.separacion(true);
+            myMenu.separacion(false);
             break;
         case 'X'://seleciona al de la cubeta
+            myMenu.separacion(false);
             Serial.println("Entra a bule servo cubeta optica");
             while(loopServo(false)){}
             Serial.println("Sale con exito del bucle cubeta optica");
+            myMenu.separacion(true);
+            myMenu.separacion(false);
             break;
         case 'S'://detiene todo alv como vez asi nomas en caliente
             Serial.println("PAREN TODO!!!");
@@ -61,7 +68,7 @@ void UNITYgen::genSwitch(){
             nemaES.setStopNema(true);
             nemaBA.setStopNema(true);
             nemaAX.setStopNema(true);
-            Serial.println("TODO DETENIDO awevo");
+            Serial.println("\n\nTODO DETENIDO awevo :)\n\n");
             break;
         /// estos case son para mover los motores de la roboclaw
         case 'q'://antihorario
@@ -137,6 +144,123 @@ void UNITYgen::genSwitch(){
             Serial.println("BOMBAA stop con exito :)");
             break;
 
+
+        //estos case corresponden al manejo de la logica del control de los motores nema
+        case 'n':
+            controlNEMA();
+            switch(myNEMAdta.nemaAux){
+                case 0:
+                    Serial.println("NEMA EX-cavadora seleccionado");
+                    break;
+                case 1:
+                    Serial.println("NEMA ES-pectrometro seleccionado");
+                    break;
+                case 2:
+                    Serial.println("NEMA BA-ndeja seleccionado");
+                    break;
+                case 3:
+                    Serial.println("NEMA AX-auxiliar seleccionado");
+                    break;
+            }
+            break;
+        case 'm':
+            switch(myNEMAdta.nemaAux){
+                case 0:
+                    Serial.println("NEMA EX-cavadora CARACTERISTICAS");
+                    break;
+                case 1:
+                    Serial.println("NEMA ES-pectrometro CARACTERISTICAS");
+                    break;
+                case 2:
+                    Serial.println("NEMA BA-ndeja CARACTERISTICAS");
+                    break;
+                case 3:
+                    Serial.println("NEMA AX-auxiliar CARACTERISTICAS");
+                    break;
+            }
+            break;
+        case 'b':
+            myNEMAdta.bndMode = !myNEMAdta.bndMode;
+            if(myNEMAdta.bndMode){
+                Serial.println("Modifica PASOS");
+            }else{
+                Serial.println("Modifica TIEMPO");
+            }
+            break;
+        case 'c':
+            myNEMAdta.interMENOS();
+            Serial.println("Intervalo actual "+String(myNEMAdta.intervalo));
+            break;
+        case 'v':
+            myNEMAdta.interMAS();
+            Serial.println("Intervalo actual "+String(myNEMAdta.intervalo));
+            break;
+        case 'z':
+            if(myNEMAdta.bndMode){//modifica pasos
+                switch(myNEMAdta.nemaAux){
+                    case 0:
+                        infoEX.pasosINTER(false, myNEMAdta.intervalo);
+                        break;
+                    case 1:
+                        infoES.pasosINTER(false, myNEMAdta.intervalo);
+                        break;
+                    case 2:
+                        infoBA.pasosINTER(false, myNEMAdta.intervalo);
+                        break;
+                    case 3:
+                        infoAX.pasosINTER(false, myNEMAdta.intervalo);
+                        break;
+                }
+            }else{//modifica tiempo
+                switch(myNEMAdta.nemaAux){
+                    case 0:
+                        infoEX.tiempoINTER(false, myNEMAdta.intervalo);
+                        break;
+                    case 1:
+                        infoES.tiempoINTER(false, myNEMAdta.intervalo);
+                        break;
+                    case 2:
+                        infoBA.tiempoINTER(false, myNEMAdta.intervalo);
+                        break;
+                    case 3:
+                        infoAX.tiempoINTER(false, myNEMAdta.intervalo);
+                        break;
+                }
+            }
+            break;
+        case 'x':
+            if(myNEMAdta.bndMode){
+                switch(myNEMAdta.nemaAux){
+                    case 0:
+                        infoEX.pasosINTER(true, myNEMAdta.intervalo);
+                        break;
+                    case 1:
+                        infoES.pasosINTER(true, myNEMAdta.intervalo);
+                        break;
+                    case 2:
+                        infoBA.pasosINTER(true, myNEMAdta.intervalo);
+                        break;
+                    case 3:
+                        infoAX.pasosINTER(true, myNEMAdta.intervalo);
+                        break;
+                }
+            }else{
+                switch(myNEMAdta.nemaAux){
+                    case 0:
+                        infoEX.tiempoINTER(true, myNEMAdta.intervalo);
+                        break;
+                    case 1:
+                        infoES.tiempoINTER(true, myNEMAdta.intervalo);
+                        break;
+                    case 2:
+                        infoBA.tiempoINTER(true, myNEMAdta.intervalo);
+                        break;
+                    case 3:
+                        infoAX.tiempoINTER(true, myNEMAdta.intervalo);
+                        break;
+                }
+            }
+            break;
         default:
             if(omiteDefault)
                 Serial.println("Tecla NO reconocida :( ...");
@@ -155,6 +279,13 @@ bool UNITYgen::loopServo(bool bnd){
     op = Serial.read();
 
     switch(op){
+        case '0':
+            if(bnd)
+                servoDisp.moveAng(0.0f);
+            else
+                servoCube.moveAng(0.0f);
+            Serial.println("angulo actual 0°");
+            break;
         case '1':
             if(bnd)
                 servoDisp.moveAng(20.0f);
@@ -228,4 +359,10 @@ bool UNITYgen::loopServo(bool bnd){
     }
 
     return true;
+}
+//los siguientes metodos corresponen al control de los motroes nema
+void UNITYgen::controlNEMA(){
+    myNEMAdta.nemaAux++;
+    if(myNEMAdta.nemaAux > 3)
+        myNEMAdta.nemaAux = 0;
 }

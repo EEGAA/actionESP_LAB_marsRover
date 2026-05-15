@@ -104,9 +104,49 @@ void MENUgen::bomba_M(){
 }
 void MENUgen::servos_M(){
     Serial.println("\n\tSERVOS m e n u :)");
+    Serial.println("Primero accede al control de uno solo motor SERVO");
+    Serial.println(" Z - para seleccionar el servo dispensacion");
+    Serial.println(" X - para seleccionar el servo cubeta optica");
+    Serial.println("\nUna vez selecionado el motor veras un mensaje similar a:");
+    Serial.println("Entra a bule servo ");
+    Serial.println("\n\tLas siguientes teclas solo funcinan\n\tdentro del bucle del servo");
+    Serial.println("\n S - para salir del bucle servo, y regresar al principal");
+    Serial.println("\n teclas del 0 al 9 realizan:");
+    Serial.println(" 0 -> 0°     1 -> 20°     2 -> 40°     3 -> 60°     4 -> 80°");
+    Serial.println(" 5 -> 100°   6 -> 120°    7 -> 140°    8 -> 160°    9 -> 180°");
+    //w para aumentar un grado, s para disminuirlo
+    //d para aumentar 5 grados, a para disminuirlo
 }
 void MENUgen::nemas_M(){
     Serial.println("\n\tNEMAS m e n u :)");
+    //primero se sellciona un nema, hay 4 nemas a escoger, ex, es, ba, y ax
+    //se menciona como puedes modificar las caracteristicas del nema seleccionado
+    //indica que tienes que hacer para poder mover el nema
+    Serial.println("\nPRIMERO selecciona el nema que quieres controlar con \"n\"");
+    Serial.println(" n - switch que seleciona el nema a controlar");
+    Serial.println("NEMAS: EX->cavadora, ES->pectrometro, BA->ndeja y AX->auxiliar");
+    Serial.println("Para ver el motor actual y sus caracteristicas, con: ");
+    Serial.println(" m - muestra el motor selecionado y sus atributos actuales");
+    Serial.println("\n¿Como mover el NEMA?");
+
+    Serial.println("¿Como modificar los atributos?");
+    Serial.println("    puedes modificar la cantidad de pasos");
+    Serial.println("    y tambien la cantidad de milisegundos entre pasos");
+    Serial.println(" b - Decide si modificas pasos o tiempo");
+    /*
+        B switchea que aumentar entre cantidad de pasos o timer entre pasos
+        hay cierto intervalo entre cada vez que se aumenta o se disminuye
+        (Esto quiero decir que el factor de cambio des de 2 posibles opiciones, pasos, o delay)
+
+        Normalmente el intervalo es de 50
+
+        C disminuye en 1 el intervalo 
+        V aumenta en 1 el intervalo
+
+        para aplicar una resta o una suma, del intervalo al posible factor de cambio:
+        Z para restar al cambio
+        X para sumar al cambio
+    */
 }
 
 void MENUgen::generalDTA(){
