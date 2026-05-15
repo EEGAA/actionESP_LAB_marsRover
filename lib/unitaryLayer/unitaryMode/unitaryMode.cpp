@@ -200,30 +200,38 @@ void UNITYgen::genSwitch(){
                 switch(myNEMAdta.nemaAux){
                     case 0:
                         infoEX.pasosINTER(false, myNEMAdta.intervalo);
+                        Serial.println("EX -> PASOS actuales: "+String(infoEX.getPasos()));
                         break;
                     case 1:
                         infoES.pasosINTER(false, myNEMAdta.intervalo);
+                        Serial.println("ES -> PASOS actuales: "+String(infoES.getPasos()));
                         break;
                     case 2:
                         infoBA.pasosINTER(false, myNEMAdta.intervalo);
+                        Serial.println("BA -> PASOS actuales: "+String(infoBA.getPasos()));
                         break;
                     case 3:
                         infoAX.pasosINTER(false, myNEMAdta.intervalo);
+                        Serial.println("AX -> PASOS actuales: "+String(infoAX.getPasos()));
                         break;
                 }
             }else{//modifica tiempo
                 switch(myNEMAdta.nemaAux){
                     case 0:
                         infoEX.tiempoINTER(false, myNEMAdta.intervalo);
+                        Serial.println("EX -> TIEMER ms actuales: "+String(infoEX.getRetraso()));
                         break;
                     case 1:
                         infoES.tiempoINTER(false, myNEMAdta.intervalo);
+                        Serial.println("ES -> TIEMER ms actuales: "+String(infoES.getRetraso()));
                         break;
                     case 2:
                         infoBA.tiempoINTER(false, myNEMAdta.intervalo);
+                        Serial.println("BA -> TIEMER ms actuales: "+String(infoBA.getRetraso()));
                         break;
                     case 3:
                         infoAX.tiempoINTER(false, myNEMAdta.intervalo);
+                        Serial.println("AX -> TIEMER ms actuales: "+String(infoAX.getRetraso()));
                         break;
                 }
             }
@@ -233,33 +241,77 @@ void UNITYgen::genSwitch(){
                 switch(myNEMAdta.nemaAux){
                     case 0:
                         infoEX.pasosINTER(true, myNEMAdta.intervalo);
+                        Serial.println("EX -> PASOS actuales: "+String(infoEX.getPasos()));
                         break;
                     case 1:
                         infoES.pasosINTER(true, myNEMAdta.intervalo);
+                        Serial.println("ES -> PASOS actuales: "+String(infoES.getPasos()));
                         break;
                     case 2:
                         infoBA.pasosINTER(true, myNEMAdta.intervalo);
+                        Serial.println("BA -> PASOS actuales: "+String(infoBA.getPasos()));
                         break;
                     case 3:
                         infoAX.pasosINTER(true, myNEMAdta.intervalo);
+                        Serial.println("AX -> PASOS actuales: "+String(infoAX.getPasos()));
                         break;
                 }
             }else{
                 switch(myNEMAdta.nemaAux){
                     case 0:
                         infoEX.tiempoINTER(true, myNEMAdta.intervalo);
+                        Serial.println("EX -> TIEMER ms actuales: "+String(infoEX.getRetraso()));
                         break;
                     case 1:
                         infoES.tiempoINTER(true, myNEMAdta.intervalo);
+                        Serial.println("ES -> TIEMER ms actuales: "+String(infoES.getRetraso()));
                         break;
                     case 2:
                         infoBA.tiempoINTER(true, myNEMAdta.intervalo);
+                        Serial.println("BA -> TIEMER ms actuales: "+String(infoBA.getRetraso()));
                         break;
                     case 3:
                         infoAX.tiempoINTER(true, myNEMAdta.intervalo);
+                        Serial.println("AX -> TIEMER ms actuales: "+String(infoAX.getRetraso()));
                         break;
                 }
             }
+            break;
+        case 'j':
+            Serial.println("Moviendo motor NEMA en sentido antihorario");
+            switch(myNEMAdta.nemaAux){
+                case 0:
+                    nemaEX.moveMTR(infoEX.getPasos(), infoEX.getDireccion(), infoEX.getRetraso(), false);
+                    break;
+                case 1:
+                    nemaES.moveMTR(infoES.getPasos(), infoES.getDireccion(), infoES.getRetraso(), false);
+                    break;
+                case 2:
+                    nemaBA.moveMTR(infoBA.getPasos(), infoBA.getDireccion(), infoBA.getRetraso(), false);
+                    break;
+                case 3:
+                    nemaAX.moveMTR(infoAX.getPasos(), infoAX.getDireccion(), infoAX.getRetraso(), false);
+                    break;
+            }
+            Serial.println("MOTOR NEMA DETENIDO");
+            break;
+        case 'k':
+            Serial.println("Moviendo motor NEMA en sentido horario");
+            switch(myNEMAdta.nemaAux){
+                case 0:
+                    nemaEX.moveMTR(infoEX.getPasos(), !infoEX.getDireccion(), infoEX.getRetraso(), false);
+                    break;
+                case 1:
+                    nemaES.moveMTR(infoES.getPasos(), !infoES.getDireccion(), infoES.getRetraso(), false);
+                    break;
+                case 2:
+                    nemaBA.moveMTR(infoBA.getPasos(), !infoBA.getDireccion(), infoBA.getRetraso(), false);
+                    break;
+                case 3:
+                    nemaAX.moveMTR(infoAX.getPasos(), !infoAX.getDireccion(), infoAX.getRetraso(), false);
+                    break;
+            }
+            Serial.println("MOTOR NEMA DETENIDO");
             break;
         default:
             if(omiteDefault)

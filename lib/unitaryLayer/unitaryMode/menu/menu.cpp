@@ -118,21 +118,31 @@ void MENUgen::servos_M(){
     //d para aumentar 5 grados, a para disminuirlo
 }
 void MENUgen::nemas_M(){
-    Serial.println("\n\tNEMAS m e n u :)");
+    Serial.println("\n\t\tNEMAS m e n u :)");
     //primero se sellciona un nema, hay 4 nemas a escoger, ex, es, ba, y ax
     //se menciona como puedes modificar las caracteristicas del nema seleccionado
     //indica que tienes que hacer para poder mover el nema
     Serial.println("\nPRIMERO selecciona el nema que quieres controlar con \"n\"");
     Serial.println(" n - switch que seleciona el nema a controlar");
     Serial.println("NEMAS: EX->cavadora, ES->pectrometro, BA->ndeja y AX->auxiliar");
-    Serial.println("Para ver el motor actual y sus caracteristicas, con: ");
+    Serial.println("\nPara ver el motor actual y sus caracteristicas, es con: ");
     Serial.println(" m - muestra el motor selecionado y sus atributos actuales");
     Serial.println("\n¿Como mover el NEMA?");
+    Serial.println(" j - mover NEMA en sentido antihorario");
+    Serial.println(" k - mover NEMA en sentido horario");
 
-    Serial.println("¿Como modificar los atributos?");
-    Serial.println("    puedes modificar la cantidad de pasos");
-    Serial.println("    y tambien la cantidad de milisegundos entre pasos");
-    Serial.println(" b - Decide si modificas pasos o tiempo");
+    Serial.println("\n¿Como modificar los atributos?");
+    Serial.println("   puedes modificar la cantidad de pasos");
+    Serial.println("   y tambien la cantidad de milisegundos entre pasos");
+    Serial.println("     b - Decide si modificas pasos o tiempo");
+    
+    Serial.println("\n    ¿Como disminuir o aumentar el intervalo de cambio?");
+    Serial.println("     c - disminuye en uno el intervalo del atributo selecionado");
+    Serial.println("     v - aumenta en uno el intervalo del atributo selecionado");
+
+    Serial.println("\n    ¿Como aplicar los cambios al motor NEMA?");
+    Serial.println("     z - disminuye atributo seleccionado, un intervalo");
+    Serial.println("     x - aumenta atributo seleccionado, un intervalo");
     /*
         B switchea que aumentar entre cantidad de pasos o timer entre pasos
         hay cierto intervalo entre cada vez que se aumenta o se disminuye
