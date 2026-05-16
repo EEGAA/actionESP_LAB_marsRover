@@ -12,7 +12,7 @@
 #include <std_msgs/msg/u_int8.h>
 #include <std_msgs/msg/bool.h>
 
-#include <my_msgs/msg/nema_cmd.h>
+#include <lab_interfaces/msg/nema_cmd.h>
 
 #define SerialSpeed 921600
 
@@ -76,8 +76,8 @@ private:
     std_msgs__msg__Bool subSTOP_msg;
 
     //Mema
-    my_msgs__msg__NemaCMD subNemaEX_move_msg, subNemaES_move_msg;
-    my_msgs__msg__NemaCMD subNemaBA_move_msg, subNemaAX_move_msg;
+    lab_interfaces__msg__NemaCMD subNemaEX_move_msg, subNemaES_move_msg;
+    lab_interfaces__msg__NemaCMD subNemaBA_move_msg, subNemaAX_move_msg;
     std_msgs__msg__UInt8 subNemaStop_msg;
 
     //tipos de dato bool, tomaran el state de los limitSwitch
