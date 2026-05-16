@@ -122,6 +122,10 @@ void AppManager::nemaEXTask(void* pvParameters){
                 xSemaphoreGive(mutexNemaEX);
             }
             vTaskDelay(pdMS_TO_TICKS(timeSleep));
+
+            //En caso de que se detecte el limit, se para en seco el nema
+            if(!limitEX.readState())
+                sigueMoviendo = false;
         }
         // Movimiento completado -> deshabilitar motor
         if(xSemaphoreTake(mutexNemaEX, pdMS_TO_TICKS(100)) == pdTRUE){
@@ -163,6 +167,10 @@ void AppManager::nemaESTask(void* pvParameters){
                 xSemaphoreGive(mutexNemaES);
             }
             vTaskDelay(pdMS_TO_TICKS(timeSleep));
+
+            //En caso de que se detecte el limit, se para en seco el nema
+            if(!limitES.readState())
+                sigueMoviendo = false;
         }
         // Movimiento completado -> deshabilitar motor
         if(xSemaphoreTake(mutexNemaES, pdMS_TO_TICKS(100)) == pdTRUE){
