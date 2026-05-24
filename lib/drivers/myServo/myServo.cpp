@@ -8,11 +8,12 @@ SERVOgen::SERVOgen(int freq_, int chanel_, int resolution_, int minPulso_, int m
     ADCmax = thisPWM.getADCmax();
     stopPWM();
 
-    this->currentAngle = 0;
+    this->currentAngle = 90;
     this->targetAngle = 0;
     this->speed = 0;
 
     this->lastUpdate = millis();
+
 }
 
 // Mueve el servo a un angulo entre 0 y 180

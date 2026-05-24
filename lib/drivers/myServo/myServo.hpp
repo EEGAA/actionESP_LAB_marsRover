@@ -13,6 +13,7 @@ private:
     float targetAngle;    // objetivo
     float speed;          // grados por segundo
     unsigned long lastUpdate;
+    
 
 public:
     SERVOgen(int freq_, int chanel_, int resolution_, int minPulso_, int maxPulso_, int pin_);
