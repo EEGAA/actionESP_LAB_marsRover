@@ -29,31 +29,42 @@ void DriversTask::update(){
                 break;
             // Añade: todos los demas motores
             case CmdType::RC_STOP:
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
                 switch(cmd.uint8Val){
-                    case 0:
-                        exca.stop();
-                        break;
-                    case 1:
-                        exca.stopMTR1();
-                        break;
-                    case 2:
-                        exca.stopMTR2();
-                        break;
-                    default:
-                        exca.stop();
+                    case 0: exca.stop();      break;
+                    case 1: exca.stopMTR1();  break;
+                    case 2: exca.stopMTR2();  break;
+                    default: exca.stop();
                 }
+                xSemaphoreGive(mutexEXCA);
+            }
                 break;
             case CmdType::RC_VELMTR1:
-                exca.setVel1(cmd.uint8Val);
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.setVel1(cmd.uint8Val);
+                    xSemaphoreGive(mutexEXCA);
+                }
                 break;
+
             case CmdType::RC_VELMTR2:
-                exca.setVel2(cmd.uint8Val);
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.setVel2(cmd.uint8Val);
+                    xSemaphoreGive(mutexEXCA);
+                }
                 break;
+
             case CmdType::RC_MoveMTR1:
-                exca.moveMTR1(cmd.boolVal);
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.moveMTR1(cmd.boolVal);
+                    xSemaphoreGive(mutexEXCA);
+                }
                 break;
+
             case CmdType::RC_MoveMTR2:
-                exca.moveMTR2(cmd.boolVal);
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.moveMTR2(cmd.boolVal);
+                    xSemaphoreGive(mutexEXCA);
+                }
                 break;
 
             //puenteH
@@ -182,6 +193,10 @@ void DriversTask::update(){
                 // neoLED.blanco();
                 bndSignal_UM.setSignalBND(cmd.boolVal);
                 break;
+            case CmdType::EXCAVANDO:
+                if(cmd.boolVal && excavandoTaskHandle)
+                    xTaskNotify(excavandoTaskHandle, 0, eNoAction);
+                break;
         }
     }
 
@@ -202,8 +217,5 @@ void DriversTask::update(){
         xQueueSend(statusQueue, &statusLex, 0);
         statusLes.type = StatusType::SIGNAL_LIMIT_ES;
         xQueueSend(statusQueue, &statusLes, 0);
-    }
-    // ── 3. Aquí va lógica de excavación/dispensación ──
-    // excavationFSM.update();
-    // dispenserFSM.update();
+    }    
 }

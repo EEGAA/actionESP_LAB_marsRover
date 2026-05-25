@@ -47,6 +47,11 @@ private:
     rcl_subscription_t subNemaStop;
     //Este subscriber ayuda a cambiar de modo micro ros a Serial
     rcl_subscription_t subUnitaryMode;
+    //Este subscriber contiene un proceso para mover el gusano arriba y abajo
+    //mientras la broca saca tierra, con el fin de crear una mini rutina 
+    //encargada de excavar de la mejor forma posible, sin delay, y como nos plazca
+    rcl_subscription_t subExcavando;
+
 
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
@@ -86,6 +91,9 @@ private:
     //dato bool para cambiar estado de la bnd signal subUnitaryMode
     std_msgs__msg__Bool subUnitaryMode_msg;
 
+    //tipo de dato para subExcavando
+    std_msgs__msg__Bool subExcavando_msg;
+
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
     //este callback manipula el LED recibe bool = estado led
     static void subLED_callback(const void * msgin);
@@ -120,6 +128,9 @@ private:
 
     //callback para manejar la bandera subUnitaryMode
     static void subUnitaryMode_callback(const void * msgin);
+
+    //callback para subExcavando
+    static void subExcavando_callback(const void * msgin);
 
     Tempo timeConnected, sleepTime;
 public:

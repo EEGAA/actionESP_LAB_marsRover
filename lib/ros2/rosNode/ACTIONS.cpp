@@ -179,3 +179,11 @@ void RosNode::subUnitaryMode_callback(const void * msgin){
     cmd.boolVal   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }
+//callback para subExcavando
+void RosNode::subExcavando_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::EXCAVANDO;
+    cmd.boolVal   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}

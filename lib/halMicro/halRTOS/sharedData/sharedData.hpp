@@ -27,6 +27,7 @@ enum class CmdType : uint8_t {
     NEMA_AX_MOVE,
     NEMA_STOP,
     UNITARY_MODE,
+    EXCAVANDO,
 };
 //La siguiente estructura es para que los nema, pueda recibir, bien bien
 // el mensaje custom
@@ -75,4 +76,6 @@ extern SemaphoreHandle_t semNemaES, mutexNemaES;
 extern SemaphoreHandle_t semNemaBA, mutexNemaBA;
 //nemaAX
 extern SemaphoreHandle_t semNemaAX, mutexNemaAX;
-
+//este taskHandle_t es para activar la tarea de EXCAVANDO
+extern TaskHandle_t excavandoTaskHandle;
+extern SemaphoreHandle_t mutexEXCA;

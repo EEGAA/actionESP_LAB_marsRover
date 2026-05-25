@@ -12,6 +12,8 @@ SemaphoreHandle_t semNemaBA = nullptr;
 SemaphoreHandle_t mutexNemaBA = nullptr;
 SemaphoreHandle_t semNemaAX = nullptr;
 SemaphoreHandle_t mutexNemaAX = nullptr;
+TaskHandle_t excavandoTaskHandle = nullptr;
+SemaphoreHandle_t mutexEXCA = nullptr;
 // ── Instancias privadas al translation unit ──
 static RosConnection rosManager;
 static DriversTask   driversManager;
@@ -40,6 +42,8 @@ void AppManager::createSemaphores(){
     //nemaAX
     semNemaAX = xSemaphoreCreateBinary();
     mutexNemaAX = xSemaphoreCreateMutex();
+    //semaforo para la excavadora
+    mutexEXCA = xSemaphoreCreateMutex();
 }
 
 void AppManager::launchTasks(){
@@ -50,6 +54,7 @@ void AppManager::launchTasks(){
     xTaskCreatePinnedToCore(nemaESTask, "nemaESTask", 2048, nullptr, 4, nullptr, 1);
     xTaskCreatePinnedToCore(nemaBATask, "nemaBATask", 2048, nullptr, 4, nullptr, 1);
     xTaskCreatePinnedToCore(nemaAXTask, "nemaAXTask", 2048, nullptr, 4, nullptr, 1);
+    xTaskCreatePinnedToCore(excavandoTask, "excavandoTask", 4096, nullptr, 5, &excavandoTaskHandle, 1);
 }
 
 void AppManager::rosTask(void* pvParameters){
@@ -85,7 +90,70 @@ void AppManager::servoTask(void* pvParameters){
         }
     }
 }
+//tarea excavando ando
+void AppManager::excavandoTask(void* pvParameters){
+    while(true){
+        ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
 
+        // ── Arrancar los dos motores UNA sola vez ──
+        if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+            exca.setVel1(50);
+            exca.setVel2(20);
+            exca.moveMTR1(true);
+            exca.moveMTR2(true);
+            xSemaphoreGive(mutexEXCA);
+        }
+
+        // ── 5 ciclos de limit switch ──
+        for(uint8_t ciclo = 0; ciclo < 5; ciclo++){
+
+            // Espera a que el limit se presione (pasa de true -> false)
+            while(limitEX.readState())
+                vTaskDelay(pdMS_TO_TICKS(10));
+
+            if(ciclo < 4){
+                // Ciclos 1-4: retrocede MTR1 durante 2 segundos, luego avanza de nuevo
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.moveMTR1(false);
+                    xSemaphoreGive(mutexEXCA);
+                }
+                vTaskDelay(pdMS_TO_TICKS(2000));
+
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.moveMTR1(true);
+                    xSemaphoreGive(mutexEXCA);
+                }
+
+            } else {
+                // Ciclo 5 (último): para MTR1, MTR2 sigue 5 segundos
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.stopMTR1();
+                    xSemaphoreGive(mutexEXCA);
+                }
+                vTaskDelay(pdMS_TO_TICKS(5000));
+
+                // Para ambos, luego MTR1 en reversa durante 3 segundos
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.stop();
+                    xSemaphoreGive(mutexEXCA);
+                }
+                vTaskDelay(pdMS_TO_TICKS(100)); // pequeña pausa antes de reversa
+
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.moveMTR1(false);
+                    xSemaphoreGive(mutexEXCA);
+                }
+                vTaskDelay(pdMS_TO_TICKS(3000));
+
+                if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.stop();
+                    xSemaphoreGive(mutexEXCA);
+                }
+            }
+        }
+        // Tarea termina su ciclo -> vuelve a ulTaskNotifyTake y duerme
+    }
+}
 //NEMA Task
 void AppManager::nemaEXTask(void* pvParameters){
     while(true){
@@ -124,7 +192,10 @@ void AppManager::nemaEXTask(void* pvParameters){
             vTaskDelay(pdMS_TO_TICKS(timeSleep));
 
             //En caso de que se detecte el limit, se para en seco el nema
-            sigueMoviendo = limitEX.readState();
+            //sigueMoviendo = limitEX.readState();
+            //ya no es necesario frenarel nema con este limit
+            //ahora este limit sera para freanr el gusano
+            //y hacer imposibe que caiga del modulo
         }
         // Movimiento completado -> deshabilitar motor
         if(xSemaphoreTake(mutexNemaEX, pdMS_TO_TICKS(100)) == pdTRUE){

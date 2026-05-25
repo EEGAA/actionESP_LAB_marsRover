@@ -123,6 +123,13 @@ bool RosNode::initSubscribers(){
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
                                         "unitaryMode") != RCL_RET_OK)
         return false;
+
+    if (rclc_subscription_init_default(
+        &subExcavando,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
+                                        "EXCAVA") != RCL_RET_OK)
+        return false;
     return true;
 }
 
@@ -146,4 +153,5 @@ void RosNode::finiSubscribers(){
     rcl_subscription_fini(&subNemaAX_move, &node);
     rcl_subscription_fini(&subNemaStop, &node);
     rcl_subscription_fini(&subUnitaryMode, &node);
+    rcl_subscription_fini(&subExcavando, &node);
 }
