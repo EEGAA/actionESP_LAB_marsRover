@@ -129,7 +129,7 @@ void RosNode::subSTOP_callback(const void * msgin){
 // Nema
 
 void RosNode::subNemaEX_move_callback(const void * msgin){
-    const my_msgs__msg__NemaCMD * msg = (const my_msgs__msg__NemaCMD *)msgin;
+    const lab_interfaces__msg__NemaCMD * msg = (const lab_interfaces__msg__NemaCMD *)msgin;
     RosCommand cmd;
     cmd.type      = CmdType::NEMA_EX_MOVE;
     cmd.nemaVal.pasos     = msg->pasos;
@@ -138,7 +138,7 @@ void RosNode::subNemaEX_move_callback(const void * msgin){
 }
 
 void RosNode::subNemaES_move_callback(const void * msgin){
-    const my_msgs__msg__NemaCMD * msg = (const my_msgs__msg__NemaCMD *)msgin;
+    const lab_interfaces__msg__NemaCMD * msg = (const lab_interfaces__msg__NemaCMD *)msgin;
     RosCommand cmd;
     cmd.type      = CmdType::NEMA_ES_MOVE;
     cmd.nemaVal.pasos     = msg->pasos;
@@ -147,7 +147,7 @@ void RosNode::subNemaES_move_callback(const void * msgin){
 }
 
 void RosNode::subNemaBA_move_callback(const void * msgin){
-    const my_msgs__msg__NemaCMD * msg = (const my_msgs__msg__NemaCMD *)msgin;
+    const lab_interfaces__msg__NemaCMD * msg = (const lab_interfaces__msg__NemaCMD *)msgin;
     RosCommand cmd;
     cmd.type      = CmdType::NEMA_BA_MOVE;
     cmd.nemaVal.pasos     = msg->pasos;
@@ -156,7 +156,7 @@ void RosNode::subNemaBA_move_callback(const void * msgin){
 }
 
 void RosNode::subNemaAX_move_callback(const void * msgin){
-    const my_msgs__msg__NemaCMD * msg = (const my_msgs__msg__NemaCMD *)msgin;
+    const lab_interfaces__msg__NemaCMD * msg = (const lab_interfaces__msg__NemaCMD *)msgin;
     RosCommand cmd;
     cmd.type      = CmdType::NEMA_AX_MOVE;
     cmd.nemaVal.pasos     = msg->pasos;

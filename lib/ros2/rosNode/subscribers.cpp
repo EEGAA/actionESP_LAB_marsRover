@@ -89,25 +89,25 @@ bool RosNode::initSubscribers(){
     if (rclc_subscription_init_default(
         &subNemaEX_move,
         &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(my_msgs, msg, NemaCMD),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(lab_interfaces, msg, NemaCMD),
                                         "nemaEX") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subNemaES_move,
         &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(my_msgs, msg, NemaCMD),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(lab_interfaces, msg, NemaCMD),
                                         "nemaES") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subNemaBA_move,
         &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(my_msgs, msg, NemaCMD),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(lab_interfaces, msg, NemaCMD),
                                         "nemaBA") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
         &subNemaAX_move,
         &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(my_msgs, msg, NemaCMD),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(lab_interfaces, msg, NemaCMD),
                                         "nemaAX") != RCL_RET_OK)
         return false;
     if (rclc_subscription_init_default(
