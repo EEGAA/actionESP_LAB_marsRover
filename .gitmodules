@@ -1,3 +1,3 @@
 [submodule "extra_packages/lab_interfaces"]
 	path = extra_packages/lab_interfaces
-	url = https://github.com/MarsRoverUdeGSpace/lab_interfaces
+	url = ../lab_interfaces
