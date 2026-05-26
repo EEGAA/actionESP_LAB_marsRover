@@ -97,8 +97,8 @@ void AppManager::excavandoTask(void* pvParameters){
 
         // ── Arrancar los dos motores UNA sola vez ──
         if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
-            exca.setVel1(50);
-            exca.setVel2(20);
+            exca.setVel1(70);
+            exca.setVel2(125);
             exca.moveMTR1(true);
             exca.moveMTR2(true);
             xSemaphoreGive(mutexEXCA);
