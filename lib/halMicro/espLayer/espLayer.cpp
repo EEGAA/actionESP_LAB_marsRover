@@ -12,9 +12,9 @@ L298Ngen bomba(10, 11, 9, 2);
 
 //pines PCB nueva
 //- - - - - dir, step, enable
-NEMAgen nemaEX(42, 2, 1); //bien
+NEMAgen nemaBA(42, 2, 1); //bien
 NEMAgen nemaES(38, 37, 36); //bien
-NEMAgen nemaBA(8, 18, 17); // bien
+NEMAgen nemaEX(8, 18, 17); // bien
 NEMAgen nemaAX(4, 5, 6); // 
 
 
@@ -54,3 +54,13 @@ lado derecho
 47 48 (solo entrada)
 pin 39 y 40 apartados para roboclaw
 */
+
+//NOTAS generales
+//NOTAS: definicion de pasos NEMA
+// para mover el nema ex, el recorrido es de 3500 pasos -> true = sube; false = baja
+
+
+//nemaES, direccion 1 va al home, con 0 va a cubeta
+//pasos desde el home nemaES para llegar primera cubeta = 1800
+//segunda cubeta 600 pasos despues de la pirmea
+//o 2400 desde el home

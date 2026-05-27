@@ -55,6 +55,7 @@ void AppManager::launchTasks(){
     xTaskCreatePinnedToCore(nemaBATask, "nemaBATask", 2048, nullptr, 4, nullptr, 1);
     xTaskCreatePinnedToCore(nemaAXTask, "nemaAXTask", 2048, nullptr, 4, nullptr, 1);
     xTaskCreatePinnedToCore(excavandoTask, "excavandoTask", 4096, nullptr, 5, &excavandoTaskHandle, 1);
+    xTaskCreatePinnedToCore(stopRC_MTR1, "stopRC_MTR1", 2048, nullptr, 5, nullptr, 1);
 }
 
 void AppManager::rosTask(void* pvParameters){
@@ -105,21 +106,23 @@ void AppManager::excavandoTask(void* pvParameters){
         }
 
         // ── 5 ciclos de limit switch ──
-        for(uint8_t ciclo = 0; ciclo < 5; ciclo++){
+        for(uint8_t ciclo = 0; ciclo < 10; ciclo++){
 
-            // Espera a que el limit se presione (pasa de true -> false)
+            // Espera a que el limitEX se presione (pasa de true -> false)
             while(limitEX.readState())
                 vTaskDelay(pdMS_TO_TICKS(10));
 
-            if(ciclo < 4){
+            if(ciclo < 9){
                 // Ciclos 1-4: retrocede MTR1 durante 2 segundos, luego avanza de nuevo
                 if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.setVel1(125);
                     exca.moveMTR1(false);
                     xSemaphoreGive(mutexEXCA);
                 }
-                vTaskDelay(pdMS_TO_TICKS(2000));
+                vTaskDelay(pdMS_TO_TICKS(250));
 
                 if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.setVel1(50);
                     exca.moveMTR1(true);
                     xSemaphoreGive(mutexEXCA);
                 }
@@ -130,7 +133,7 @@ void AppManager::excavandoTask(void* pvParameters){
                     exca.stopMTR1();
                     xSemaphoreGive(mutexEXCA);
                 }
-                vTaskDelay(pdMS_TO_TICKS(5000));
+                vTaskDelay(pdMS_TO_TICKS(60000));
 
                 // Para ambos, luego MTR1 en reversa durante 3 segundos
                 if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
@@ -140,10 +143,14 @@ void AppManager::excavandoTask(void* pvParameters){
                 vTaskDelay(pdMS_TO_TICKS(100)); // pequeña pausa antes de reversa
 
                 if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
+                    exca.setVel1(70);
                     exca.moveMTR1(false);
                     xSemaphoreGive(mutexEXCA);
                 }
-                vTaskDelay(pdMS_TO_TICKS(3000));
+                // vTaskDelay(pdMS_TO_TICKS(5500));
+                // Espera a que el limitES se presione (pasa de true -> false)
+                while(limitES.readState())
+                    vTaskDelay(pdMS_TO_TICKS(10));
 
                 if(xSemaphoreTake(mutexEXCA, pdMS_TO_TICKS(100)) == pdTRUE){
                     exca.stop();
@@ -152,6 +159,23 @@ void AppManager::excavandoTask(void* pvParameters){
             }
         }
         // Tarea termina su ciclo -> vuelve a ulTaskNotifyTake y duerme
+    }
+}
+//Esta tarea se encarga de monitoriar si el gusano se mueve, y de detenerlo cuando llegue al limit correspondiente
+void AppManager::stopRC_MTR1(void* pvParameters){
+    while(true){
+        if(exca.mtr1Move){//cuando se esta moviendo, 
+            if(exca.mtr1Direccion){//gusano va para abajo
+                if(!limitEX.readState())//limitEX, lo detiene al presionarlo
+                    exca.stopMTR1();
+            }else{//gusano va para arriba
+                if(!limitES.readState())//en esta dirrecion lo detiene limitES
+                    exca.stopMTR1();
+            }
+
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
 //NEMA Task

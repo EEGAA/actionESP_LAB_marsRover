@@ -28,4 +28,8 @@ public:
     void stopMTR2();
     void moveMTR1(bool aux);
     void moveMTR2(bool aux);
+    //mtr1Direccion indica la ultima direccion del gusano 
+    bool mtr1Direccion;//true -> baja, false -> sube
+    //mtr1Move indica si el gusano esta quieto o no
+    bool mtr1Move;//true -> moviendo, false -> quieto
 };

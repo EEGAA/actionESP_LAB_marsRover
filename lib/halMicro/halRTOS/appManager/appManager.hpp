@@ -25,4 +25,5 @@ private:
     static void nemaAXTask(void* pvParameters);
     //esta tarea es para la mini rutina del gusano y broca, excavacion
     static void excavandoTask(void* pvParameters);
+    static void stopRC_MTR1(void* pvParameters);
 };

@@ -128,7 +128,7 @@ bool RosNode::initSubscribers(){
         &subExcavando,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Bool),
-                                        "EXCAVA") != RCL_RET_OK)
+                                        "EXCAVANDO") != RCL_RET_OK)
         return false;
     return true;
 }
