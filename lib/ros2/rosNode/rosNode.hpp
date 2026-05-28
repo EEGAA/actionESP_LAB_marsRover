@@ -51,7 +51,8 @@ private:
     //mientras la broca saca tierra, con el fin de crear una mini rutina 
     //encargada de excavar de la mejor forma posible, sin delay, y como nos plazca
     rcl_subscription_t subExcavando;
-
+    //Este subscriber es para poder reiniciar la esp 
+    rcl_subscription_t subResetESP;
 
     //tambien declarar un tipo de dato por cada callback que use tipos de dato
     std_msgs__msg__Int32 counter_msg;
@@ -94,6 +95,9 @@ private:
     //tipo de dato para subExcavando
     std_msgs__msg__Bool subExcavando_msg;
 
+    //Este tipo de dato es para reiniciar la esp
+    std_msgs__msg__Bool subResetESP_msg;
+
     //**** todos los callbacks se manejan en ACTIONS.cpp ****
     //este callback manipula el LED recibe bool = estado led
     static void subLED_callback(const void * msgin);
@@ -131,6 +135,9 @@ private:
 
     //callback para subExcavando
     static void subExcavando_callback(const void * msgin);
+
+    //callback para reiniciar la esp
+    static void subResetESP_callback(const void * msgin);
 
     Tempo timeConnected, sleepTime;
 public:

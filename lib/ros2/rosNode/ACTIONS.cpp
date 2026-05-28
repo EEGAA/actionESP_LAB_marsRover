@@ -187,3 +187,12 @@ void RosNode::subExcavando_callback(const void * msgin){
     cmd.boolVal   = msg->data;
     xQueueSend(commandQueue, &cmd, 0);
 }
+
+//Action callback para reiniciar la esp
+void RosNode::subResetESP_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::RESETesp;
+    cmd.boolVal   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}

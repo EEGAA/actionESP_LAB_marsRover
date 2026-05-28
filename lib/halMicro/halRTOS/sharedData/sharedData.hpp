@@ -28,6 +28,7 @@ enum class CmdType : uint8_t {
     NEMA_STOP,
     UNITARY_MODE,
     EXCAVANDO,
+    RESETesp,
 };
 //La siguiente estructura es para que los nema, pueda recibir, bien bien
 // el mensaje custom

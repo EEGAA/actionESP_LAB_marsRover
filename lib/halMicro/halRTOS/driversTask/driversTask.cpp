@@ -197,6 +197,9 @@ void DriversTask::update(){
                 if(cmd.boolVal && excavandoTaskHandle)
                     xTaskNotify(excavandoTaskHandle, 0, eNoAction);
                 break;
+            case CmdType::RESETesp:
+                ESP.restart();
+                break;
         }
     }
 
