@@ -1,9 +1,7 @@
-//esta modificacion no tiene chiste nadamas quiero hacer un comit en mi rama dev
-#include <rosConnection.hpp>
-RosConnection manager;
-void setup(){
-    manager.init();
+#include "../lib/halMicro/halRTOS/appManager/appManager.hpp"
+void setup() {
+    AppManager::start();
 }
 void loop(){
-    manager.update();
+    AppManager::idle();
 }

@@ -1,0 +1,198 @@
+#include "rosNode.hpp"
+#include "../../halMicro/halRTOS/sharedData/sharedData.hpp"
+// ===== PUBLISHERS =====
+void RosNode::publishCounter(){
+    counter_msg.data++;
+    rcl_publish(&pubCounter, &counter_msg, NULL);
+}
+void RosNode::pubLimitEX_callback(){
+    pubLimitEX_msg.data = limitEX.readState();
+    rcl_publish(&pubLimitEX, &pubLimitEX_msg, NULL);
+}
+
+void RosNode::pubLimitES_callback(){
+    pubLimitES_msg.data = limitES.readState();
+    rcl_publish(&pubLimitES, &pubLimitES_msg, NULL);
+}
+
+// ===== SUBSCRIBERS =====
+void RosNode::subLED_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    //myLed.setState(msg->data);
+    RosCommand cmd;
+    cmd.type     = CmdType::LED_SET;
+    cmd.boolVal  = msg->data;
+    //xQueueSendFromISR(commandQueue, &cmd, nullptr);
+    // Usa xQueueSend si callbacks NO son ISR reales:
+    xQueueSend(commandQueue, &cmd, 0);
+}
+// SERVOS
+void RosNode::subServoDispAng_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    //servoDisp.moveAng(msg->data);
+    RosCommand cmd;
+    cmd.type      = CmdType::SERVOdisp_MOVE;
+    cmd.uint8Val  = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+void RosNode::subServoCubeAng_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    //servoDisp.moveAng(msg->data);
+    RosCommand cmd;
+    cmd.type      = CmdType::SERVOcube_MOVE;
+    cmd.uint8Val  = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+//RoboClaw
+void RosNode::subRCstop_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::RC_STOP;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+void RosNode::subSetVelRCmtr1_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::RC_VELMTR1;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+void RosNode::subSetVelRCmtr2_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::RC_VELMTR2;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+void RosNode::subRCmoveMTR1_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::RC_MoveMTR1;
+    cmd.boolVal   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+void RosNode::subRCmoveMTR2_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::RC_MoveMTR2;
+    cmd.boolVal   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+//puente H
+void RosNode::subH_moveMTR_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::H_mtrMOVE;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+void RosNode::subH_setPWM_callback(const void * msgin){
+    const std_msgs__msg__Int16 * msg = (const std_msgs__msg__Int16 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::H_mtrSetPWM;
+    cmd.int16Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+//NEO Led
+void RosNode::subNeo_basic_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEO_LED_basic;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+void RosNode::subNeo_brillo_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEO_LED_brillo;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+//generales
+
+void RosNode::subSTOP_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::STOPall;
+    cmd.boolVal   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+// Nema
+
+void RosNode::subNemaEX_move_callback(const void * msgin){
+    const lab_interfaces__msg__NemaCMD * msg = (const lab_interfaces__msg__NemaCMD *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEMA_EX_MOVE;
+    cmd.nemaVal.pasos     = msg->pasos;
+    cmd.nemaVal.direccion = msg->direccion;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+void RosNode::subNemaES_move_callback(const void * msgin){
+    const lab_interfaces__msg__NemaCMD * msg = (const lab_interfaces__msg__NemaCMD *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEMA_ES_MOVE;
+    cmd.nemaVal.pasos     = msg->pasos;
+    cmd.nemaVal.direccion = msg->direccion;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+void RosNode::subNemaBA_move_callback(const void * msgin){
+    const lab_interfaces__msg__NemaCMD * msg = (const lab_interfaces__msg__NemaCMD *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEMA_BA_MOVE;
+    cmd.nemaVal.pasos     = msg->pasos;
+    cmd.nemaVal.direccion = msg->direccion;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+void RosNode::subNemaAX_move_callback(const void * msgin){
+    const lab_interfaces__msg__NemaCMD * msg = (const lab_interfaces__msg__NemaCMD *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEMA_AX_MOVE;
+    cmd.nemaVal.pasos     = msg->pasos;
+    cmd.nemaVal.direccion = msg->direccion;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+void RosNode::subNemaStop_callback(const void * msgin){
+    const std_msgs__msg__UInt8 * msg = (const std_msgs__msg__UInt8 *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::NEMA_STOP;
+    cmd.uint8Val   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+// signal mode bnd
+void RosNode::subUnitaryMode_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::UNITARY_MODE;
+    cmd.boolVal   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+//callback para subExcavando
+void RosNode::subExcavando_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::EXCAVANDO;
+    cmd.boolVal   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
+
+//Action callback para reiniciar la esp
+void RosNode::subResetESP_callback(const void * msgin){
+    const std_msgs__msg__Bool * msg = (const std_msgs__msg__Bool *)msgin;
+    RosCommand cmd;
+    cmd.type      = CmdType::RESETesp;
+    cmd.boolVal   = msg->data;
+    xQueueSend(commandQueue, &cmd, 0);
+}
